@@ -64,5 +64,5 @@ func _exit_tree() -> void:
 		_tween.kill()
 
 
-func _on_battle_fox_taunt(_message: String) -> void:
-	pass # Replace with function body.
+func _on_battle_fox_taunt(message: String) -> void:
+	show_taunt(message)
