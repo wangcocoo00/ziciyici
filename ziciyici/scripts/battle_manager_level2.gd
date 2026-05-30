@@ -108,9 +108,9 @@ func player_shoot(slot: int) -> void:
 	_update_all_button_states()
 	sentence_updated.emit()
 
-	# 检查效果中的 ending 标记
+	# 检查效果中的 ending 标记（不限制 target，只检查 attribute）
 	for effect in word.shot_effects:
-		if effect.type == EffectData.EffectType.MODIFY_ATTRIBUTE and effect.target == EffectData.Target.ENEMY and effect.attribute == "ending":
+		if effect.type == EffectData.EffectType.MODIFY_ATTRIBUTE and effect.attribute == "ending":
 			if int(effect.value) == 1:
 				end_game(true, "熊熊小王良心发现，决定今天减肥", "好吧，你可以活着通过")
 			elif int(effect.value) == 2:
