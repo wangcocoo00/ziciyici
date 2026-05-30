@@ -6,4 +6,7 @@
 [resource]
 script = ExtResource("1_rjq7u")
 sentence = ExtResource("2_dk6ju")
+hp = 20
+base_attack = 5
+base_jump_height = 200.0
 metadata/_custom_type_script = "uid://dmykkocql6h34"
