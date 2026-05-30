@@ -102,10 +102,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -12.5
-offset_right = 20.0
-offset_bottom = 12.5
+offset_left = -176.0
+offset_top = -36.0
+offset_right = 61.0
+offset_bottom = 36.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("8_l1kui")
@@ -113,11 +113,16 @@ theme_override_font_sizes/font_size = 48
 text = "GameOver"
 
 [node name="RestartBtn" type="Button" parent="GameOverUI" unique_id=1746486183]
-offset_left = 350.0
-offset_top = 300.0
-offset_right = 422.0
-offset_bottom = 333.0
+offset_left = 400.0
+offset_top = 200.0
+offset_right = 472.0
+offset_bottom = 350.0
 text = "重新挑战"
+
+[node name="NextLevelBtn" type="Button" parent="GameOverUI" unique_id=69316343]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "下一关"
 
 [node name="PlayerHPLabel" type="Label" parent="." unique_id=61279231]
 offset_left = 230.0

@@ -26,6 +26,8 @@ class_name BattleManager
 ## 子弹场景（PackedScene，需包含 Bullet 脚本）
 @export var bullet_scene: PackedScene
 
+@export var next_level_scene: String = ""
+
 # ---------------------------------------------------------------------------
 # 运行时变量（从配置加载）
 # ---------------------------------------------------------------------------
