@@ -5,6 +5,7 @@
 [ext_resource type="Resource" uid="uid://cu4dn6xtmb80p" path="res://resources/player_config_lv1.tres" id="3_bl1r5"]
 [ext_resource type="Resource" uid="uid://duhkqf7do7285" path="res://resources/taunts.tres" id="4_pp7ab"]
 [ext_resource type="Script" uid="uid://xjntphmll8l7" path="res://scripts/sentence_ui.gd" id="6_n4b6j"]
+[ext_resource type="Script" uid="uid://ca11714ms7hyc" path="res://scripts/fox_popup.gd" id="7_hihw6"]
 [ext_resource type="FontFile" uid="uid://biffnd0pv2bcc" path="res://resources/NotoSansSC-Regular.ttf" id="8_ih0ju"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_l1kui"]
@@ -64,6 +65,15 @@ offset_top = 450.0
 offset_right = 240.0
 offset_bottom = 490.0
 
+[node name="FoxPopup" type="CanvasLayer" parent="." unique_id=852023058]
+script = ExtResource("7_hihw6")
+
+[node name="FoxSprite" type="Sprite2D" parent="FoxPopup" unique_id=891934620]
+
+[node name="DialogBubble" type="Label" parent="FoxPopup" unique_id=1693996157]
+offset_right = 40.0
+offset_bottom = 23.0
+
 [node name="ActionButtons" type="Control" parent="." unique_id=960622291]
 layout_mode = 3
 anchors_preset = 15
@@ -122,6 +132,7 @@ scale = Vector2(1.5, 1.5)
 text = "下一关"
 
 [connection signal="sentence_updated" from="." to="SentenceUI" method="_on_battle_sentence_updated"]
+[connection signal="fox_taunt" from="." to="FoxPopup" method="_on_battle_fox_taunt"]
 [connection signal="pressed" from="ActionButtons/HBoxContainer/ShootBtn" to="." method="_on_shoot_pressed"]
 [connection signal="pressed" from="GameOverUI/RestartBtn" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="GameOverUI/NextLevelBtn" to="." method="_on_next_level_pressed"]
