@@ -40,15 +40,20 @@ func refresh_display() -> void:
 
 		# 敌人文字 Label / Button
 		var enemy_label: Control
-		if player_word and player_word.can_be_shot and shoot_mode_active:
-			# 可射击且射击模式已激活：创建按钮，点击后触发射击
+		if shoot_mode_active:
+			# 射击模式已激活：所有字都创建为 Button
 			var btn := Button.new()
 			btn.text = enemy_text
-			btn.modulate = player_word.highlight_color
+			if player_word and player_word.can_be_shot:
+				# 有色字：显示高亮颜色
+				btn.modulate = player_word.highlight_color
+			else:
+				# 无色字：白色
+				btn.modulate = Color.WHITE
 			btn.pressed.connect(_on_enemy_word_clicked.bind(i))
 			enemy_label = btn
 		else:
-			# 不可射击或射击模式未激活：普通 Label
+			# 射击模式未激活：普通 Label
 			var lbl := Label.new()
 			lbl.text = enemy_text
 			if player_word and player_word.can_be_shot:
