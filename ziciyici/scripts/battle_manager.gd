@@ -108,7 +108,16 @@ var _tween: Tween = null
 
 func _ready() -> void:
 	load_config()
+	_setup_sprites()
 
+
+func _setup_sprites() -> void:
+	var player_sprite: Sprite2D = $PlayerSprite
+	var enemy_sprite: Sprite2D = $EnemySprite
+	if player_sprite and player_config.sprite:
+		player_sprite.texture = player_config.sprite
+	if enemy_sprite and enemy_config.sprite:
+		enemy_sprite.texture = enemy_config.sprite
 
 ## 从配置资源加载所有运行时变量
 func load_config() -> void:

@@ -7,6 +7,12 @@
 [ext_resource type="Script" uid="uid://xjntphmll8l7" path="res://scripts/sentence_ui.gd" id="6_n4b6j"]
 [ext_resource type="FontFile" uid="uid://biffnd0pv2bcc" path="res://resources/NotoSansSC-Regular.ttf" id="8_ih0ju"]
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_l1kui"]
+size = Vector2(64, 64)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_p6tk1"]
+size = Vector2(64, 64)
+
 [node name="Battle" type="Node2D" unique_id=1820023348]
 script = ExtResource("1_1syc1")
 enemy_config = ExtResource("2_dfhvj")
@@ -18,10 +24,12 @@ next_level_scene = "res://scenes/battle_xufuji.tscn"
 modulate = Color(0, 0, 1, 1)
 position = Vector2(200, 400)
 scale = Vector2(2, 2)
+texture = SubResource("PlaceholderTexture2D_l1kui")
 
 [node name="EnemySprite" type="Sprite2D" parent="." unique_id=566615846]
 position = Vector2(1300, 400)
 scale = Vector2(2, 2)
+texture = SubResource("PlaceholderTexture2D_p6tk1")
 
 [node name="EnemyExtraText" type="Label" parent="." unique_id=1286442959]
 visible = false

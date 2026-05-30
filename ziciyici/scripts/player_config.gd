@@ -20,3 +20,6 @@ class_name PlayerConfig
 
 ## 基础跳跃高度（像素单位）
 @export var base_jump_height: float = 80.0
+
+## 玩家形象纹理
+@export var sprite: Texture2D

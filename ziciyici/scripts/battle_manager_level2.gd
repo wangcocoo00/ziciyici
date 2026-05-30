@@ -23,6 +23,15 @@ signal fox_taunt(message: String)
 func _ready() -> void:
 	load_config()
 	sentence_updated.emit()
+	_setup_sprites()
+
+func _setup_sprites() -> void:
+	var player_sprite: Sprite2D = $PlayerSprite
+	var enemy_sprite: Sprite2D = $EnemySprite
+	if player_sprite and player_config.sprite:
+		player_sprite.texture = player_config.sprite
+	if enemy_sprite and enemy_config.sprite:
+		enemy_sprite.texture = enemy_config.sprite
 
 func load_config() -> void:
 	enemy_sentence.clear()
