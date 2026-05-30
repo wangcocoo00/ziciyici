@@ -81,20 +81,10 @@ offset_bottom = 560.0
 scale = Vector2(2, 2)
 theme_override_constants/separation = 20
 
-[node name="AttackBtn" type="Button" parent="ActionButtons/HBoxContainer" unique_id=1558428434]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("8_ih0ju")
-text = "攻击"
-
 [node name="ShootBtn" type="Button" parent="ActionButtons/HBoxContainer" unique_id=1004607529]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("8_ih0ju")
 text = "射击"
-
-[node name="JumpBtn" type="Button" parent="ActionButtons/HBoxContainer" unique_id=1282695462]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("8_ih0ju")
-text = "跳跃"
 
 [node name="GameOverUI" type="CanvasLayer" parent="." unique_id=1272163202]
 visible = false
@@ -132,8 +122,6 @@ scale = Vector2(1.5, 1.5)
 text = "下一关"
 
 [connection signal="sentence_updated" from="." to="SentenceUI" method="_on_battle_sentence_updated"]
-[connection signal="pressed" from="ActionButtons/HBoxContainer/AttackBtn" to="." method="_on_attack_pressed"]
 [connection signal="pressed" from="ActionButtons/HBoxContainer/ShootBtn" to="." method="_on_shoot_pressed"]
-[connection signal="pressed" from="ActionButtons/HBoxContainer/JumpBtn" to="." method="_on_jump_pressed"]
 [connection signal="pressed" from="GameOverUI/RestartBtn" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="GameOverUI/NextLevelBtn" to="." method="_on_next_level_pressed"]
