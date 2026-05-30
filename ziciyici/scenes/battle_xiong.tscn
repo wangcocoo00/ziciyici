@@ -1,13 +1,13 @@
-[gd_scene format=3 uid="uid://x18csctspgrc"]
+[gd_scene format=3 uid="uid://tmtb7nul8m3k"]
 
-[ext_resource type="Script" uid="uid://bj1c6qdo3udhf" path="res://scripts/battle_manager.gd" id="1_656bh"]
-[ext_resource type="Resource" uid="uid://crx213q0v8il5" path="res://resources/xu_fuji.tres" id="2_yw1d3"]
-[ext_resource type="Resource" uid="uid://dvgpadkf3ql8l" path="res://resources/player.tres" id="3_ciu3y"]
-[ext_resource type="Resource" uid="uid://duhkqf7do7285" path="res://resources/taunts.tres" id="4_pp7ab"]
-[ext_resource type="PackedScene" uid="uid://dc1wlhupgmgcg" path="res://scenes/Bullet.tscn" id="5_qul14"]
-[ext_resource type="Script" uid="uid://xjntphmll8l7" path="res://scripts/sentence_ui.gd" id="6_n4b6j"]
-[ext_resource type="Script" uid="uid://ca11714ms7hyc" path="res://scripts/fox_popup.gd" id="7_hihw6"]
-[ext_resource type="FontFile" uid="uid://biffnd0pv2bcc" path="res://resources/NotoSansSC-Regular.ttf" id="8_ih0ju"]
+[ext_resource type="Script" uid="uid://bj1c6qdo3udhf" path="res://scripts/battle_manager.gd" id="1_q3i6v"]
+[ext_resource type="Resource" uid="uid://crx213q0v8il5" path="res://resources/xu_fuji.tres" id="2_bbehg"]
+[ext_resource type="Resource" uid="uid://dvgpadkf3ql8l" path="res://resources/player.tres" id="3_acqap"]
+[ext_resource type="Resource" uid="uid://duhkqf7do7285" path="res://resources/taunts.tres" id="4_2crch"]
+[ext_resource type="PackedScene" uid="uid://dc1wlhupgmgcg" path="res://scenes/Bullet.tscn" id="5_fh0ok"]
+[ext_resource type="Script" uid="uid://xjntphmll8l7" path="res://scripts/sentence_ui.gd" id="6_0u6j2"]
+[ext_resource type="Script" uid="uid://ca11714ms7hyc" path="res://scripts/fox_popup.gd" id="7_xdduv"]
+[ext_resource type="FontFile" uid="uid://biffnd0pv2bcc" path="res://resources/NotoSansSC-Regular.ttf" id="8_478fg"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_l1kui"]
 size = Vector2(64, 64)
@@ -16,18 +16,18 @@ size = Vector2(64, 64)
 size = Vector2(64, 64)
 
 [node name="Battle" type="Node2D" unique_id=689843110]
-script = ExtResource("1_656bh")
-enemy_config = ExtResource("2_yw1d3")
-player_config = ExtResource("3_ciu3y")
-fox_taunt_library = ExtResource("4_pp7ab")
-bullet_scene = ExtResource("5_qul14")
+script = ExtResource("1_q3i6v")
+enemy_config = ExtResource("2_bbehg")
+player_config = ExtResource("3_acqap")
+fox_taunt_library = ExtResource("4_2crch")
+bullet_scene = ExtResource("5_fh0ok")
 
 [node name="PlayerSprite" type="Sprite2D" parent="." unique_id=2004262358]
 position = Vector2(200, 400)
 texture = SubResource("PlaceholderTexture2D_l1kui")
 
 [node name="EnemySprite" type="Sprite2D" parent="." unique_id=1564758301]
-position = Vector2(1300, 400)
+position = Vector2(600, 400)
 texture = SubResource("PlaceholderTexture2D_p6tk1")
 
 [node name="SentenceUI" type="Control" parent="." unique_id=1557530583]
@@ -37,7 +37,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("6_n4b6j")
+script = ExtResource("6_0u6j2")
 
 [node name="EnemySentenceContainer" type="HBoxContainer" parent="SentenceUI" unique_id=1862869488]
 layout_mode = 0
@@ -54,7 +54,7 @@ offset_right = 100.0
 offset_bottom = 300.0
 
 [node name="FoxPopup" type="CanvasLayer" parent="." unique_id=852023058]
-script = ExtResource("7_hihw6")
+script = ExtResource("7_xdduv")
 
 [node name="FoxSprite" type="Sprite2D" parent="FoxPopup" unique_id=891934620]
 
@@ -80,17 +80,17 @@ theme_override_constants/separation = 20
 
 [node name="AttackBtn" type="Button" parent="ActionButtons/HBoxContainer" unique_id=1558428434]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8_ih0ju")
+theme_override_fonts/font = ExtResource("8_478fg")
 text = "攻击"
 
 [node name="ShootBtn" type="Button" parent="ActionButtons/HBoxContainer" unique_id=749983760]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8_ih0ju")
+theme_override_fonts/font = ExtResource("8_478fg")
 text = "射击"
 
 [node name="JumpBtn" type="Button" parent="ActionButtons/HBoxContainer" unique_id=1282695462]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8_ih0ju")
+theme_override_fonts/font = ExtResource("8_478fg")
 text = "跳跃"
 
 [node name="GameOverUI" type="CanvasLayer" parent="." unique_id=1873818336]
@@ -108,7 +108,7 @@ offset_right = 61.0
 offset_bottom = 36.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("8_ih0ju")
+theme_override_fonts/font = ExtResource("8_478fg")
 theme_override_font_sizes/font_size = 48
 text = "GameOver"
 
@@ -129,7 +129,7 @@ offset_left = 230.0
 offset_top = 380.0
 offset_right = 270.0
 offset_bottom = 405.0
-theme_override_fonts/font = ExtResource("8_ih0ju")
+theme_override_fonts/font = ExtResource("8_478fg")
 theme_override_font_sizes/font_size = 16
 
 [node name="EnemyHPLabel" type="Label" parent="." unique_id=685025840]
@@ -137,7 +137,7 @@ offset_left = 630.0
 offset_top = 380.0
 offset_right = 670.0
 offset_bottom = 416.0
-theme_override_fonts/font = ExtResource("8_ih0ju")
+theme_override_fonts/font = ExtResource("8_478fg")
 theme_override_font_sizes/font_size = 16
 
 [connection signal="fox_taunt" from="." to="FoxPopup" method="_on_battle_fox_taunt"]
