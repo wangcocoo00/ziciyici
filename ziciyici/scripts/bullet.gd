@@ -14,13 +14,11 @@ var battle_ref: BattleManager = null
 signal bullet_finished()
 
 func _ready() -> void:
-	print("子弹已生成，父节点：", get_parent().name, " 父节点类型：", get_parent().get_class())
 	var viewport_rect = get_viewport().get_visible_rect()
 	screen_width = viewport_rect.size.x
 	battle_ref = get_parent() as BattleManager
 
 func _physics_process(delta: float) -> void:
-	print("子弹帧更新中，位置：", position, " 方向：", direction)
 	position += direction * speed * delta
 
 	# 边界反弹或销毁

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bcffjufmsx4rt" path="res://scripts/sentence_config.gd" id="1_8jtkn"]
 [ext_resource type="Script" uid="uid://wpq0rh32h21a" path="res://scripts/word_data.gd" id="2_s5nnt"]
-[ext_resource type="Script" uid="uid://bb4wrhnr086ep" path="res://scripts/effect_data.gd" id="3_s5nnt"]
+[ext_resource type="Script" uid="uid://dmimlx5lxapvv" path="res://scripts/effect_data.gd" id="3_s5nnt"]
 
 [sub_resource type="Resource" id="Resource_mdcrt"]
 script = ExtResource("2_s5nnt")
@@ -12,94 +12,55 @@ metadata/_custom_type_script = "uid://wpq0rh32h21a"
 
 [sub_resource type="Resource" id="Resource_wu5p7"]
 script = ExtResource("2_s5nnt")
-text = "可"
+text = "闪"
 can_be_shot = false
 metadata/_custom_type_script = "uid://wpq0rh32h21a"
 
 [sub_resource type="Resource" id="Resource_sumpl"]
 script = ExtResource("2_s5nnt")
-text = "以"
+text = "避"
 can_be_shot = false
 metadata/_custom_type_script = "uid://wpq0rh32h21a"
 
 [sub_resource type="Resource" id="Resource_jyat3"]
-script = ExtResource("3_s5nnt")
-type = 1
-direction = Vector2(-0.707, -0.707)
-metadata/_custom_type_script = "uid://bb4wrhnr086ep"
+script = ExtResource("2_s5nnt")
+text = "率"
+can_be_shot = false
+metadata/_custom_type_script = "uid://wpq0rh32h21a"
 
 [sub_resource type="Resource" id="Resource_p1mkc"]
 script = ExtResource("2_s5nnt")
-text = "一"
-highlight_color = Color(0, 1, 1, 0.9098039)
-shot_effects = Array[ExtResource("3_s5nnt")]([SubResource("Resource_jyat3")])
-metadata/_custom_type_script = "uid://wpq0rh32h21a"
-
-[sub_resource type="Resource" id="Resource_s5nnt"]
-script = ExtResource("2_s5nnt")
-text = "跳"
+text = "百"
 can_be_shot = false
 metadata/_custom_type_script = "uid://wpq0rh32h21a"
 
 [sub_resource type="Resource" id="Resource_xqd5n"]
 script = ExtResource("2_s5nnt")
-text = "八"
+text = "分"
 can_be_shot = false
 metadata/_custom_type_script = "uid://wpq0rh32h21a"
 
 [sub_resource type="Resource" id="Resource_p1o2c"]
-script = ExtResource("3_s5nnt")
-attribute = "attack_damage"
-value = 9.0
-metadata/_custom_type_script = "uid://bb4wrhnr086ep"
+script = ExtResource("2_s5nnt")
+text = "之"
+can_be_shot = false
+metadata/_custom_type_script = "uid://wpq0rh32h21a"
 
 [sub_resource type="Resource" id="Resource_y3cp6"]
-script = ExtResource("3_s5nnt")
-target = 1
-attribute = "jump_height"
-value = 8.0
-metadata/_custom_type_script = "uid://bb4wrhnr086ep"
+script = ExtResource("2_s5nnt")
+text = "一"
+can_be_shot = false
+highlight_color = Color(1, 0, 0, 0.9490196)
+metadata/_custom_type_script = "uid://wpq0rh32h21a"
 
 [sub_resource type="Resource" id="Resource_j271o"]
 script = ExtResource("2_s5nnt")
-text = "十"
-highlight_color = Color(1, 0, 1, 0.90588236)
-shot_effects = Array[ExtResource("3_s5nnt")]([SubResource("Resource_p1o2c"), SubResource("Resource_y3cp6")])
-metadata/_custom_type_script = "uid://wpq0rh32h21a"
-
-[sub_resource type="Resource" id="Resource_abddk"]
-script = ExtResource("3_s5nnt")
-type = 2
-tag = "ricochet"
-metadata/_custom_type_script = "uid://bb4wrhnr086ep"
-
-[sub_resource type="Resource" id="Resource_yeo5j"]
-script = ExtResource("3_s5nnt")
-type = 2
-tag = "can_hurt_shooter"
-metadata/_custom_type_script = "uid://bb4wrhnr086ep"
-
-[sub_resource type="Resource" id="Resource_mkgk4"]
-script = ExtResource("3_s5nnt")
-target = 1
-attribute = "jump_height"
-value = 800.0
-metadata/_custom_type_script = "uid://bb4wrhnr086ep"
-
-[sub_resource type="Resource" id="Resource_htwcv"]
-script = ExtResource("2_s5nnt")
-text = "厘"
-highlight_color = Color(0.27450982, 1, 0.26666668, 0.9098039)
-shot_effects = Array[ExtResource("3_s5nnt")]([SubResource("Resource_abddk"), SubResource("Resource_yeo5j"), SubResource("Resource_mkgk4")])
-metadata/_custom_type_script = "uid://wpq0rh32h21a"
-
-[sub_resource type="Resource" id="Resource_7u8fy"]
-script = ExtResource("2_s5nnt")
-text = "米"
+text = "百"
 can_be_shot = false
+highlight_color = Color(0, 1, 0.015686275, 0.9411765)
 metadata/_custom_type_script = "uid://wpq0rh32h21a"
 
 [resource]
 script = ExtResource("1_8jtkn")
-words = Array[ExtResource("2_s5nnt")]([SubResource("Resource_mdcrt"), SubResource("Resource_wu5p7"), SubResource("Resource_sumpl"), SubResource("Resource_p1mkc"), SubResource("Resource_s5nnt"), SubResource("Resource_xqd5n"), SubResource("Resource_j271o"), SubResource("Resource_htwcv"), SubResource("Resource_7u8fy")])
+words = Array[ExtResource("2_s5nnt")]([SubResource("Resource_mdcrt"), SubResource("Resource_wu5p7"), SubResource("Resource_sumpl"), SubResource("Resource_jyat3"), SubResource("Resource_p1mkc"), SubResource("Resource_xqd5n"), SubResource("Resource_p1o2c"), SubResource("Resource_y3cp6"), SubResource("Resource_j271o")])
 metadata/_custom_type_script = "uid://bcffjufmsx4rt"

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="WordData" format=3 uid="uid://caw606rsvck40"]
+
+[ext_resource type="Script" uid="uid://wpq0rh32h21a" path="res://scripts/word_data.gd" id="1_02eum"]
+[ext_resource type="Script" uid="uid://dmimlx5lxapvv" path="res://scripts/effect_data.gd" id="2_xyvg5"]
+
+[sub_resource type="Resource" id="Resource_02eum"]
+script = ExtResource("2_xyvg5")
+
+[resource]
+script = ExtResource("1_02eum")
+shot_effects = Array[ExtResource("2_xyvg5")]([SubResource("Resource_02eum")])
+metadata/_custom_type_script = "uid://wpq0rh32h21a"
