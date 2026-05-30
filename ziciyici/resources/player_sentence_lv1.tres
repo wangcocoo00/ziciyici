@@ -48,8 +48,6 @@ metadata/_custom_type_script = "uid://wpq0rh32h21a"
 
 [sub_resource type="Resource" id="Resource_ending_win"]
 script = ExtResource("3_8qp1a")
-type = 0
-target = 0
 attribute = "ending"
 value = 1.0
 metadata/_custom_type_script = "uid://bb4wrhnr086ep"
@@ -57,15 +55,12 @@ metadata/_custom_type_script = "uid://bb4wrhnr086ep"
 [sub_resource type="Resource" id="Resource_htwcv"]
 script = ExtResource("2_xop6x")
 text = "一"
-can_be_shot = true
 highlight_color = Color(0, 1, 0, 0.95686275)
 shot_effects = Array[ExtResource("3_8qp1a")]([SubResource("Resource_ending_win")])
 metadata/_custom_type_script = "uid://wpq0rh32h21a"
 
 [sub_resource type="Resource" id="Resource_ending_lose"]
 script = ExtResource("3_8qp1a")
-type = 0
-target = 0
 attribute = "ending"
 value = 2.0
 metadata/_custom_type_script = "uid://bb4wrhnr086ep"
@@ -73,7 +68,6 @@ metadata/_custom_type_script = "uid://bb4wrhnr086ep"
 [sub_resource type="Resource" id="Resource_7u8fy"]
 script = ExtResource("2_xop6x")
 text = "百"
-can_be_shot = true
 highlight_color = Color(1, 0, 0, 0.94509804)
 shot_effects = Array[ExtResource("3_8qp1a")]([SubResource("Resource_ending_lose")])
 metadata/_custom_type_script = "uid://wpq0rh32h21a"
