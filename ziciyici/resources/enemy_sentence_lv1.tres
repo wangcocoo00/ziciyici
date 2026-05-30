@@ -49,7 +49,7 @@ metadata/_custom_type_script = "uid://wpq0rh32h21a"
 [sub_resource type="Resource" id="Resource_mviny"]
 script = ExtResource("3_fffum")
 attribute = "ending"
-value = 2.0
+value = 1.0
 metadata/_custom_type_script = "uid://bb4wrhnr086ep"
 
 [sub_resource type="Resource" id="Resource_6rxc8"]
@@ -62,7 +62,8 @@ metadata/_custom_type_script = "uid://wpq0rh32h21a"
 
 [sub_resource type="Resource" id="Resource_knkdb"]
 script = ExtResource("3_fffum")
-attribute = "2"
+attribute = "ending"
+value = 2.0
 metadata/_custom_type_script = "uid://bb4wrhnr086ep"
 
 [sub_resource type="Resource" id="Resource_1fuwk"]
