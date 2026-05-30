@@ -8,6 +8,9 @@
 extends CanvasLayer
 class_name FoxPopup
 
+## 嘲讽文字停留时间（秒），可在编辑器中调整
+@export var taunt_duration: float = 2.0
+
 ## 是否正在显示嘲讽弹窗
 var is_showing: bool = false
 
@@ -42,14 +45,14 @@ func show_taunt(message: String) -> void:
 	# 从 y=-100 滑入到 y=200
 	_tween.tween_property(fox_sprite, "position:y", 200.0, 0.6)
 
-	# 停留 2 秒
-	_tween.tween_interval(2.0)
+	# 停留 taunt_duration 秒（可在编辑器中调整）
+	_tween.tween_interval(taunt_duration)
 
 	# 滑出到 y=-100
 	_tween.tween_property(fox_sprite, "position:y", -100.0, 0.5)
 
 	# 动画完成后重置状态
-	_tween.finished.connect(_on_taunt_finished)
+	_tween.tween_callback(_on_taunt_finished)
 
 
 ## 嘲讽动画完成回调
