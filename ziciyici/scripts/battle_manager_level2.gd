@@ -27,8 +27,7 @@ func _ready() -> void:
 	load_config()
 	sentence_updated.emit()
 	_setup_sprites()
-	_update_shoot_button_style()
-	_update_shoot_count_label()
+	_update_all_button_states()
 
 func _setup_sprites() -> void:
 	var player_sprite: Sprite2D = $PlayerSprite
@@ -51,15 +50,33 @@ func load_config() -> void:
 	player_attack_power = player_config.base_attack
 	player_jump_height = player_config.base_jump_height
 
-## 更新射击按钮的样式：未激活时灰白色，激活时灰黑色
+## 更新所有按钮的状态
+func _update_all_button_states() -> void:
+	_update_shoot_button_style()
+	_update_shoot_count_label()
+	# 第一关只有射击按钮，其他按钮暂不处理
+
+## 更新射击按钮的样式
+## 三种状态：
+##   - 未激活（灰白色，可点击）：shoot_mode_active=false, shots_remaining>0
+##   - 激活（灰黑色，可点击）：shoot_mode_active=true, shots_remaining>0
+##   - 已用完（灰黑色，disabled）：shots_remaining<=0
 func _update_shoot_button_style() -> void:
 	var shoot_btn = get_node_or_null("ActionButtons/HBoxContainer/ShootBtn") as Button
 	if not shoot_btn:
 		return
-	if shoot_mode_active:
-		shoot_btn.modulate = Color(0.3, 0.3, 0.3, 1.0)  # 灰黑色（已激活）
+	if shots_remaining <= 0:
+		# 已用完：灰黑色，不可点击
+		shoot_btn.modulate = Color(0.3, 0.3, 0.3, 1.0)
+		shoot_btn.disabled = true
+	elif shoot_mode_active:
+		# 激活：灰黑色，可点击
+		shoot_btn.modulate = Color(0.3, 0.3, 0.3, 1.0)
+		shoot_btn.disabled = false
 	else:
-		shoot_btn.modulate = Color(0.8, 0.8, 0.8, 1.0)  # 灰白色（未激活）
+		# 未激活：灰白色，可点击
+		shoot_btn.modulate = Color(0.8, 0.8, 0.8, 1.0)
+		shoot_btn.disabled = false
 
 ## 更新剩余射击次数显示
 func _update_shoot_count_label() -> void:
@@ -88,8 +105,7 @@ func player_shoot(slot: int) -> void:
 	shots_remaining -= 1
 	# 射击后退出射击模式
 	shoot_mode_active = false
-	_update_shoot_button_style()
-	_update_shoot_count_label()
+	_update_all_button_states()
 	sentence_updated.emit()
 
 	# 检查效果中的 ending 标记
@@ -132,7 +148,7 @@ func _on_shoot_pressed() -> void:
 		return
 	# 切换射击模式状态
 	shoot_mode_active = not shoot_mode_active
-	_update_shoot_button_style()
+	_update_all_button_states()
 	# 刷新句子显示，更新有色字可点击状态
 	sentence_updated.emit()
 

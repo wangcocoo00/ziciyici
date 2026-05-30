@@ -112,8 +112,7 @@ var _tween: Tween = null
 func _ready() -> void:
 	load_config()
 	_setup_sprites()
-	_update_shoot_button_style()
-	_update_shoot_count_label()
+	_update_all_button_states()
 
 
 func _setup_sprites() -> void:
@@ -156,15 +155,53 @@ func update_hp_display() -> void:
 	if enemy_hp_label:
 		enemy_hp_label.text = "徐福记血量：" + str(enemy_hp)
 
-## 更新射击按钮的样式：未激活时灰白色，激活时灰黑色
+## 更新所有按钮的状态
+func _update_all_button_states() -> void:
+	_update_shoot_button_style()
+	_update_shoot_count_label()
+	_update_action_button_states()
+
+## 更新非射击按钮（攻击、跳跃）的状态
+## 可触发状态：灰白色，disabled=false
+## 不可触发状态：灰黑色，disabled=true
+func _update_action_button_states() -> void:
+	var is_player_turn = current_state == State.PLAYER_TURN and not battle_ended
+	_set_button_state("ActionButtons/HBoxContainer/AttackBtn", is_player_turn)
+	_set_button_state("ActionButtons/HBoxContainer/JumpBtn", is_player_turn and not is_jumping)
+
+## 设置单个按钮的可触发状态
+func _set_button_state(path: String, enabled: bool) -> void:
+	var btn = get_node_or_null(path) as Button
+	if not btn:
+		return
+	if enabled:
+		btn.modulate = Color(0.8, 0.8, 0.8, 1.0)  # 灰白色（可触发）
+		btn.disabled = false
+	else:
+		btn.modulate = Color(0.3, 0.3, 0.3, 1.0)  # 灰黑色（不可触发）
+		btn.disabled = true
+
+## 更新射击按钮的样式
+## 三种状态：
+##   - 未激活（灰白色，可点击）：shoot_mode_active=false, shots_remaining>0
+##   - 激活（灰黑色，可点击）：shoot_mode_active=true, shots_remaining>0
+##   - 已用完（灰黑色，disabled）：shots_remaining<=0
 func _update_shoot_button_style() -> void:
 	var shoot_btn = get_node_or_null("ActionButtons/HBoxContainer/ShootBtn") as Button
 	if not shoot_btn:
 		return
-	if shoot_mode_active:
-		shoot_btn.modulate = Color(0.3, 0.3, 0.3, 1.0)  # 灰黑色（已激活）
+	if shots_remaining <= 0:
+		# 已用完：灰黑色，不可点击
+		shoot_btn.modulate = Color(0.3, 0.3, 0.3, 1.0)
+		shoot_btn.disabled = true
+	elif shoot_mode_active:
+		# 激活：灰黑色，可点击
+		shoot_btn.modulate = Color(0.3, 0.3, 0.3, 1.0)
+		shoot_btn.disabled = false
 	else:
-		shoot_btn.modulate = Color(0.8, 0.8, 0.8, 1.0)  # 灰白色（未激活）
+		# 未激活：灰白色，可点击
+		shoot_btn.modulate = Color(0.8, 0.8, 0.8, 1.0)
+		shoot_btn.disabled = false
 
 ## 更新剩余射击次数显示
 func _update_shoot_count_label() -> void:
@@ -202,8 +239,7 @@ func player_shoot(slot: int) -> void:
 	shots_remaining -= 1
 	# 射击后退出射击模式
 	shoot_mode_active = false
-	_update_shoot_button_style()
-	_update_shoot_count_label()
+	_update_all_button_states()
 	sentence_updated.emit()
 
 	# 应用该字绑定的所有效果
@@ -347,6 +383,7 @@ func check_victory() -> void:
 ## @param new_state: 目标状态
 func change_state(new_state: State) -> void:
 	current_state = new_state
+	_update_all_button_states()
 
 	if new_state == State.ENEMY_TURN:
 		_on_enemy_turn()
@@ -386,7 +423,7 @@ func _on_shoot_pressed() -> void:
 		return
 	# 切换射击模式状态
 	shoot_mode_active = not shoot_mode_active
-	_update_shoot_button_style()
+	_update_all_button_states()
 	# 刷新句子显示，更新有色字可点击状态
 	sentence_updated.emit()
 
