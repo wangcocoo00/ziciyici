@@ -62,7 +62,7 @@ func _update_all_button_states() -> void:
 ##   - 激活（灰黑色，可点击）：shoot_mode_active=true, shots_remaining>0
 ##   - 已用完（灰黑色，disabled）：shots_remaining<=0
 func _update_shoot_button_style() -> void:
-	var shoot_btn = get_node_or_null("ActionButtons/HBoxContainer/ShootBtn") as Button
+	var shoot_btn = get_node_or_null("ActionButtons/VBoxContainer/ShootBtn") as Button
 	if not shoot_btn:
 		return
 	if shots_remaining <= 0:
@@ -80,7 +80,7 @@ func _update_shoot_button_style() -> void:
 
 ## 更新剩余射击次数显示
 func _update_shoot_count_label() -> void:
-	var label = get_node_or_null("ActionButtons/HBoxContainer/ShootCountLabel") as Label
+	var label = get_node_or_null("ActionButtons/VBoxContainer/ShootCountLabel") as Label
 	if label:
 		label.text = "剩余: " + str(shots_remaining)
 

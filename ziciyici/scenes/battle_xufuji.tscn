@@ -88,12 +88,16 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("8_ih0ju")
 text = "攻击"
 
-[node name="ShootBtn" type="Button" parent="ActionButtons/HBoxContainer" unique_id=749983760]
+[node name="ShootVBox" type="VBoxContainer" parent="ActionButtons/HBoxContainer" unique_id=749983759]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="ShootBtn" type="Button" parent="ActionButtons/HBoxContainer/ShootVBox" unique_id=749983760]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("8_ih0ju")
 text = "射击"
 
-[node name="ShootCountLabel" type="Label" parent="ActionButtons/HBoxContainer" unique_id=749983761]
+[node name="ShootCountLabel" type="Label" parent="ActionButtons/HBoxContainer/ShootVBox" unique_id=749983761]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("8_ih0ju")
 theme_override_font_sizes/font_size = 12
@@ -156,7 +160,7 @@ theme_override_font_sizes/font_size = 16
 [connection signal="fox_taunt" from="." to="FoxPopup" method="_on_battle_fox_taunt"]
 [connection signal="sentence_updated" from="." to="SentenceUI" method="_on_battle_sentence_updated"]
 [connection signal="pressed" from="ActionButtons/HBoxContainer/AttackBtn" to="." method="_on_attack_pressed"]
-[connection signal="pressed" from="ActionButtons/HBoxContainer/ShootBtn" to="." method="_on_shoot_pressed"]
+[connection signal="pressed" from="ActionButtons/HBoxContainer/ShootVBox/ShootBtn" to="." method="_on_shoot_pressed"]
 [connection signal="pressed" from="ActionButtons/HBoxContainer/JumpBtn" to="." method="_on_jump_pressed"]
 [connection signal="pressed" from="GameOverUI/RestartBtn" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="GameOverUI/NextLevelBtn" to="." method="_on_next_level_pressed"]
