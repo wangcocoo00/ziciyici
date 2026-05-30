@@ -5,6 +5,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p1sfj"]
 size = Vector2(16, 8)
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_hf8mt"]
+size = Vector2(16, 8)
+
 [node name="Bullet" type="Area2D" unique_id=1798329]
 script = ExtResource("1_hf8mt")
 
@@ -12,3 +15,9 @@ script = ExtResource("1_hf8mt")
 shape = SubResource("RectangleShape2D_p1sfj")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1841447857]
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1166302563]
+texture = SubResource("PlaceholderTexture2D_hf8mt")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

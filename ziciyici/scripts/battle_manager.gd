@@ -7,6 +7,8 @@
 
 extends Node2D
 class_name BattleManager
+@onready var player_hp_label: Label = $PlayerHPLabel
+@onready var enemy_hp_label: Label = $EnemyHPLabel
 
 # ---------------------------------------------------------------------------
 # 导出资源（在 Godot 编辑器中拖入）
@@ -129,6 +131,14 @@ func load_config() -> void:
 	for word: WordData in player_config.sentence.words:
 		player_words.append(word.duplicate())
 
+	sentence_updated.emit()
+	update_hp_display()
+
+func update_hp_display() -> void:
+	if player_hp_label:
+		player_hp_label.text = "血量：" + str(player_hp)
+	if enemy_hp_label:
+		enemy_hp_label.text = "徐福记血量：" + str(enemy_hp)
 
 # ===========================================================================
 # 玩家行动
@@ -196,7 +206,9 @@ func player_attack() -> void:
 		return
 
 	enemy_hp -= player_attack_power
+	update_hp_display()  
 	check_victory()
+		
 
 	if current_state != State.GAME_OVER:
 		change_state(State.ENEMY_TURN)
@@ -204,6 +216,7 @@ func player_attack() -> void:
 
 ## 玩家跳跃
 ## 跳跃动画完成后自动切换到敌人回合
+
 func player_jump() -> void:
 	if current_state != State.PLAYER_TURN or is_jumping:
 		return
@@ -211,15 +224,14 @@ func player_jump() -> void:
 	is_jumping = true
 	player_jump_started.emit(player_jump_height)
 
-	# 获取玩家精灵节点（假设在场景中路径为 ../PlayerSprite）
-	var player_node: Node2D = get_node("../PlayerSprite") as Node2D
+	var player_node: Sprite2D = $PlayerSprite
 	if not player_node:
+		print("错误：找不到 PlayerSprite 节点！")
 		is_jumping = false
 		return
 
 	var start_y: float = player_node.position.y
 
-	# 创建跳跃动画 Tween
 	_tween = create_tween()
 	_tween.set_trans(Tween.TRANS_QUAD)
 	_tween.set_ease(Tween.EASE_OUT)
@@ -229,9 +241,7 @@ func player_jump() -> void:
 	# 下落
 	_tween.tween_property(player_node, "position:y", start_y, 0.5)
 
-	# 动画完成后恢复状态并切换回合
 	_tween.finished.connect(_on_jump_finished)
-
 
 ## 跳跃完成回调
 func _on_jump_finished() -> void:
@@ -250,8 +260,10 @@ func _on_jump_finished() -> void:
 func _on_enemy_turn() -> void:
 	# 实例化子弹
 	var bullet: Bullet = bullet_scene.instantiate() as Bullet
-	if not bullet:
-		return
+	bullet.position = $EnemySprite.position  # 从敌人位置发射
+	# 如果子弹方向是斜上方，稍微调整发射点
+	if current_shoot_direction.y < 0:
+		bullet.position.y -= 20
 
 	# 设置子弹属性
 	bullet.damage = enemy_damage
@@ -280,12 +292,15 @@ func _on_bullet_finished() -> void:
 
 ## 检查双方生命值，判定胜负
 func check_victory() -> void:
+	update_hp_display()
 	if enemy_hp <= 0:
 		current_state = State.GAME_OVER
 		battle_ended.emit(true)
+		_show_game_over(true)
 	elif player_hp <= 0:
 		current_state = State.GAME_OVER
 		battle_ended.emit(false)
+		_show_game_over(false)
 
 
 # ===========================================================================
@@ -306,13 +321,17 @@ func change_state(new_state: State) -> void:
 # ===========================================================================
 
 ## 节点退出场景树时清理 Tween，防止内存泄漏
-func _exit_tree() -> void:
-	if _tween and _tween.is_valid():
-		_tween.kill()
-		_tween = null
+func _show_game_over(victory: bool) -> void:
+	var ui = $GameOverUI
+	if not ui:
+		return
+	ui.visible = true
+	var label = ui.get_node("ResultLabel") as Label
+	if label:
+		label.text = "胜利！" if victory else "失败..."
 
-func _on_attack_pressed() -> void:
-	player_attack()
+func _on_restart_pressed() -> void:
+	get_tree().reload_current_scene()
 	
 
 
@@ -322,3 +341,8 @@ func _on_jump_pressed() -> void:
 
 func _on_shoot_pressed() -> void:
 	print("请点击敌人头顶的有色字进行射击")
+
+
+func _on_attack_pressed() -> void:
+	print("攻击按钮被点击了")
+	player_attack()# Replace with function body.

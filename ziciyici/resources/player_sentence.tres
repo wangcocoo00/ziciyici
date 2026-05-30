@@ -70,10 +70,16 @@ metadata/_custom_type_script = "uid://wpq0rh32h21a"
 [sub_resource type="Resource" id="Resource_abddk"]
 script = ExtResource("3_s5nnt")
 type = 2
-attribute = "can_hurt_shooter"
+tag = "ricochet"
 metadata/_custom_type_script = "uid://bb4wrhnr086ep"
 
 [sub_resource type="Resource" id="Resource_yeo5j"]
+script = ExtResource("3_s5nnt")
+type = 2
+tag = "can_hurt_shooter"
+metadata/_custom_type_script = "uid://bb4wrhnr086ep"
+
+[sub_resource type="Resource" id="Resource_mkgk4"]
 script = ExtResource("3_s5nnt")
 target = 1
 attribute = "jump_height"
@@ -84,7 +90,7 @@ metadata/_custom_type_script = "uid://bb4wrhnr086ep"
 script = ExtResource("2_s5nnt")
 text = "厘"
 highlight_color = Color(0.27450982, 1, 0.26666668, 0.9098039)
-shot_effects = Array[ExtResource("3_s5nnt")]([SubResource("Resource_abddk"), SubResource("Resource_yeo5j")])
+shot_effects = Array[ExtResource("3_s5nnt")]([SubResource("Resource_abddk"), SubResource("Resource_yeo5j"), SubResource("Resource_mkgk4")])
 metadata/_custom_type_script = "uid://wpq0rh32h21a"
 
 [sub_resource type="Resource" id="Resource_7u8fy"]
