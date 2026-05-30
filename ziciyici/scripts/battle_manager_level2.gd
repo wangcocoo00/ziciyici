@@ -8,8 +8,14 @@ extends Node2D
 
 var enemy_sentence: Array[String] = []
 var player_words: Array[WordData] = []
+var player_hp: int = 0
+var enemy_hp: int = 0
+var player_attack_power: int = 0
+var player_jump_height: float = 0.0
 var shots_remaining: int = 1
 var battle_ended: bool = false
+var is_jumping: bool = false
+var _tween: Tween = null
 
 signal sentence_updated()
 signal fox_taunt(message: String)
@@ -26,6 +32,10 @@ func load_config() -> void:
 	for word in player_config.sentence.words:
 		player_words.append(word.duplicate())
 	shots_remaining = enemy_config.shots_allowed
+	player_hp = player_config.hp
+	enemy_hp = enemy_config.hp
+	player_attack_power = player_config.base_attack
+	player_jump_height = player_config.base_jump_height
 
 func player_shoot(slot: int) -> void:
 	if battle_ended or shots_remaining <= 0:
@@ -85,3 +95,42 @@ func _on_next_level_pressed() -> void:
 
 func _on_shoot_pressed() -> void:
 	print("请点击敌人句子中的有色字")
+
+func _on_attack_pressed() -> void:
+	print("攻击按钮被点击了")
+	if battle_ended:
+		return
+	enemy_hp -= player_attack_power
+	if enemy_hp <= 0:
+		end_game(true, "熊熊小王被击败了！", "啊！我输了...")
+	else:
+		print("敌人剩余血量：", enemy_hp)
+
+func _on_jump_pressed() -> void:
+	print("跳跃按钮被点击了")
+	if battle_ended or is_jumping:
+		return
+
+	is_jumping = true
+	var player_node: Sprite2D = $PlayerSprite
+	if not player_node:
+		print("错误：找不到 PlayerSprite 节点！")
+		is_jumping = false
+		return
+
+	var start_y: float = player_node.position.y
+
+	_tween = create_tween()
+	_tween.set_trans(Tween.TRANS_QUAD)
+	_tween.set_ease(Tween.EASE_OUT)
+
+	# 上升
+	_tween.tween_property(player_node, "position:y", start_y - player_jump_height, 0.5)
+	# 下落
+	_tween.tween_property(player_node, "position:y", start_y, 0.5)
+
+	_tween.finished.connect(_on_jump_finished)
+
+func _on_jump_finished() -> void:
+	is_jumping = false
+	_tween = null

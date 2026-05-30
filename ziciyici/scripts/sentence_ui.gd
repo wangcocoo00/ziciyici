@@ -16,8 +16,8 @@ func _ready():
 
 # ==================== 刷新显示 ====================
 func refresh_display() -> void:
-	var battle: BattleManager = get_parent() as BattleManager
-	if not battle:
+	var battle = get_parent()
+	if not battle or not battle.has_method("player_shoot"):
 		return
 
 	# 清空容器
@@ -60,10 +60,10 @@ func refresh_display() -> void:
 
 # ==================== 事件 ====================
 func _on_enemy_word_clicked(slot: int) -> void:
-	var battle: BattleManager = get_parent() as BattleManager
-	if battle:
+	var battle = get_parent()
+	if battle and battle.has_method("player_shoot"):
 		battle.player_shoot(slot)
 
 
 func _on_battle_sentence_updated() -> void:
-	refresh_display() # Replace with function body.
+	refresh_display()
