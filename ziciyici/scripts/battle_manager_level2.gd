@@ -28,6 +28,7 @@ func _ready() -> void:
 	sentence_updated.emit()
 	_setup_sprites()
 	_update_shoot_button_style()
+	_update_shoot_count_label()
 
 func _setup_sprites() -> void:
 	var player_sprite: Sprite2D = $PlayerSprite
@@ -60,6 +61,12 @@ func _update_shoot_button_style() -> void:
 	else:
 		shoot_btn.modulate = Color(0.8, 0.8, 0.8, 1.0)  # 灰白色（未激活）
 
+## 更新剩余射击次数显示
+func _update_shoot_count_label() -> void:
+	var label = get_node_or_null("ActionButtons/HBoxContainer/ShootCountLabel") as Label
+	if label:
+		label.text = "剩余: " + str(shots_remaining)
+
 func player_shoot(slot: int) -> void:
 	if battle_ended or shots_remaining <= 0:
 		return
@@ -82,6 +89,7 @@ func player_shoot(slot: int) -> void:
 	# 射击后退出射击模式
 	shoot_mode_active = false
 	_update_shoot_button_style()
+	_update_shoot_count_label()
 	sentence_updated.emit()
 
 	# 检查效果中的 ending 标记

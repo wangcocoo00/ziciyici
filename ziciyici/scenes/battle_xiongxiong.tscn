@@ -27,7 +27,7 @@ position = Vector2(200, 400)
 scale = Vector2(2, 2)
 texture = SubResource("PlaceholderTexture2D_l1kui")
 
-[node name="EnemySprite" type="Sprite2D" parent="." unique_id=566615846]
+[node name="EnemySprite" type="Sprite2D" parent="." unique_id=566615846)
 position = Vector2(1300, 400)
 scale = Vector2(2, 2)
 texture = SubResource("PlaceholderTexture2D_p6tk1")
@@ -95,6 +95,12 @@ theme_override_constants/separation = 20
 layout_mode = 2
 theme_override_fonts/font = ExtResource("8_ih0ju")
 text = "射击"
+
+[node name="ShootCountLabel" type="Label" parent="ActionButtons/HBoxContainer" unique_id=1004607530]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_ih0ju")
+theme_override_font_sizes/font_size = 12
+text = "剩余: 1"
 
 [node name="GameOverUI" type="CanvasLayer" parent="." unique_id=1272163202]
 visible = false

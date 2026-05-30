@@ -113,6 +113,7 @@ func _ready() -> void:
 	load_config()
 	_setup_sprites()
 	_update_shoot_button_style()
+	_update_shoot_count_label()
 
 
 func _setup_sprites() -> void:
@@ -165,6 +166,12 @@ func _update_shoot_button_style() -> void:
 	else:
 		shoot_btn.modulate = Color(0.8, 0.8, 0.8, 1.0)  # 灰白色（未激活）
 
+## 更新剩余射击次数显示
+func _update_shoot_count_label() -> void:
+	var label = get_node_or_null("ActionButtons/HBoxContainer/ShootCountLabel") as Label
+	if label:
+		label.text = "剩余: " + str(shots_remaining)
+
 # ===========================================================================
 # 玩家行动
 # ===========================================================================
@@ -196,6 +203,7 @@ func player_shoot(slot: int) -> void:
 	# 射击后退出射击模式
 	shoot_mode_active = false
 	_update_shoot_button_style()
+	_update_shoot_count_label()
 	sentence_updated.emit()
 
 	# 应用该字绑定的所有效果
