@@ -125,8 +125,10 @@ offset_bottom = 350.0
 text = "重新挑战"
 
 [node name="NextLevelBtn" type="Button" parent="GameOverUI" unique_id=69316343]
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 400.0
+offset_top = 280.0
+offset_right = 472.0
+offset_bottom = 430.0
 text = "下一关"
 
 [node name="PlayerHPLabel" type="Label" parent="." unique_id=61279231]
@@ -151,3 +153,4 @@ theme_override_font_sizes/font_size = 16
 [connection signal="pressed" from="ActionButtons/HBoxContainer/ShootBtn" to="." method="_on_shoot_pressed"]
 [connection signal="pressed" from="ActionButtons/HBoxContainer/JumpBtn" to="." method="_on_jump_pressed"]
 [connection signal="pressed" from="GameOverUI/RestartBtn" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="GameOverUI/NextLevelBtn" to="." method="_on_next_level_pressed"]
