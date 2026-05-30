@@ -23,12 +23,12 @@ next_level_scene = "res://scenes/battle_xufuji.tscn"
 
 [node name="PlayerSprite" type="Sprite2D" parent="." unique_id=2030853381]
 modulate = Color(0, 0, 1, 1)
-position = Vector2(270, 380)
+position = Vector2(260, 380)
 scale = Vector2(2, 2)
 texture = SubResource("PlaceholderTexture2D_l1kui")
 
 [node name="EnemySprite" type="Sprite2D" parent="." unique_id=566615846]
-position = Vector2(270, 180)
+position = Vector2(260, 180)
 scale = Vector2(2, 2)
 texture = SubResource("PlaceholderTexture2D_p6tk1")
 
@@ -52,17 +52,17 @@ script = ExtResource("6_n4b6j")
 
 [node name="EnemySentenceContainer" type="HBoxContainer" parent="SentenceUI" unique_id=762468490]
 layout_mode = 0
-offset_left = 380.0
+offset_left = 370.0
 offset_top = 170.0
-offset_right = 420.0
+offset_right = 410.0
 offset_bottom = 210.0
 scale = Vector2(1.3, 1.3)
 
 [node name="PlayerSentenceContainer" type="HBoxContainer" parent="SentenceUI" unique_id=1988279806]
 layout_mode = 0
-offset_left = 380.0
+offset_left = 370.0
 offset_top = 370.0
-offset_right = 420.0
+offset_right = 410.0
 offset_bottom = 410.0
 scale = Vector2(1.3, 1.3)
 
@@ -107,34 +107,26 @@ text = "剩余: 1"
 visible = false
 
 [node name="ResultLabel" type="Label" parent="GameOverUI" unique_id=624197755]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -0.5
-offset_top = -12.5
-offset_right = 0.5
-offset_bottom = 12.5
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = 200.0
+offset_top = 730.0
+offset_right = 1018.5
+offset_bottom = 802.0
 theme_override_fonts/font = ExtResource("8_ih0ju")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 32
 
 [node name="RestartBtn" type="Button" parent="GameOverUI" unique_id=1966713663]
-offset_left = 550.0
-offset_top = 400.0
-offset_right = 622.0
-offset_bottom = 433.0
+offset_left = 600.0
+offset_top = 640.0
+offset_right = 672.0
+offset_bottom = 673.0
 scale = Vector2(1.5, 1.5)
 text = "重新挑战"
 
 [node name="NextLevelBtn" type="Button" parent="GameOverUI" unique_id=550370990]
-visible = false
-offset_left = 550.0
-offset_top = 470.0
-offset_right = 606.0
-offset_bottom = 503.0
+offset_left = 750.0
+offset_top = 640.0
+offset_right = 806.0
+offset_bottom = 673.0
 scale = Vector2(1.5, 1.5)
 text = "下一关"
 
