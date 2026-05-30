@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="FoxTauntLibrary" format=3 uid="uid://duhkqf7do7285"]
+
+[ext_resource type="Script" uid="uid://t22mcf7figbg" path="res://scripts/fox_taunt_library.gd" id="1_q7467"]
+
+[resource]
+script = ExtResource("1_q7467")
+taunts = Array[String](["狗屁不通！你是这样说话的吗！", "这一箭下去，你自己信吗？", "语法之灵都被你气笑了。", "射这里？你的语文是体育老师教的？"])
+metadata/_custom_type_script = "uid://t22mcf7figbg"
