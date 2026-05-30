@@ -54,7 +54,7 @@ func load_config() -> void:
 func _update_all_button_states() -> void:
 	_update_shoot_button_style()
 	_update_shoot_count_label()
-	# 第一关只有射击按钮，其他按钮暂不处理
+	# 第一关只有射击按钮，攻击/跳跃按钮不显示
 
 ## 更新射击按钮的样式
 ## 三种状态：
@@ -112,9 +112,11 @@ func player_shoot(slot: int) -> void:
 	for effect in word.shot_effects:
 		if effect.type == EffectData.EffectType.MODIFY_ATTRIBUTE and effect.attribute == "ending":
 			if int(effect.value) == 1:
-				end_game(true, "熊熊小王良心发现，决定今天减肥", "好吧，你可以活着通过")
-			elif int(effect.value) == 2:
+				# value=1 对应"生"字 → 失败
 				end_game(false, "熊熊小王是语言的主宰，你今天就是要被吃掉", "即使你能闪避，但我还是决定你要被我吃掉")
+			elif int(effect.value) == 2:
+				# value=2 对应"死"字 → 胜利
+				end_game(true, "熊熊小王良心发现，决定今天减肥", "好吧，你可以活着通过")
 			return
 
 func end_game(victory: bool, result_text: String, enemy_text: String) -> void:

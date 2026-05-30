@@ -159,27 +159,17 @@ func update_hp_display() -> void:
 func _update_all_button_states() -> void:
 	_update_shoot_button_style()
 	_update_shoot_count_label()
-	_update_action_button_states()
+	# 攻击/跳跃按钮始终为可点击的灰白色（不受回合状态影响）
+	_set_button_always_enabled("ActionButtons/HBoxContainer/AttackBtn")
+	_set_button_always_enabled("ActionButtons/HBoxContainer/JumpBtn")
 
-## 更新非射击按钮（攻击、跳跃）的状态
-## 可触发状态：灰白色，disabled=false
-## 不可触发状态：灰黑色，disabled=true
-func _update_action_button_states() -> void:
-	var is_player_turn = current_state == State.PLAYER_TURN and not battle_ended
-	_set_button_state("ActionButtons/HBoxContainer/AttackBtn", is_player_turn)
-	_set_button_state("ActionButtons/HBoxContainer/JumpBtn", is_player_turn and not is_jumping)
-
-## 设置单个按钮的可触发状态
-func _set_button_state(path: String, enabled: bool) -> void:
+## 设置按钮始终为可点击的灰白色
+func _set_button_always_enabled(path: String) -> void:
 	var btn = get_node_or_null(path) as Button
 	if not btn:
 		return
-	if enabled:
-		btn.modulate = Color(0.8, 0.8, 0.8, 1.0)  # 灰白色（可触发）
-		btn.disabled = false
-	else:
-		btn.modulate = Color(0.3, 0.3, 0.3, 1.0)  # 灰黑色（不可触发）
-		btn.disabled = true
+	btn.modulate = Color(0.8, 0.8, 0.8, 1.0)  # 灰白色
+	btn.disabled = false
 
 ## 更新射击按钮的样式
 ## 三种状态：
