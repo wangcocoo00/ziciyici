@@ -331,7 +331,7 @@ func change_state(new_state: State) -> void:
 # 生命周期与防御
 # ===========================================================================
 
-## 节点退出场景树时清理 Tween，防止内存泄漏
+## 显示游戏结束界面
 func _show_game_over(victory: bool) -> void:
 	var ui = $GameOverUI
 	if not ui:
@@ -340,6 +340,12 @@ func _show_game_over(victory: bool) -> void:
 	var label = ui.get_node("ResultLabel") as Label
 	if label:
 		label.text = "胜利！" if victory else "失败..."
+	var restart_btn = ui.get_node("RestartBtn") as Button
+	if restart_btn:
+		restart_btn.visible = true
+	var next_btn = ui.get_node("NextLevelBtn") as Button
+	if next_btn:
+		next_btn.visible = victory and not next_level_scene.is_empty()
 
 func _on_restart_pressed() -> void:
 	get_tree().reload_current_scene()
@@ -356,4 +362,4 @@ func _on_shoot_pressed() -> void:
 
 func _on_attack_pressed() -> void:
 	print("攻击按钮被点击了")
-	player_attack()# Replace with function body.
+	player_attack()
