@@ -155,15 +155,15 @@ func update_hp_display() -> void:
 	if enemy_hp_label:
 		enemy_hp_label.text = "徐福记血量：" + str(enemy_hp)
 
-## 更新射击按钮的样式：激活时灰白色，未激活时灰黑色
+## 更新射击按钮的样式：未激活时灰白色，激活时灰黑色
 func _update_shoot_button_style() -> void:
 	var shoot_btn = get_node_or_null("ActionButtons/HBoxContainer/ShootBtn") as Button
 	if not shoot_btn:
 		return
 	if shoot_mode_active:
-		shoot_btn.modulate = Color(0.8, 0.8, 0.8, 1.0)  # 灰白色
+		shoot_btn.modulate = Color(0.3, 0.3, 0.3, 1.0)  # 灰黑色（已激活）
 	else:
-		shoot_btn.modulate = Color(0.3, 0.3, 0.3, 1.0)  # 灰黑色
+		shoot_btn.modulate = Color(0.8, 0.8, 0.8, 1.0)  # 灰白色（未激活）
 
 # ===========================================================================
 # 玩家行动
