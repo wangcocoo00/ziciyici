@@ -1,0 +1,87 @@
+class_name BattleManagerLevel2
+extends Node2D
+
+@export var enemy_config: EnemyConfig
+@export var player_config: PlayerConfig
+@export var fox_taunt_library: FoxTauntLibrary
+@export var next_level_scene: String = ""
+
+var enemy_sentence: Array[String] = []
+var player_words: Array[WordData] = []
+var shots_remaining: int = 1
+var battle_ended: bool = false
+
+signal sentence_updated()
+signal fox_taunt(message: String)
+
+func _ready() -> void:
+	load_config()
+	sentence_updated.emit()
+
+func load_config() -> void:
+	enemy_sentence.clear()
+	for word in enemy_config.sentence.words:
+		enemy_sentence.append(word.text)
+	player_words.clear()
+	for word in player_config.sentence.words:
+		player_words.append(word.duplicate())
+	shots_remaining = enemy_config.shots_allowed
+
+func player_shoot(slot: int) -> void:
+	if battle_ended or shots_remaining <= 0:
+		return
+	if slot < 0 or slot >= player_words.size():
+		return
+
+	var word = player_words[slot]
+	if not word.can_be_shot:
+		var msg = "狗屁不通！你是这样说话的吗！"
+		if fox_taunt_library and not fox_taunt_library.taunts.is_empty():
+			msg = fox_taunt_library.taunts[randi() % fox_taunt_library.taunts.size()]
+		fox_taunt.emit(msg)
+		return
+
+	# 双向删除
+	enemy_sentence[slot] = ""
+	player_words[slot].text = ""
+	player_words[slot].can_be_shot = false
+	shots_remaining -= 1
+	sentence_updated.emit()
+
+	# 检查效果中的 ending 标记
+	for effect in word.shot_effects:
+		if effect.type == EffectData.EffectType.MODIFY_ATTRIBUTE and effect.target == EffectData.Target.ENEMY and effect.attribute == "ending":
+			if int(effect.value) == 1:
+				end_game(true, "熊熊小王良心发现，决定今天减肥", "好吧，你可以活着通过")
+			elif int(effect.value) == 2:
+				end_game(false, "熊熊小王是语言的主宰，你今天就是要被吃掉", "即使你能闪避，但我还是决定你要被我吃掉")
+			return
+
+func end_game(victory: bool, result_text: String, enemy_text: String) -> void:
+	battle_ended = true
+	var extra = $EnemyExtraText as Label
+	if extra:
+		extra.text = enemy_text
+		extra.visible = true
+	var ui = $GameOverUI
+	if ui:
+		ui.visible = true
+		var label = ui.get_node("ResultLabel") as Label
+		if label:
+			label.text = result_text
+		var restart = ui.get_node("RestartBtn") as Button
+		if restart:
+			restart.visible = true
+		var next_btn = ui.get_node("NextLevelBtn") as Button
+		if next_btn:
+			next_btn.visible = victory and not next_level_scene.is_empty()
+
+func _on_restart_pressed() -> void:
+	get_tree().reload_current_scene()
+
+func _on_next_level_pressed() -> void:
+	if not next_level_scene.is_empty():
+		get_tree().change_scene_to_file(next_level_scene)
+
+func _on_shoot_pressed() -> void:
+	print("请点击敌人句子中的有色字")

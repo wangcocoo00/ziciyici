@@ -8,12 +8,10 @@ extends Control
 # ==================== 信号 ====================
 
 # ==================== 初始化 ====================
-func _ready() -> void:
-	# 连接 BattleManager 的句子更新信号
-	var battle: BattleManager = get_parent() as BattleManager
-	if battle:
+func _ready():
+	var battle = get_parent()
+	if battle and battle.has_signal("sentence_updated"):
 		battle.sentence_updated.connect(refresh_display)
-		# 立即刷新一次（数据可能已准备好）
 		refresh_display()
 
 # ==================== 刷新显示 ====================
@@ -65,3 +63,7 @@ func _on_enemy_word_clicked(slot: int) -> void:
 	var battle: BattleManager = get_parent() as BattleManager
 	if battle:
 		battle.player_shoot(slot)
+
+
+func _on_battle_sentence_updated() -> void:
+	refresh_display() # Replace with function body.
