@@ -17,6 +17,9 @@ var battle_ended: bool = false
 var is_jumping: bool = false
 var _tween: Tween = null
 
+# 射击模式状态：true=已激活（可点击有色字），false=未激活（点击有色字无反应）
+var shoot_mode_active: bool = false
+
 signal sentence_updated()
 signal fox_taunt(message: String)
 
@@ -24,6 +27,7 @@ func _ready() -> void:
 	load_config()
 	sentence_updated.emit()
 	_setup_sprites()
+	_update_shoot_button_style()
 
 func _setup_sprites() -> void:
 	var player_sprite: Sprite2D = $PlayerSprite
@@ -46,6 +50,16 @@ func load_config() -> void:
 	player_attack_power = player_config.base_attack
 	player_jump_height = player_config.base_jump_height
 
+## 更新射击按钮的样式：激活时灰白色，未激活时灰黑色
+func _update_shoot_button_style() -> void:
+	var shoot_btn = get_node_or_null("ActionButtons/HBoxContainer/ShootBtn") as Button
+	if not shoot_btn:
+		return
+	if shoot_mode_active:
+		shoot_btn.modulate = Color(0.8, 0.8, 0.8, 1.0)  # 灰白色
+	else:
+		shoot_btn.modulate = Color(0.3, 0.3, 0.3, 1.0)  # 灰黑色
+
 func player_shoot(slot: int) -> void:
 	if battle_ended or shots_remaining <= 0:
 		return
@@ -65,6 +79,9 @@ func player_shoot(slot: int) -> void:
 	player_words[slot].text = ""
 	player_words[slot].can_be_shot = false
 	shots_remaining -= 1
+	# 射击后退出射击模式
+	shoot_mode_active = false
+	_update_shoot_button_style()
 	sentence_updated.emit()
 
 	# 检查效果中的 ending 标记
@@ -103,7 +120,13 @@ func _on_next_level_pressed() -> void:
 		get_tree().change_scene_to_file(next_level_scene)
 
 func _on_shoot_pressed() -> void:
-	print("请点击敌人句子中的有色字")
+	if battle_ended or shots_remaining <= 0:
+		return
+	# 切换射击模式状态
+	shoot_mode_active = not shoot_mode_active
+	_update_shoot_button_style()
+	# 刷新句子显示，更新有色字可点击状态
+	sentence_updated.emit()
 
 func _on_attack_pressed() -> void:
 	print("攻击按钮被点击了")

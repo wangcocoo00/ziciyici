@@ -68,6 +68,9 @@ var bullet_can_hurt_self: bool = false
 ## 玩家是否正在跳跃中
 var is_jumping: bool = false
 
+## 射击模式状态：true=已激活（可点击有色字），false=未激活（点击有色字无反应）
+var shoot_mode_active: bool = false
+
 # ---------------------------------------------------------------------------
 # 回合状态
 # ---------------------------------------------------------------------------
@@ -109,6 +112,7 @@ var _tween: Tween = null
 func _ready() -> void:
 	load_config()
 	_setup_sprites()
+	_update_shoot_button_style()
 
 
 func _setup_sprites() -> void:
@@ -151,6 +155,16 @@ func update_hp_display() -> void:
 	if enemy_hp_label:
 		enemy_hp_label.text = "徐福记血量：" + str(enemy_hp)
 
+## 更新射击按钮的样式：激活时灰白色，未激活时灰黑色
+func _update_shoot_button_style() -> void:
+	var shoot_btn = get_node_or_null("ActionButtons/HBoxContainer/ShootBtn") as Button
+	if not shoot_btn:
+		return
+	if shoot_mode_active:
+		shoot_btn.modulate = Color(0.8, 0.8, 0.8, 1.0)  # 灰白色
+	else:
+		shoot_btn.modulate = Color(0.3, 0.3, 0.3, 1.0)  # 灰黑色
+
 # ===========================================================================
 # 玩家行动
 # ===========================================================================
@@ -179,6 +193,9 @@ func player_shoot(slot: int) -> void:
 	player_words[slot].text = ""
 	player_words[slot].can_be_shot = false
 	shots_remaining -= 1
+	# 射击后退出射击模式
+	shoot_mode_active = false
+	_update_shoot_button_style()
 	sentence_updated.emit()
 
 	# 应用该字绑定的所有效果
@@ -357,7 +374,13 @@ func _on_jump_pressed() -> void:
 
 
 func _on_shoot_pressed() -> void:
-	print("请点击敌人头顶的有色字进行射击")
+	if current_state != State.PLAYER_TURN or shots_remaining <= 0:
+		return
+	# 切换射击模式状态
+	shoot_mode_active = not shoot_mode_active
+	_update_shoot_button_style()
+	# 刷新句子显示，更新有色字可点击状态
+	sentence_updated.emit()
 
 
 func _on_attack_pressed() -> void:

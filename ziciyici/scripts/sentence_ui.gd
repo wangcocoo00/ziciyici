@@ -26,6 +26,13 @@ func refresh_display() -> void:
 	for child in player_container.get_children():
 		child.queue_free()
 
+	# 检查射击模式是否激活（从父节点读取）
+	var shoot_mode_active: bool = false
+	if battle.has_method("get_shoot_mode_active"):
+		shoot_mode_active = battle.get_shoot_mode_active()
+	elif "shoot_mode_active" in battle:
+		shoot_mode_active = battle.shoot_mode_active
+
 	# 遍历所有槽位
 	for i in range(battle.enemy_sentence.size()):
 		var enemy_text: String = battle.enemy_sentence[i]
@@ -33,18 +40,22 @@ func refresh_display() -> void:
 
 		# 敌人文字 Label / Button
 		var enemy_label: Control
-		if player_word and player_word.can_be_shot:
-			# 可射击：创建按钮，点击后触发射击
+		if player_word and player_word.can_be_shot and shoot_mode_active:
+			# 可射击且射击模式已激活：创建按钮，点击后触发射击
 			var btn := Button.new()
 			btn.text = enemy_text
 			btn.modulate = player_word.highlight_color
 			btn.pressed.connect(_on_enemy_word_clicked.bind(i))
 			enemy_label = btn
 		else:
-			# 不可射击：普通 Label
+			# 不可射击或射击模式未激活：普通 Label
 			var lbl := Label.new()
 			lbl.text = enemy_text
-			lbl.modulate = Color.WHITE
+			if player_word and player_word.can_be_shot:
+				# 有色字但射击模式未激活：显示颜色但不可点击
+				lbl.modulate = player_word.highlight_color
+			else:
+				lbl.modulate = Color.WHITE
 			enemy_label = lbl
 
 		enemy_container.add_child(enemy_label)
