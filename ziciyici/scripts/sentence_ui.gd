@@ -5,6 +5,9 @@ extends Control
 @onready var enemy_container: HBoxContainer = $EnemySentenceContainer
 @onready var player_container: HBoxContainer = $PlayerSentenceContainer
 
+# 每个字的固定宽度（像素），确保上下对齐
+const CHAR_WIDTH: float = 40.0
+
 # ==================== 信号 ====================
 
 # ==================== 初始化 ====================
@@ -44,6 +47,7 @@ func refresh_display() -> void:
 			# 射击模式已激活：所有字都创建为 Button
 			var btn := Button.new()
 			btn.text = enemy_text
+			btn.custom_minimum_size = Vector2(CHAR_WIDTH, 0)
 			if player_word and player_word.can_be_shot:
 				# 有色字：显示高亮颜色
 				btn.modulate = player_word.highlight_color
@@ -56,6 +60,7 @@ func refresh_display() -> void:
 			# 射击模式未激活：普通 Label
 			var lbl := Label.new()
 			lbl.text = enemy_text
+			lbl.custom_minimum_size = Vector2(CHAR_WIDTH, 0)
 			if player_word and player_word.can_be_shot:
 				# 有色字但射击模式未激活：显示颜色但不可点击
 				lbl.modulate = player_word.highlight_color
@@ -69,9 +74,11 @@ func refresh_display() -> void:
 		var player_label := Label.new()
 		if player_word:
 			player_label.text = player_word.text
+			player_label.custom_minimum_size = Vector2(CHAR_WIDTH, 0)
 			player_label.modulate = player_word.highlight_color
 		else:
 			player_label.text = ""
+			player_label.custom_minimum_size = Vector2(CHAR_WIDTH, 0)
 		player_container.add_child(player_label)
 
 # ==================== 事件 ====================
