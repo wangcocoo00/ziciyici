@@ -27,7 +27,7 @@ position = Vector2(200, 400)
 scale = Vector2(2, 2)
 texture = SubResource("PlaceholderTexture2D_l1kui")
 
-[node name="EnemySprite" type="Sprite2D" parent="." unique_id=566615846)
+[node name="EnemySprite" type="Sprite2D" parent="." unique_id=566615846]
 position = Vector2(1300, 400)
 scale = Vector2(2, 2)
 texture = SubResource("PlaceholderTexture2D_p6tk1")
