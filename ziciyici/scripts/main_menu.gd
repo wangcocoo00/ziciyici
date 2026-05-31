@@ -2,6 +2,7 @@ class_name MainMenu
 extends Control
 
 @onready var play_button: TextureButton = $PlayButton
+@onready var bgm: AudioStreamPlayer = $BGM
 
 func _ready() -> void:
 	# 检查按钮节点是否存在
@@ -11,5 +12,8 @@ func _ready() -> void:
 	# 连接按钮点击信号
 
 func _on_play_pressed() -> void:
+	# 停止 BGM 播放
+	if bgm != null:
+		bgm.stop()
 	# 点击后切换到开场动画场景
 	get_tree().change_scene_to_file("res://scenes/start_animation.tscn")

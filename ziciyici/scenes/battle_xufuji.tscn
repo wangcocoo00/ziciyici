@@ -1,14 +1,13 @@
-[gd_scene format=3 uid="uid://h420l68jldb"]
+[gd_scene format=3 uid="uid://x18csctspgrc"]
 
-[ext_resource type="Script" uid="uid://3ipodfwy5rll" path="res://scripts/battle_manager_level3.gd" id="1_8tbow"]
-[ext_resource type="Resource" path="res://resources/tutu_config.tres" id="2_8tbow"]
-[ext_resource type="Resource" uid="uid://dwwxu087nfsds" path="res://resources/player_level3.tres" id="3_2ihut"]
+[ext_resource type="Script" uid="uid://bj1c6qdo3udhf" path="res://scripts/battle_manager.gd" id="1_jibkb"]
+[ext_resource type="Resource" uid="uid://crx213q0v8il5" path="res://resources/xu_fuji.tres" id="2_8tbow"]
+[ext_resource type="Resource" uid="uid://ctwyv417jck8r" path="res://resources/player_level1.tres" id="3_jibkb"]
 [ext_resource type="Resource" uid="uid://duhkqf7do7285" path="res://resources/taunts.tres" id="4_pp7ab"]
 [ext_resource type="PackedScene" uid="uid://dc1wlhupgmgcg" path="res://scenes/Bullet.tscn" id="5_qul14"]
-<<<<<<<< HEAD:ziciyici/scenes/battle_xufuji.tscn
-[ext_resource type="Texture2D" uid="uid://cp28vevschuu" path="res://resources/背景图.png" id="6_4mfke"]
+[ext_resource type="Texture2D" uid="uid://cp28vevschuu" path="res://resources/背景图.png" id="6_eob0c"]
 [ext_resource type="Script" uid="uid://xjntphmll8l7" path="res://scripts/sentence_ui.gd" id="6_n4b6j"]
-[ext_resource type="Texture2D" uid="uid://c5nodteo6rof7" path="res://resources/img_v3_02127_bfa615cb-8268-451d-88b4-9a3834d3be6g.png" id="6_vu1hv"]
+[ext_resource type="Texture2D" uid="uid://c5nodteo6rof7" path="res://resources/img_v3_02127_bfa615cb-8268-451d-88b4-9a3834d3be6g.png" id="7_3sw6v"]
 [ext_resource type="Script" uid="uid://ca11714ms7hyc" path="res://scripts/fox_popup.gd" id="7_hihw6"]
 [ext_resource type="FontFile" uid="uid://biffnd0pv2bcc" path="res://resources/NotoSansSC-Regular.ttf" id="8_ih0ju"]
 [ext_resource type="Texture2D" uid="uid://dnie6wy2ckdqe" path="res://resources/企鹅ui.png" id="10_t2t55"]
@@ -16,70 +15,36 @@
 [ext_resource type="Texture2D" uid="uid://8ux4r7k4b35r" path="res://resources/镜像护士小狗.png" id="11_t2t55"]
 [ext_resource type="Texture2D" uid="uid://cdfvb11jvt2wi" path="res://resources/开弓设计.png" id="12_jibkb"]
 [ext_resource type="Texture2D" uid="uid://bstustndpwn5w" path="res://resources/重新开始.png" id="13_4c2yr"]
-[ext_resource type="AudioStream" path="res://resources/Copper Confetti.mp3" id="14_bgm"]
+[ext_resource type="AudioStream" uid="uid://befeimebhfwwi" path="res://resources/Copper Confetti.mp3" id="14_bgm"]
 
-[node name="Battle3" type="Node2D" unique_id=689843110]
-script = ExtResource("1_656bh")
-enemy_config = ExtResource("2_yw1d3")
-player_config = ExtResource("3_ciu3y")
-========
-[ext_resource type="Texture2D" uid="uid://cp28vevschuu" path="res://resources/背景图.png" id="6_eob0c"]
-[ext_resource type="Script" uid="uid://xjntphmll8l7" path="res://scripts/sentence_ui.gd" id="6_n4b6j"]
-[ext_resource type="Texture2D" uid="uid://c5nodteo6rof7" path="res://resources/img_v3_02127_bfa615cb-8268-451d-88b4-9a3834d3be6g.png" id="7_3sw6v"]
-[ext_resource type="Script" uid="uid://ca11714ms7hyc" path="res://scripts/fox_popup.gd" id="7_hihw6"]
-[ext_resource type="FontFile" uid="uid://biffnd0pv2bcc" path="res://resources/NotoSansSC-Regular.ttf" id="8_ih0ju"]
-[ext_resource type="Texture2D" uid="uid://lfy2uju01g7q" path="res://resources/攻击.png" id="11_2chcw"]
-[ext_resource type="Texture2D" uid="uid://cdfvb11jvt2wi" path="res://resources/开弓设计.png" id="12_sdqur"]
-[ext_resource type="Texture2D" uid="uid://dcpgsy7gsndww" path="res://resources/4.png" id="13_yxia1"]
-[ext_resource type="Texture2D" uid="uid://dnie6wy2ckdqe" path="res://resources/企鹅ui.png" id="14_7cybf"]
-[ext_resource type="Texture2D" uid="uid://bss7p4tdrfl50" path="res://resources/兔兔.png" id="15_qcfgc"]
-[ext_resource type="Texture2D" uid="uid://bstustndpwn5w" path="res://resources/重新开始.png" id="16_hux4o"]
-
-[node name="Battle3" type="Node2D" unique_id=689843110]
-script = ExtResource("1_8tbow")
+[node name="Battle2" type="Node2D" unique_id=3123006]
+script = ExtResource("1_jibkb")
 enemy_config = ExtResource("2_8tbow")
-player_config = ExtResource("3_2ihut")
->>>>>>>> test2:ziciyici/scenes/battle_bluegoggy.tscn
+player_config = ExtResource("3_jibkb")
 fox_taunt_library = ExtResource("4_pp7ab")
 bullet_scene = ExtResource("5_qul14")
 next_level_scene = "res://scenes/battle_tutu.tscn"
 
-[node name="BGM" type="AudioStreamPlayer" parent="."]
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=634073164]
 stream = ExtResource("14_bgm")
 autoplay = true
 
-[node name="background" type="Sprite2D" parent="." unique_id=1986734028]
+[node name="background" type="Sprite2D" parent="." unique_id=188569597]
 position = Vector2(1081, 40.000004)
 scale = Vector2(1.6171875, 2.0898438)
-texture = ExtResource("6_4mfke")
-
-[node name="background" type="Sprite2D" parent="." unique_id=1144299769]
-position = Vector2(924, -79)
-scale = Vector2(1.4267112, 2.6670737)
 texture = ExtResource("6_eob0c")
 
-[node name="PlayerSprite" type="Sprite2D" parent="." unique_id=2004262358]
-<<<<<<<< HEAD:ziciyici/scenes/battle_xufuji.tscn
+[node name="PlayerSprite" type="Sprite2D" parent="." unique_id=1867372067]
 position = Vector2(192, 444.00003)
 scale = Vector2(0.18452382, 0.34114587)
-texture = ExtResource("6_vu1hv")
+texture = ExtResource("7_3sw6v")
 
-[node name="EnemySprite" type="Sprite2D" parent="." unique_id=1564758301]
+[node name="EnemySprite" type="Sprite2D" parent="." unique_id=1522433320]
 position = Vector2(1067, 444)
 scale = Vector2(0.20238103, 0.3401693)
-texture = ExtResource("6_vu1hv")
-========
-position = Vector2(180, 457)
-scale = Vector2(0.13020834, 0.2799479)
 texture = ExtResource("7_3sw6v")
 
-[node name="EnemySprite" type="Sprite2D" parent="." unique_id=1564758301]
-position = Vector2(1096, 457.00003)
-scale = Vector2(0.14787947, 0.27294922)
-texture = ExtResource("7_3sw6v")
->>>>>>>> test2:ziciyici/scenes/battle_bluegoggy.tscn
-
-[node name="SentenceUI" type="Control" parent="." unique_id=1557530583]
+[node name="SentenceUI" type="Control" parent="." unique_id=1430615204]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -88,9 +53,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("6_n4b6j")
 
-[node name="EnemySentenceContainer" type="HBoxContainer" parent="SentenceUI" unique_id=1862869488]
+[node name="EnemySentenceContainer" type="HBoxContainer" parent="SentenceUI" unique_id=311924774]
 layout_mode = 0
-<<<<<<<< HEAD:ziciyici/scenes/battle_xufuji.tscn
 offset_left = 855.00006
 offset_top = 256.0
 offset_right = 934.638
@@ -98,37 +62,20 @@ offset_bottom = 295.81903
 scale = Vector2(2.21, 2.21)
 theme_override_constants/separation = 4
 
-[node name="PlayerSentenceContainer" type="HBoxContainer" parent="SentenceUI" unique_id=886792692]
+[node name="PlayerSentenceContainer" type="HBoxContainer" parent="SentenceUI" unique_id=201397836]
 layout_mode = 0
 offset_left = 84.0
 offset_top = 261.0
 offset_right = 163.63802
 offset_bottom = 294.48416
 scale = Vector2(2.21, 2.21)
-========
-offset_left = 909.99994
-offset_top = 245.99998
-offset_right = 990.5128
-offset_bottom = 277.79486
-scale = Vector2(1.95, 1.95)
-theme_override_constants/separation = 2
 
-[node name="PlayerSentenceContainer" type="HBoxContainer" parent="SentenceUI" unique_id=886792692]
-layout_mode = 0
-offset_left = 111.00001
-offset_top = 255.0
-offset_right = 159.20514
-offset_bottom = 281.6667
-scale = Vector2(1.95, 1.95)
-theme_override_constants/separation = 2
->>>>>>>> test2:ziciyici/scenes/battle_bluegoggy.tscn
-
-[node name="FoxPopup" type="CanvasLayer" parent="." unique_id=852023058]
+[node name="FoxPopup" type="CanvasLayer" parent="." unique_id=1687361617]
 script = ExtResource("7_hihw6")
 
-[node name="FoxSprite" type="Sprite2D" parent="FoxPopup" unique_id=891934620]
+[node name="FoxSprite" type="Sprite2D" parent="FoxPopup" unique_id=1738175521]
 
-[node name="DialogBubble" type="Label" parent="FoxPopup/FoxSprite" unique_id=1693996157]
+[node name="DialogBubble" type="Label" parent="FoxPopup/FoxSprite" unique_id=685467895]
 offset_left = -24.0
 offset_top = -49.0
 offset_right = 176.0
@@ -137,7 +84,7 @@ theme_override_fonts/font = ExtResource("8_ih0ju")
 theme_override_font_sizes/font_size = 24
 horizontal_alignment = 1
 
-[node name="ActionButtons" type="Control" parent="." unique_id=562539446]
+[node name="ActionButtons" type="Control" parent="." unique_id=2076745949]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -145,7 +92,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ActionButtons" unique_id=89587544]
+[node name="HBoxContainer" type="HBoxContainer" parent="ActionButtons" unique_id=412120125]
 layout_mode = 0
 offset_left = 140.0
 offset_top = 700.0
@@ -154,13 +101,12 @@ offset_bottom = 756.0
 scale = Vector2(2, 2)
 theme_override_constants/separation = 20
 
-[node name="AttackBtn" type="Button" parent="ActionButtons/HBoxContainer" unique_id=1558428434]
+[node name="AttackBtn" type="Button" parent="ActionButtons/HBoxContainer" unique_id=539114193]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("8_ih0ju")
 text = "攻击"
 
-<<<<<<<< HEAD:ziciyici/scenes/battle_xufuji.tscn
-[node name="attackbtnimage" type="TextureRect" parent="ActionButtons/HBoxContainer/AttackBtn" unique_id=33805117]
+[node name="attackbtnimage" type="TextureRect" parent="ActionButtons/HBoxContainer/AttackBtn" unique_id=2095848166]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.062000003
@@ -169,90 +115,37 @@ offset_top = -39.0
 offset_right = 45.52
 offset_bottom = 87.5
 texture = ExtResource("11_01oib")
-========
-[node name="TextureRect" type="TextureRect" parent="ActionButtons/HBoxContainer/AttackBtn" unique_id=1967414492]
-layout_mode = 0
-offset_left = -15.0
-offset_top = -45.0
-offset_right = 46.5
-offset_bottom = 98.0
-texture = ExtResource("11_2chcw")
->>>>>>>> test2:ziciyici/scenes/battle_bluegoggy.tscn
 expand_mode = 1
 
-[node name="ShootVBox" type="VBoxContainer" parent="ActionButtons/HBoxContainer" unique_id=749983759]
+[node name="ShootVBox" type="VBoxContainer" parent="ActionButtons/HBoxContainer" unique_id=816778003]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="ShootBtn" type="Button" parent="ActionButtons/HBoxContainer/ShootVBox" unique_id=749983760]
+[node name="ShootBtn" type="Button" parent="ActionButtons/HBoxContainer/ShootVBox" unique_id=1790083080]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("8_ih0ju")
 text = "射击"
 
-<<<<<<<< HEAD:ziciyici/scenes/battle_xufuji.tscn
-[node name="shootbtnimage" type="TextureRect" parent="ActionButtons/HBoxContainer/ShootVBox/ShootBtn" unique_id=1390715135]
+[node name="shootbtnimage" type="TextureRect" parent="ActionButtons/HBoxContainer/ShootVBox/ShootBtn" unique_id=1973156131]
 layout_mode = 0
 offset_left = -16.5
 offset_top = -23.5
 offset_right = 51.0
 offset_bottom = 57.0
 texture = ExtResource("12_jibkb")
-========
-[node name="TextureRect" type="TextureRect" parent="ActionButtons/HBoxContainer/ShootVBox/ShootBtn" unique_id=331234892]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -1.4030001
-anchor_top = -1.381
-anchor_right = -1.4030001
-anchor_bottom = -1.381
-offset_left = 55.538002
-offset_top = 14.073002
-offset_right = 114.538
-offset_bottom = 104.073
-texture = ExtResource("12_sdqur")
->>>>>>>> test2:ziciyici/scenes/battle_bluegoggy.tscn
 expand_mode = 1
 
-[node name="ShootCountLabel" type="Label" parent="ActionButtons/HBoxContainer/ShootVBox" unique_id=749983761]
+[node name="ShootCountLabel" type="Label" parent="ActionButtons/HBoxContainer/ShootVBox" unique_id=302958259]
 layout_mode = 2
-<<<<<<<< HEAD:ziciyici/scenes/battle_xufuji.tscn
 theme_override_colors/font_color = Color(0.9611512, 0.19004989, 0.32134914, 1)
-========
-theme_override_colors/font_color = Color(0.9704569, 0.35974282, 0.39797673, 1)
->>>>>>>> test2:ziciyici/scenes/battle_bluegoggy.tscn
 theme_override_fonts/font = ExtResource("8_ih0ju")
 theme_override_font_sizes/font_size = 15
 text = "剩余: 2"
 
-<<<<<<<< HEAD:ziciyici/scenes/battle_xufuji.tscn
-========
-[node name="DodgeBtn" type="Button" parent="ActionButtons/HBoxContainer" unique_id=1282695463]
-modulate = Color(0.3, 0.3, 0.3, 1)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("8_ih0ju")
-disabled = true
-text = "闪避"
-
-[node name="TextureRect" type="TextureRect" parent="ActionButtons/HBoxContainer/DodgeBtn" unique_id=577965360]
-layout_mode = 0
-offset_left = -12.0
-offset_top = -34.0
-offset_right = 49.5
-offset_bottom = 93.0
-texture = ExtResource("13_yxia1")
-expand_mode = 1
-
-[node name="VictoryBtn" type="Button" parent="ActionButtons/HBoxContainer" unique_id=1282695464]
-visible = false
-layout_mode = 2
-theme_override_fonts/font = ExtResource("8_ih0ju")
-text = "胜利"
-
->>>>>>>> test2:ziciyici/scenes/battle_bluegoggy.tscn
-[node name="GameOverUI" type="CanvasLayer" parent="." unique_id=1873818336]
+[node name="GameOverUI" type="CanvasLayer" parent="." unique_id=747080020]
 visible = false
 
-[node name="Overlay" type="ColorRect" parent="GameOverUI" unique_id=1873818337]
+[node name="Overlay" type="ColorRect" parent="GameOverUI" unique_id=275861492]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -261,7 +154,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0.7)
 
-[node name="ResultLabel" type="Label" parent="GameOverUI" unique_id=975836803]
+[node name="ResultLabel" type="Label" parent="GameOverUI" unique_id=1754141256]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -278,7 +171,7 @@ theme_override_font_sizes/font_size = 36
 text = "GameOver"
 horizontal_alignment = 1
 
-[node name="RestartBtn" type="Button" parent="GameOverUI" unique_id=1746486183]
+[node name="RestartBtn" type="Button" parent="GameOverUI" unique_id=2143536064]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -294,7 +187,7 @@ theme_override_fonts/font = ExtResource("8_ih0ju")
 theme_override_font_sizes/font_size = 28
 text = "重新挑战"
 
-[node name="NextLevelBtn" type="Button" parent="GameOverUI" unique_id=69316343]
+[node name="NextLevelBtn" type="Button" parent="GameOverUI" unique_id=352862902]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -310,16 +203,7 @@ theme_override_fonts/font = ExtResource("8_ih0ju")
 theme_override_font_sizes/font_size = 28
 text = "下一关"
 
-[node name="playerimage" type="TextureRect" parent="." unique_id=433340706]
-offset_left = 248.0
-offset_top = 339.0
-offset_right = 467.0
-offset_bottom = 551.0
-texture = ExtResource("14_7cybf")
-expand_mode = 1
-
-[node name="PlayerHPLabel" type="Label" parent="." unique_id=61279231]
-<<<<<<<< HEAD:ziciyici/scenes/battle_xufuji.tscn
+[node name="PlayerHPLabel" type="Label" parent="." unique_id=1128538005]
 z_index = 10
 offset_left = 103.0
 offset_top = 485.0
@@ -329,13 +213,13 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("8_ih0ju")
 theme_override_font_sizes/font_size = 24
 
-[node name="playericon" type="Control" parent="." unique_id=1232442814]
+[node name="playericon" type="Control" parent="." unique_id=1882764886]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="playername" type="Label" parent="playericon" unique_id=2105358835]
+[node name="playername" type="Label" parent="playericon" unique_id=1046654633]
 layout_mode = 0
 offset_left = 118.0
 offset_top = 355.0
@@ -345,7 +229,7 @@ theme_override_colors/font_color = Color(0.38170114, 0.82807684, 0.99363095, 1)
 theme_override_font_sizes/font_size = 32
 text = "玩家：企鹅"
 
-[node name="playerimage" type="TextureRect" parent="playericon" unique_id=296778049]
+[node name="playerimage" type="TextureRect" parent="playericon" unique_id=1214289089]
 layout_mode = 0
 offset_left = 270.0
 offset_top = 344.0
@@ -354,7 +238,7 @@ offset_bottom = 542.0
 texture = ExtResource("10_t2t55")
 expand_mode = 1
 
-[node name="EnemyExtraText" type="Label" parent="." unique_id=123456789]
+[node name="EnemyExtraText" type="Label" parent="." unique_id=1354188605]
 visible = false
 z_index = 10
 offset_left = 400.0
@@ -365,54 +249,33 @@ theme_override_fonts/font = ExtResource("8_ih0ju")
 theme_override_font_sizes/font_size = 28
 horizontal_alignment = 1
 
-[node name="RestartBtn" type="Button" parent="." unique_id=987654321]
+[node name="RestartBtn" type="Button" parent="." unique_id=1843179644]
 offset_left = -35.0
 offset_top = -133.0
 offset_right = 204.0
 offset_bottom = 207.0
-========
-offset_left = 170.0
-offset_top = 505.0
-offset_right = 210.0
-offset_bottom = 530.0
->>>>>>>> test2:ziciyici/scenes/battle_bluegoggy.tscn
 theme_override_fonts/font = ExtResource("8_ih0ju")
 theme_override_font_sizes/font_size = 16
 icon = ExtResource("13_4c2yr")
 flat = true
 expand_icon = true
 
-[node name="enemyimage" type="TextureRect" parent="." unique_id=798257601]
-offset_left = 855.0
-offset_top = 355.0
-offset_right = 1039.0
-offset_bottom = 501.0
-texture = ExtResource("15_qcfgc")
-expand_mode = 1
-
-[node name="EnemyHPLabel" type="Label" parent="." unique_id=685025840]
-<<<<<<<< HEAD:ziciyici/scenes/battle_xufuji.tscn
+[node name="EnemyHPLabel" type="Label" parent="." unique_id=1361764725]
 offset_left = 1016.0
 offset_top = 502.0
 offset_right = 1165.0
 offset_bottom = 571.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-========
-offset_left = 1505.0
-offset_top = 386.0
-offset_right = 1545.0
-offset_bottom = 422.0
->>>>>>>> test2:ziciyici/scenes/battle_bluegoggy.tscn
 theme_override_fonts/font = ExtResource("8_ih0ju")
 theme_override_font_sizes/font_size = 24
 
-[node name="enemyicon" type="Control" parent="." unique_id=135623953]
+[node name="enemyicon" type="Control" parent="." unique_id=1489386344]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="enemyname" type="Label" parent="enemyicon" unique_id=1711994812]
+[node name="enemyname" type="Label" parent="enemyicon" unique_id=816762105]
 layout_mode = 0
 offset_left = 952.0
 offset_top = 356.0
@@ -422,7 +285,7 @@ theme_override_colors/font_color = Color(0.9179055, 0.92235994, 0.92892456, 1)
 theme_override_font_sizes/font_size = 32
 text = "敌人：小狗小兰"
 
-[node name="enemyimage" type="TextureRect" parent="enemyicon" unique_id=1434546324]
+[node name="enemyimage" type="TextureRect" parent="enemyicon" unique_id=555485599]
 layout_mode = 0
 offset_left = 822.0
 offset_top = 362.0
@@ -431,42 +294,10 @@ offset_bottom = 501.0
 texture = ExtResource("11_t2t55")
 expand_mode = 1
 
-[node name="EnemyExtraText" type="Label" parent="." unique_id=123456789]
-visible = false
-offset_left = 400.0
-offset_top = 500.0
-offset_right = 1200.0
-offset_bottom = 550.0
-theme_override_fonts/font = ExtResource("8_ih0ju")
-theme_override_font_sizes/font_size = 28
-horizontal_alignment = 1
-
-[node name="RestartBtn" type="Button" parent="." unique_id=987654321]
-offset_left = 20.0
-offset_top = 20.0
-offset_right = 100.0
-offset_bottom = 60.0
-theme_override_fonts/font = ExtResource("8_ih0ju")
-theme_override_font_sizes/font_size = 16
-
-[node name="TextureRect" type="TextureRect" parent="RestartBtn" unique_id=37676664]
-layout_mode = 0
-offset_left = -41.0
-offset_top = -108.0
-offset_right = 143.0
-offset_bottom = 147.0
-texture = ExtResource("16_hux4o")
-expand_mode = 1
-
 [connection signal="fox_taunt" from="." to="FoxPopup" method="_on_battle_fox_taunt"]
 [connection signal="sentence_updated" from="." to="SentenceUI" method="_on_battle_sentence_updated"]
 [connection signal="pressed" from="ActionButtons/HBoxContainer/AttackBtn" to="." method="_on_attack_pressed"]
 [connection signal="pressed" from="ActionButtons/HBoxContainer/ShootVBox/ShootBtn" to="." method="_on_shoot_pressed"]
-<<<<<<<< HEAD:ziciyici/scenes/battle_xufuji.tscn
-========
-[connection signal="pressed" from="ActionButtons/HBoxContainer/DodgeBtn" to="." method="_on_dodge_pressed"]
-[connection signal="pressed" from="ActionButtons/HBoxContainer/VictoryBtn" to="." method="_on_victory_pressed"]
->>>>>>>> test2:ziciyici/scenes/battle_bluegoggy.tscn
 [connection signal="pressed" from="GameOverUI/RestartBtn" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="GameOverUI/NextLevelBtn" to="." method="_on_next_level_pressed"]
 [connection signal="pressed" from="RestartBtn" to="." method="_on_restart_pressed"]
