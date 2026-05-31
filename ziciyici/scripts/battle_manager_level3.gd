@@ -452,7 +452,7 @@ func _show_victory_screen() -> void:
 	ui.visible = true
 	var label = ui.get_node("ResultLabel") as Label
 	if label:
-		label.text = "如果是语言赋予了小动物们沟通与理解的契机，那在只此一次的相遇中，用「字此一次」去伤害，而不是去爱，会不会太过可惜？\n如果文字拥有改变世界的能力，那使用言灵之力的副作用，是不是也迷失了自己？\n小企鹅想知道：你呢？如果你也能改变别人的话语，你会冒着忘记自我的副作用，去施暴？还是拥抱？"
+		label.text = "若语言赋予了小动物沟通的契机，那用「字此一次」去伤害，而非去爱，会不会太可惜？\n如果文字拥有改变世界的能力，那使用言灵之力的副作用，是不是也迷失了自己？\n如果你也能改变别人的话语，你会冒着忘记自我的副作用，去施暴？还是拥抱？"
 	var restart_btn = ui.get_node("RestartBtn") as Button
 	if restart_btn:
 		restart_btn.visible = true
@@ -548,8 +548,8 @@ func _on_restart_pressed() -> void:
 	get_tree().reload_current_scene()
 
 func _on_next_level_pressed() -> void:
-	if next_level_scene != "":
-		get_tree().change_scene_to_file(next_level_scene)
+	# 第三关的"感谢游玩"按钮跳转到主菜单
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 func _on_shoot_pressed() -> void:
 	if current_state != State.PLAYER_TURN or shots_remaining <= 0:
