@@ -255,10 +255,10 @@ flat = true
 expand_icon = true
 
 [node name="EnemyHPLabel" type="Label" parent="." unique_id=685025840]
-offset_left = 994.0
-offset_top = 505.0
-offset_right = 1143.0
-offset_bottom = 574.0
+offset_left = 1044.0
+offset_top = 502.0
+offset_right = 1193.0
+offset_bottom = 571.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("8_ih0ju")
 theme_override_font_sizes/font_size = 24
@@ -277,7 +277,7 @@ offset_right = 1184.0
 offset_bottom = 407.0
 theme_override_colors/font_color = Color(0.9179055, 0.92235994, 0.92892456, 1)
 theme_override_font_sizes/font_size = 32
-text = "敌人：护士小狗"
+text = "敌人：小狗小兰"
 
 [node name="enemyimage" type="TextureRect" parent="enemyicon" unique_id=1434546324]
 layout_mode = 0
