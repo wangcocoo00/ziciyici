@@ -1,15 +1,15 @@
 extends Node2D
 
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var video_player: VideoStreamPlayer = $VideoStreamPlayer
 @onready var color_rect: ColorRect = $ColorRect
 
 func _ready() -> void:
-	# 直接播放动画
-	animation_player.play("intro")
-	animation_player.animation_finished.connect(_on_animation_finished)
+	# 开始播放视频
+	video_player.play()
+	video_player.finished.connect(_on_video_finished)
 
-func _on_animation_finished(anim_name: String) -> void:
-	# 动画播放完后淡出变黑
+func _on_video_finished() -> void:
+	# 视频播放完后淡出变黑
 	var tween = create_tween()
 	tween.tween_property(color_rect, "color", Color.BLACK, 1.0)
 	tween.tween_callback(func():
