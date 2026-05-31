@@ -113,7 +113,7 @@ func player_shoot(slot: int) -> void:
 		if effect.type == EffectData.EffectType.MODIFY_ATTRIBUTE and effect.attribute == "ending":
 			if int(effect.value) == 1:
 				# value=1 对应"生"字 → 失败
-				end_game(false, "熊熊小王是语言的主宰，你今天就是要被吃掉", "即使你能闪避，但我还是决定你要被我吃掉")
+				end_game(false, "熊熊小王是语言的主宰，他今天就是要吃掉你", "即使你能闪避，但伟大的熊熊小王还是决定你必须死亡")
 			elif int(effect.value) == 2:
 				# value=2 对应"死"字 → 胜利
 				end_game(true, "熊熊小王良心发现，决定今天减肥，不吃肉了", "好吧，看在语法之灵的份上，\n勉强让你过去吧。")
@@ -126,9 +126,8 @@ func end_game(victory: bool, result_text: String, enemy_text: String) -> void:
 		extra.text = enemy_text
 		extra.visible = true
 
-	if victory:
-		# 胜利时：先只显示敌人对话，2秒后再显示 GameOverUI
-		await get_tree().create_timer(2.0).timeout
+	# 胜利或失败时：先只显示敌人对话，2秒后再显示 GameOverUI
+	await get_tree().create_timer(2.0).timeout
 
 	var ui = $GameOverUI
 	if ui:
