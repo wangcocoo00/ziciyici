@@ -9,5 +9,4 @@ enemy_name = "史官徐福记"
 hp = 30
 sentence = ExtResource("2_ia85u")
 base_attack_damage = 10
-shots_allowed = 1
 metadata/_custom_type_script = "uid://beo8atehsmfr6"

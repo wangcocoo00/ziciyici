@@ -45,8 +45,12 @@ func _physics_process(delta: float) -> void:
 			battle_ref.player_hp -= damage
 			battle_ref.update_hp_display()
 			battle_ref.check_victory()
-			# 玩家向后挪50像素
+			# 玩家向后挪50像素，1秒后回到原位置
+			var original_x = player_sprite.position.x
 			player_sprite.position.x -= 50
+			var tween = battle_ref.create_tween()
+			tween.tween_interval(1.0)
+			tween.tween_property(player_sprite, "position:x", original_x, 0.3)
 			queue_free_and_emit()
 			return
 

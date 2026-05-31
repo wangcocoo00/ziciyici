@@ -55,7 +55,6 @@ metadata/_custom_type_script = "uid://bb4wrhnr086ep"
 [sub_resource type="Resource" id="Resource_6rxc8"]
 script = ExtResource("2_knkdb")
 text = "生"
-can_be_shot = true
 highlight_color = Color(0, 1, 0, 0.95686275)
 shot_effects = Array[ExtResource("3_fffum")]([SubResource("Resource_mviny")])
 metadata/_custom_type_script = "uid://wpq0rh32h21a"
@@ -69,7 +68,6 @@ metadata/_custom_type_script = "uid://bb4wrhnr086ep"
 [sub_resource type="Resource" id="Resource_1fuwk"]
 script = ExtResource("2_knkdb")
 text = "死"
-can_be_shot = true
 highlight_color = Color(1, 0, 0, 0.94509804)
 shot_effects = Array[ExtResource("3_fffum")]([SubResource("Resource_knkdb")])
 metadata/_custom_type_script = "uid://wpq0rh32h21a"

@@ -167,7 +167,7 @@ func update_hp_display() -> void:
 	if player_hp_label:
 		player_hp_label.text = "鹅鹅血量：" + str(player_hp)
 	if enemy_hp_label:
-		enemy_hp_label.text = "徐福记血量：" + str(enemy_hp)
+		enemy_hp_label.text = "小兰血量：" + str(enemy_hp)
 
 ## 更新所有按钮的状态
 func _update_all_button_states() -> void:
@@ -252,8 +252,9 @@ func player_shoot(slot: int) -> void:
 	# 根据槽位执行特殊效果
 	_execute_shot_effect(slot)
 
-	# 切换到敌人回合
-	change_state(State.ENEMY_TURN)
+	# 切换到敌人回合（如果还没结束的话）
+	if current_state != State.GAME_OVER:
+		change_state(State.ENEMY_TURN)
 
 
 ## 执行射击效果（根据槽位）
@@ -268,8 +269,8 @@ func _execute_shot_effect(slot: int) -> void:
 			check_victory()
 
 		1:
-			# 射"雷"：敌人伤害变10，从玩家发射黄色球到敌人，敌人右侧显示文字
-			enemy_damage = 10
+			# 射"雷"：敌人伤害变0（只触发后挪动画，不扣血），从玩家发射黄色球到敌人，敌人右侧显示文字
+			enemy_damage = 0
 			enemy_attack_mode_red_ball = false
 			# 从玩家发射黄色球到敌人
 			_spawn_projectile($PlayerSprite.position, $EnemySprite.position, Color.YELLOW, 0, false)
@@ -283,7 +284,10 @@ func _execute_shot_effect(slot: int) -> void:
 			_show_label_near_node($PlayerSprite, "闪避生效，你死吧！", Vector2(-120, -40))
 			enemy_hp = 0
 			update_hp_display()
-			check_victory()
+			# 直接胜利，显示 EnemyExtraText 2秒后再显示 GameOverUI
+			current_state = State.GAME_OVER
+			battle_ended.emit(true)
+			_show_victory_with_delay("护士小狗钦佩于鹅鹅冒险的勇气，决心跟随鹅鹅一起冒险")
 
 
 ## 播放闪电渐现渐隐闪烁动画（在敌我双方上方）
@@ -349,7 +353,7 @@ func _show_label_near_node(node: Node2D, text: String, offset: Vector2) -> void:
 	var label = Label.new()
 	label.text = text
 	label.position = node.position + offset
-	label.theme_override_font_sizes["font_size"] = 24
+	label.add_theme_font_size_override("font_size", 24)
 	label.modulate = Color(1, 1, 1, 1)
 	add_child(label)
 
@@ -514,6 +518,16 @@ func change_state(new_state: State) -> void:
 # ===========================================================================
 # 生命周期与防御
 # ===========================================================================
+
+## 显示胜利文字2秒后再显示 GameOverUI
+func _show_victory_with_delay(enemy_text: String) -> void:
+	var extra = $EnemyExtraText as Label
+	if extra:
+		extra.text = enemy_text
+		extra.visible = true
+	# 2秒后显示 GameOverUI
+	var timer = get_tree().create_timer(2.0)
+	timer.timeout.connect(func(): _show_game_over(true))
 
 ## 显示游戏结束界面
 func _show_game_over(victory: bool) -> void:
