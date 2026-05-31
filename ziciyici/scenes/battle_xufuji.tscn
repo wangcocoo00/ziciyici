@@ -117,34 +117,62 @@ text = "跳跃"
 [node name="GameOverUI" type="CanvasLayer" parent="." unique_id=1873818336]
 visible = false
 
+[node name="Overlay" type="ColorRect" parent="GameOverUI" unique_id=1873818337]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.7)
+
 [node name="ResultLabel" type="Label" parent="GameOverUI" unique_id=975836803]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -176.0
-offset_top = -36.0
-offset_right = 61.0
-offset_bottom = 36.0
+offset_left = -300.0
+offset_top = -60.0
+offset_right = 300.0
+offset_bottom = 60.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("8_ih0ju")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 36
 text = "GameOver"
+horizontal_alignment = 1
 
 [node name="RestartBtn" type="Button" parent="GameOverUI" unique_id=1746486183]
-offset_left = 400.0
-offset_top = 200.0
-offset_right = 472.0
-offset_bottom = 350.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 80.0
+offset_right = 100.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("8_ih0ju")
+theme_override_font_sizes/font_size = 28
 text = "重新挑战"
 
 [node name="NextLevelBtn" type="Button" parent="GameOverUI" unique_id=69316343]
-offset_left = 400.0
-offset_top = 280.0
-offset_right = 472.0
-offset_bottom = 430.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 160.0
+offset_right = 100.0
+offset_bottom = 220.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("8_ih0ju")
+theme_override_font_sizes/font_size = 28
 text = "下一关"
 
 [node name="PlayerHPLabel" type="Label" parent="." unique_id=61279231]
