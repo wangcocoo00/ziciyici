@@ -1,7 +1,7 @@
 extends Node2D
 
-@onready var video_player: VideoStreamPlayer = $VideoStreamPlayer
-@onready var color_rect: ColorRect = $ColorRect
+@onready var video_player: VideoStreamPlayer = $CanvasLayer/VideoStreamPlayer
+@onready var color_rect: ColorRect = $CanvasLayer/ColorRect
 
 func _ready() -> void:
 	# 开始播放视频

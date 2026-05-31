@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://yxnl1p48p2ly"
+path="res://.godot/imported/Seashell Sprint.mp3-fb923962a7167b7e083558fedae29bd3.mp3str"
+
+[deps]
+
+source_file="res://resources/Seashell Sprint.mp3"
+dest_files=["res://.godot/imported/Seashell Sprint.mp3-fb923962a7167b7e083558fedae29bd3.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
