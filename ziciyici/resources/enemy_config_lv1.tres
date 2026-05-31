@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EnemyConfig" format=3 uid="uid://cin5k6lwkpv3o"]
+
+[ext_resource type="Script" uid="uid://beo8atehsmfr6" path="res://scripts/enemy_config.gd" id="1_e5t8w"]
+[ext_resource type="Resource" uid="uid://b7xsf1ay768q5" path="res://resources/enemy_sentence_lv1.tres" id="2_hvnsl"]
+
+[resource]
+script = ExtResource("1_e5t8w")
+enemy_name = "熊熊小王"
+hp = 1
+sentence = ExtResource("2_hvnsl")
+metadata/_custom_type_script = "uid://beo8atehsmfr6"

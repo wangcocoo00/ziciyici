@@ -12,4 +12,4 @@ func _ready() -> void:
 
 func _on_play_pressed() -> void:
 	# 点击后切换到战斗场景
-	get_tree().change_scene_to_file("res://scenes/battle_xufuji.tscn")
+	get_tree().change_scene_to_file("res://scenes/battle_xiongxiong.tscn")

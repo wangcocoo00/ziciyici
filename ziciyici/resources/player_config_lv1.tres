@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PlayerConfig" format=3 uid="uid://cu4dn6xtmb80p"]
+
+[ext_resource type="Script" uid="uid://dmykkocql6h34" path="res://scripts/player_config.gd" id="1_vu3ww"]
+[ext_resource type="Resource" uid="uid://lkt2bxp7h8c5" path="res://resources/player_sentence_lv1.tres" id="2_1oanu"]
+
+[resource]
+script = ExtResource("1_vu3ww")
+sentence = ExtResource("2_1oanu")
+hp = 1
+metadata/_custom_type_script = "uid://dmykkocql6h34"

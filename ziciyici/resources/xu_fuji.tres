@@ -5,6 +5,8 @@
 
 [resource]
 script = ExtResource("1_alkkl")
-enemy_name = "熊熊大王"
+enemy_name = "史官徐福记"
+hp = 30
 sentence = ExtResource("2_ia85u")
+base_attack_damage = 10
 metadata/_custom_type_script = "uid://beo8atehsmfr6"

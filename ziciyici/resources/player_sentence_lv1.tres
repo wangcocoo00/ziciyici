@@ -1,0 +1,78 @@
+[gd_resource type="Resource" script_class="SentenceConfig" format=3 uid="uid://lkt2bxp7h8c5"]
+
+[ext_resource type="Script" uid="uid://bcffjufmsx4rt" path="res://scripts/sentence_config.gd" id="1_u2ewv"]
+[ext_resource type="Script" uid="uid://wpq0rh32h21a" path="res://scripts/word_data.gd" id="2_xop6x"]
+[ext_resource type="Script" uid="uid://bb4wrhnr086ep" path="res://scripts/effect_data.gd" id="3_8qp1a"]
+
+[sub_resource type="Resource" id="Resource_mdcrt"]
+script = ExtResource("2_xop6x")
+text = "我"
+can_be_shot = false
+metadata/_custom_type_script = "uid://wpq0rh32h21a"
+
+[sub_resource type="Resource" id="Resource_wu5p7"]
+script = ExtResource("2_xop6x")
+text = "闪"
+can_be_shot = false
+metadata/_custom_type_script = "uid://wpq0rh32h21a"
+
+[sub_resource type="Resource" id="Resource_sumpl"]
+script = ExtResource("2_xop6x")
+text = "避"
+can_be_shot = false
+metadata/_custom_type_script = "uid://wpq0rh32h21a"
+
+[sub_resource type="Resource" id="Resource_p1mkc"]
+script = ExtResource("2_xop6x")
+text = "率"
+can_be_shot = false
+metadata/_custom_type_script = "uid://wpq0rh32h21a"
+
+[sub_resource type="Resource" id="Resource_s5nnt"]
+script = ExtResource("2_xop6x")
+text = "百"
+can_be_shot = false
+metadata/_custom_type_script = "uid://wpq0rh32h21a"
+
+[sub_resource type="Resource" id="Resource_xqd5n"]
+script = ExtResource("2_xop6x")
+text = "分"
+can_be_shot = false
+metadata/_custom_type_script = "uid://wpq0rh32h21a"
+
+[sub_resource type="Resource" id="Resource_j271o"]
+script = ExtResource("2_xop6x")
+text = "之"
+can_be_shot = false
+metadata/_custom_type_script = "uid://wpq0rh32h21a"
+
+[sub_resource type="Resource" id="Resource_ending_win"]
+script = ExtResource("3_8qp1a")
+attribute = "ending"
+value = 1.0
+metadata/_custom_type_script = "uid://bb4wrhnr086ep"
+
+[sub_resource type="Resource" id="Resource_htwcv"]
+script = ExtResource("2_xop6x")
+text = "一"
+highlight_color = Color(0, 1, 0, 0.95686275)
+shot_effects = Array[ExtResource("3_8qp1a")]([SubResource("Resource_ending_win")])
+metadata/_custom_type_script = "uid://wpq0rh32h21a"
+
+[sub_resource type="Resource" id="Resource_ending_lose"]
+script = ExtResource("3_8qp1a")
+attribute = "ending"
+value = 2.0
+metadata/_custom_type_script = "uid://bb4wrhnr086ep"
+
+[sub_resource type="Resource" id="Resource_7u8fy"]
+script = ExtResource("2_xop6x")
+text = "百"
+highlight_color = Color(1, 0, 0, 0.94509804)
+shot_effects = Array[ExtResource("3_8qp1a")]([SubResource("Resource_ending_lose")])
+metadata/_custom_type_script = "uid://wpq0rh32h21a"
+
+[resource]
+script = ExtResource("1_u2ewv")
+words = Array[ExtResource("2_xop6x")]([SubResource("Resource_mdcrt"), SubResource("Resource_wu5p7"), SubResource("Resource_sumpl"), SubResource("Resource_p1mkc"), SubResource("Resource_s5nnt"), SubResource("Resource_xqd5n"), SubResource("Resource_j271o"), SubResource("Resource_htwcv"), SubResource("Resource_7u8fy")])
+metadata/_custom_type_script = "uid://bcffjufmsx4rt"
