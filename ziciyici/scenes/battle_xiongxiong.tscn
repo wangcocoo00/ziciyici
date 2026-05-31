@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cdfvb11jvt2wi" path="res://resources/开弓设计.png" id="8_656bh"]
 [ext_resource type="FontFile" uid="uid://biffnd0pv2bcc" path="res://resources/NotoSansSC-Regular.ttf" id="8_ih0ju"]
 [ext_resource type="Texture2D" uid="uid://bstustndpwn5w" path="res://resources/重新开始.png" id="12_qul14"]
+[ext_resource type="AudioStream" uid="uid://bmgm2q3q2q3q" path="res://resources/Copper Confetti.mp3" id="13_bgm"]
 
 [node name="Battle" type="Node2D" unique_id=1820023348]
 script = ExtResource("1_1syc1")
@@ -20,6 +21,10 @@ enemy_config = ExtResource("2_dfhvj")
 player_config = ExtResource("3_bl1r5")
 fox_taunt_library = ExtResource("4_pp7ab")
 next_level_scene = "res://scenes/battle_xufuji.tscn"
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_bgm")
+autoplay = true
 
 [node name="background" type="Sprite2D" parent="." unique_id=1707591871]
 position = Vector2(968.00006, -81.00001)

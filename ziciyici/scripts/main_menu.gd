@@ -11,5 +11,5 @@ func _ready() -> void:
 	# 连接按钮点击信号
 
 func _on_play_pressed() -> void:
-	# 点击后切换到战斗场景
-	get_tree().change_scene_to_file("res://scenes/battle_xiongxiong.tscn")
+	# 点击后切换到开场动画场景
+	get_tree().change_scene_to_file("res://scenes/start_animation.tscn")
