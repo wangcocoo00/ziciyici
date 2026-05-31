@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cdfvb11jvt2wi" path="res://resources/开弓设计.png" id="8_656bh"]
 [ext_resource type="FontFile" uid="uid://biffnd0pv2bcc" path="res://resources/NotoSansSC-Regular.ttf" id="8_ih0ju"]
 [ext_resource type="Texture2D" uid="uid://bstustndpwn5w" path="res://resources/重新开始.png" id="12_qul14"]
-[ext_resource type="AudioStream" path="res://resources/Copper Confetti.mp3" id="13_bgm"]
+[ext_resource type="AudioStream" uid="uid://befeimebhfwwi" path="res://resources/Copper Confetti.mp3" id="13_bgm"]
 
 [node name="Battle" type="Node2D" unique_id=1820023348]
 script = ExtResource("1_1syc1")
@@ -22,7 +22,7 @@ player_config = ExtResource("3_bl1r5")
 fox_taunt_library = ExtResource("4_pp7ab")
 next_level_scene = "res://scenes/battle_xufuji.tscn"
 
-[node name="BGM" type="AudioStreamPlayer" parent="."]
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1927772062]
 stream = ExtResource("13_bgm")
 autoplay = true
 
@@ -43,6 +43,7 @@ offset_right = 259.0843
 offset_bottom = -116.635284
 theme_override_colors/font_color = Color(0.43603075, 0.77427876, 0.9977755, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("8_ih0ju")
 theme_override_font_sizes/font_size = 130
 text = "玩家：企鹅"
 
@@ -65,6 +66,7 @@ offset_top = -299.7763
 offset_right = 153.03796
 offset_bottom = -158.7763
 theme_override_colors/font_color = Color(0.9932439, 0.54736644, 0.41125506, 1)
+theme_override_fonts/font = ExtResource("8_ih0ju")
 theme_override_font_sizes/font_size = 130
 text = "敌人：熊熊小王"
 
@@ -77,10 +79,10 @@ texture = ExtResource("7_pp7ab")
 expand_mode = 1
 
 [node name="EnemyExtraText" type="Label" parent="." unique_id=1286442959]
-offset_left = 486.0
-offset_top = 586.0
-offset_right = 1119.0
-offset_bottom = 686.0
+offset_left = 749.0
+offset_top = 60.0
+offset_right = 1382.0
+offset_bottom = 160.0
 theme_override_fonts/font = ExtResource("8_ih0ju")
 theme_override_font_sizes/font_size = 32
 autowrap_mode = 2
@@ -240,6 +242,23 @@ theme_override_font_sizes/font_size = 16
 icon = ExtResource("12_qul14")
 flat = true
 expand_icon = true
+
+[node name="Label" type="Label" parent="." unique_id=374562705]
+offset_left = 599.0
+offset_top = 477.0
+offset_right = 1355.0
+offset_bottom = 644.0
+scale = Vector2(1.5, 1.5)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.6509804)
+theme_override_fonts/font = ExtResource("8_ih0ju")
+theme_override_font_sizes/font_size = 20
+text = "回合制游戏，玩家须操纵小企鹅打败每一关的敌人。
+开弓规则：
+1.点击开弓键，使用言灵箭攻击敌人的技能话语，可以
+  将敌人头顶的字消除，自己头上的对应位置的字也会
+  因副作用消除。
+2.如果敌人头顶有不同颜色的字，开弓后只能消除相同
+  颜色的文字。"
 
 [connection signal="fox_taunt" from="." to="FoxPopup" method="_on_battle_fox_taunt"]
 [connection signal="sentence_updated" from="." to="SentenceUI" method="_on_battle_sentence_updated"]

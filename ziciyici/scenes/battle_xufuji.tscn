@@ -226,6 +226,7 @@ offset_top = 355.0
 offset_right = 278.0
 offset_bottom = 404.0
 theme_override_colors/font_color = Color(0.38170114, 0.82807684, 0.99363095, 1)
+theme_override_fonts/font = ExtResource("8_ih0ju")
 theme_override_font_sizes/font_size = 32
 text = "玩家：企鹅"
 
@@ -282,6 +283,7 @@ offset_top = 356.0
 offset_right = 1176.0
 offset_bottom = 405.0
 theme_override_colors/font_color = Color(0.9179055, 0.92235994, 0.92892456, 1)
+theme_override_fonts/font = ExtResource("8_ih0ju")
 theme_override_font_sizes/font_size = 32
 text = "敌人：小狗小兰"
 

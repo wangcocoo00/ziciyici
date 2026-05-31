@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://c5nodteo6rof7" path="res://resources/img_v3_02127_bfa615cb-8268-451d-88b4-9a3834d3be6g.png" id="7_3sw6v"]
 [ext_resource type="Script" uid="uid://ca11714ms7hyc" path="res://scripts/fox_popup.gd" id="7_hihw6"]
 [ext_resource type="FontFile" uid="uid://biffnd0pv2bcc" path="res://resources/NotoSansSC-Regular.ttf" id="8_ih0ju"]
-[ext_resource type="AudioStream" path="res://resources/Copper Confetti.mp3" id="9_bgm"]
+[ext_resource type="AudioStream" uid="uid://befeimebhfwwi" path="res://resources/Copper Confetti.mp3" id="9_bgm"]
 [ext_resource type="Texture2D" uid="uid://lfy2uju01g7q" path="res://resources/攻击.png" id="11_2chcw"]
 [ext_resource type="Texture2D" uid="uid://cdfvb11jvt2wi" path="res://resources/开弓设计.png" id="12_sdqur"]
 [ext_resource type="Texture2D" uid="uid://dcpgsy7gsndww" path="res://resources/4.png" id="13_yxia1"]
@@ -25,7 +25,7 @@ player_config = ExtResource("3_2ihut")
 fox_taunt_library = ExtResource("4_pp7ab")
 bullet_scene = ExtResource("5_qul14")
 
-[node name="BGM" type="AudioStreamPlayer" parent="."]
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1212689950]
 stream = ExtResource("9_bgm")
 autoplay = true
 
@@ -243,7 +243,7 @@ offset_top = 505.0
 offset_right = 210.0
 offset_bottom = 530.0
 theme_override_fonts/font = ExtResource("8_ih0ju")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 
 [node name="enemyimage" type="TextureRect" parent="." unique_id=798257601]
 offset_left = 855.0
@@ -254,12 +254,12 @@ texture = ExtResource("15_qcfgc")
 expand_mode = 1
 
 [node name="EnemyHPLabel" type="Label" parent="." unique_id=685025840]
-offset_left = 1505.0
-offset_top = 386.0
-offset_right = 1545.0
-offset_bottom = 422.0
+offset_left = 1069.0
+offset_top = 504.0
+offset_right = 1109.0
+offset_bottom = 540.0
 theme_override_fonts/font = ExtResource("8_ih0ju")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 
 [node name="EnemyExtraText" type="Label" parent="." unique_id=123456789]
 visible = false
