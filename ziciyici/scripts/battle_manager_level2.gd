@@ -116,7 +116,7 @@ func player_shoot(slot: int) -> void:
 				end_game(false, "熊熊小王是语言的主宰，你今天就是要被吃掉", "即使你能闪避，但我还是决定你要被我吃掉")
 			elif int(effect.value) == 2:
 				# value=2 对应"死"字 → 胜利
-				end_game(true, "熊熊小王良心发现，决定今天减肥", "好吧，你可以活着通过")
+				end_game(true, "熊熊小王良心发现，决定今天减肥", "好吧，看在语法之灵的份上，\n勉强让你过去吧。")
 			return
 
 func end_game(victory: bool, result_text: String, enemy_text: String) -> void:

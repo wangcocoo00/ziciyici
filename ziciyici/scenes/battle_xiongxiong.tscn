@@ -33,13 +33,13 @@ scale = Vector2(2, 2)
 texture = SubResource("PlaceholderTexture2D_p6tk1")
 
 [node name="EnemyExtraText" type="Label" parent="." unique_id=1286442959]
-visible = false
-offset_left = 1400.0
+offset_left = 700.0
 offset_top = 200.0
-offset_right = 1440.0
-offset_bottom = 249.0
+offset_right = 1200.0
+offset_bottom = 300.0
 theme_override_fonts/font = ExtResource("8_ih0ju")
 theme_override_font_sizes/font_size = 32
+autowrap_mode = 2
 
 [node name="SentenceUI" type="Control" parent="." unique_id=668507688]
 layout_mode = 3

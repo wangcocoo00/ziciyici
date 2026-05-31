@@ -15,7 +15,7 @@ size = Vector2(64, 64)
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_p6tk1"]
 size = Vector2(64, 64)
 
-[node name="Battle" type="Node2D" unique_id=689843110]
+[node name="Battle2" type="Node2D" unique_id=689843110]
 script = ExtResource("1_656bh")
 enemy_config = ExtResource("2_yw1d3")
 player_config = ExtResource("3_ciu3y")
@@ -43,11 +43,12 @@ script = ExtResource("6_n4b6j")
 
 [node name="EnemySentenceContainer" type="HBoxContainer" parent="SentenceUI" unique_id=1862869488]
 layout_mode = 0
-offset_left = 1150.0
+offset_left = 1000.0
 offset_top = 250.0
-offset_right = 1150.0
+offset_right = 1000.0
 offset_bottom = 250.0
 scale = Vector2(1.3, 1.3)
+theme_override_constants/separation = 4
 
 [node name="PlayerSentenceContainer" type="HBoxContainer" parent="SentenceUI" unique_id=886792692]
 layout_mode = 0

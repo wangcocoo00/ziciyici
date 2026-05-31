@@ -151,7 +151,7 @@ func load_config() -> void:
 
 func update_hp_display() -> void:
 	if player_hp_label:
-		player_hp_label.text = "血量：" + str(player_hp)
+		player_hp_label.text = "鹅鹅血量：" + str(player_hp)
 	if enemy_hp_label:
 		enemy_hp_label.text = "徐福记血量：" + str(enemy_hp)
 
