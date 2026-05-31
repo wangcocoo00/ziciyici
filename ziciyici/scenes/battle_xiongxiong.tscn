@@ -33,13 +33,13 @@ scale = Vector2(2, 2)
 texture = SubResource("PlaceholderTexture2D_p6tk1")
 
 [node name="EnemyExtraText" type="Label" parent="." unique_id=1286442959]
-visible = false
-offset_left = 1400.0
+offset_left = 800.0
 offset_top = 200.0
-offset_right = 1440.0
-offset_bottom = 249.0
+offset_right = 1300.0
+offset_bottom = 300.0
 theme_override_fonts/font = ExtResource("8_ih0ju")
 theme_override_font_sizes/font_size = 32
+autowrap_mode = 2
 
 [node name="SentenceUI" type="Control" parent="." unique_id=668507688]
 layout_mode = 3
@@ -114,28 +114,62 @@ text = "剩余: 1"
 [node name="GameOverUI" type="CanvasLayer" parent="." unique_id=1272163202]
 visible = false
 
+[node name="Overlay" type="ColorRect" parent="GameOverUI" unique_id=1873818337]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.7)
+
 [node name="ResultLabel" type="Label" parent="GameOverUI" unique_id=624197755]
-offset_left = 200.0
-offset_top = 730.0
-offset_right = 1018.5
-offset_bottom = 802.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -60.0
+offset_right = 300.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_fonts/font = ExtResource("8_ih0ju")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 36
+text = "GameOver"
+horizontal_alignment = 1
 
 [node name="RestartBtn" type="Button" parent="GameOverUI" unique_id=1966713663]
-offset_left = 600.0
-offset_top = 640.0
-offset_right = 672.0
-offset_bottom = 673.0
-scale = Vector2(1.5, 1.5)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 80.0
+offset_right = 100.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("8_ih0ju")
+theme_override_font_sizes/font_size = 28
 text = "重新挑战"
 
 [node name="NextLevelBtn" type="Button" parent="GameOverUI" unique_id=550370990]
-offset_left = 750.0
-offset_top = 640.0
-offset_right = 806.0
-offset_bottom = 673.0
-scale = Vector2(1.5, 1.5)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 160.0
+offset_right = 100.0
+offset_bottom = 220.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("8_ih0ju")
+theme_override_font_sizes/font_size = 28
 text = "下一关"
 
 [connection signal="fox_taunt" from="." to="FoxPopup" method="_on_battle_fox_taunt"]

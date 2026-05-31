@@ -151,7 +151,7 @@ func load_config() -> void:
 
 func update_hp_display() -> void:
 	if player_hp_label:
-		player_hp_label.text = "血量：" + str(player_hp)
+		player_hp_label.text = "鹅鹅血量：" + str(player_hp)
 	if enemy_hp_label:
 		enemy_hp_label.text = "徐福记血量：" + str(enemy_hp)
 
@@ -392,7 +392,7 @@ func _show_game_over(victory: bool) -> void:
 	ui.visible = true
 	var label = ui.get_node("ResultLabel") as Label
 	if label:
-		label.text = "胜利！" if victory else "失败..."
+		label.text = "熊熊小王良心发现，今天决定减肥，不吃肉了"
 	var restart_btn = ui.get_node("RestartBtn") as Button
 	if restart_btn:
 		restart_btn.visible = true
@@ -402,7 +402,11 @@ func _show_game_over(victory: bool) -> void:
 
 func _on_restart_pressed() -> void:
 	get_tree().reload_current_scene()
-	
+
+
+func _on_next_level_pressed() -> void:
+	if next_level_scene != "":
+		get_tree().change_scene_to_file(next_level_scene)
 
 
 func _on_jump_pressed() -> void:
