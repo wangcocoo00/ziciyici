@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://cm7kmll5y8dj"]
+[gd_scene format=3 uid="uid://cyhygesfvxe3h"]
 
 [ext_resource type="Script" uid="uid://bj1c6qdo3udhf" path="res://scripts/battle_manager.gd" id="1_uytx1"]
 [ext_resource type="Resource" uid="uid://crx213q0v8il5" path="res://resources/xu_fuji.tres" id="2_it7ts"]

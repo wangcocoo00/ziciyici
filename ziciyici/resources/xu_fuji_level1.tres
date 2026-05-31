@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EnemyConfig" format=3 uid="uid://c6qaq4r5s7t8u"]
 
 [ext_resource type="Script" uid="uid://beo8atehsmfr6" path="res://scripts/enemy_config.gd" id="1_alkkl"]
-[ext_resource type="Resource" uid="uid://c3p6wynddvhd4" path="res://resources/enemy_sentence_level1.tres" id="2_ia85u"]
+[ext_resource type="Resource" uid="uid://c3p6wynddvhd4" path="res://resources/enemy_sentence_level2.tres" id="2_ia85u"]
 
 [resource]
 script = ExtResource("1_alkkl")

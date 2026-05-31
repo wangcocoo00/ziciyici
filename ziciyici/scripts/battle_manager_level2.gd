@@ -7,6 +7,7 @@ extends Node2D
 @export var next_level_scene: String = ""
 
 var enemy_sentence: Array[String] = []
+var enemy_words: Array[WordData] = []
 var player_words: Array[WordData] = []
 var player_hp: int = 0
 var enemy_hp: int = 0
@@ -39,8 +40,10 @@ func _setup_sprites() -> void:
 
 func load_config() -> void:
 	enemy_sentence.clear()
+	enemy_words.clear()
 	for word in enemy_config.sentence.words:
 		enemy_sentence.append(word.text)
+		enemy_words.append(word.duplicate())
 	player_words.clear()
 	for word in player_config.sentence.words:
 		player_words.append(word.duplicate())
@@ -90,8 +93,8 @@ func player_shoot(slot: int) -> void:
 	if slot < 0 or slot >= player_words.size():
 		return
 
-	var word = player_words[slot]
-	if not word.can_be_shot:
+	# 检查敌人对应槽位的字是否可射击
+	if slot >= enemy_words.size() or not enemy_words[slot].can_be_shot:
 		var msg = "狗屁不通！你是这样说话的吗！"
 		if fox_taunt_library and not fox_taunt_library.taunts.is_empty():
 			msg = fox_taunt_library.taunts[randi() % fox_taunt_library.taunts.size()]
@@ -100,6 +103,8 @@ func player_shoot(slot: int) -> void:
 
 	# 双向删除
 	enemy_sentence[slot] = ""
+	enemy_words[slot].text = ""
+	enemy_words[slot].can_be_shot = false
 	player_words[slot].text = ""
 	player_words[slot].can_be_shot = false
 	shots_remaining -= 1
@@ -109,7 +114,7 @@ func player_shoot(slot: int) -> void:
 	sentence_updated.emit()
 
 	# 检查效果中的 ending 标记（不限制 target，只检查 attribute）
-	for effect in word.shot_effects:
+	for effect in enemy_words[slot].shot_effects:
 		if effect.type == EffectData.EffectType.MODIFY_ATTRIBUTE and effect.attribute == "ending":
 			if int(effect.value) == 1:
 				# value=1 对应"生"字 → 失败

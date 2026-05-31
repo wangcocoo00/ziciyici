@@ -1,10 +1,10 @@
-[gd_scene format=3 uid="uid://x18csctspgrc"]
+[gd_scene format=3 uid="uid://xiregy8bu526"]
 
 [ext_resource type="Script" uid="uid://bj1c6qdo3udhf" path="res://scripts/battle_manager.gd" id="1_uytx1"]
 [ext_resource type="Resource" uid="uid://c6qaq4r5s7t8u" path="res://resources/xu_fuji_level1.tres" id="2_it7ts"]
 [ext_resource type="Script" uid="uid://xjntphmll8l7" path="res://scripts/sentence_ui.gd" id="2_rd5u4"]
 [ext_resource type="Script" uid="uid://ca11714ms7hyc" path="res://scripts/fox_popup.gd" id="3_28cxp"]
-[ext_resource type="Resource" uid="uid://eifcx1sfu5ci" path="res://resources/player_level1.tres" id="3_l1kui"]
+[ext_resource type="Resource" uid="uid://ctwyv417jck8r" path="res://resources/player_level1.tres" id="3_l1kui"]
 [ext_resource type="Resource" uid="uid://duhkqf7do7285" path="res://resources/taunts.tres" id="4_p6tk1"]
 [ext_resource type="PackedScene" uid="uid://dc1wlhupgmgcg" path="res://scenes/Bullet.tscn" id="5_vu1hv"]
 [ext_resource type="FontFile" uid="uid://biffnd0pv2bcc" path="res://resources/NotoSansSC-Regular.ttf" id="8_l1kui"]

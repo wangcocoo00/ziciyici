@@ -35,6 +35,9 @@ class_name BattleManager
 ## 敌人句子文字数组（仅用于显示）
 var enemy_sentence: Array[String] = []
 
+## 敌人句子 WordData 数组（用于检查可射击状态）
+var enemy_words: Array[WordData] = []
+
 ## 玩家句子 WordData 数组（射击时需要 effects）
 var player_words: Array[WordData] = []
 
@@ -136,10 +139,12 @@ func load_config() -> void:
 	bullet_ricochet = enemy_config.bullet_ricochet
 	bullet_can_hurt_self = enemy_config.bullet_can_hurt_self
 
-	# 加载敌人句子（仅文字）
+	# 加载敌人句子
 	enemy_sentence.clear()
+	enemy_words.clear()
 	for word: WordData in enemy_config.sentence.words:
 		enemy_sentence.append(word.text)
+		enemy_words.append(word.duplicate())
 
 	# 加载玩家句子（完整 WordData，需要 duplicate 避免修改原资源）
 	player_words.clear()
@@ -213,18 +218,18 @@ func player_shoot(slot: int) -> void:
 	if slot < 0 or slot >= player_words.size():
 		return
 
-	var word: WordData = player_words[slot]
-
-	# 该字不可射击时触发狐狸嘲讽
-	if not word.can_be_shot:
+	# 检查敌人对应槽位的字是否可射击
+	if slot >= enemy_words.size() or not enemy_words[slot].can_be_shot:
 		var msg: String = "狗屁不通！你是这样说话的吗！"
 		if fox_taunt_library and not fox_taunt_library.taunts.is_empty():
 			msg = fox_taunt_library.taunts[randi() % fox_taunt_library.taunts.size()]
 		fox_taunt.emit(msg)
 		return
 
-	# 执行射击：清除敌人对应位置的字，标记玩家字已使用
+	# 执行射击：清除敌人对应位置的字，标记敌人字和玩家字已使用
 	enemy_sentence[slot] = ""
+	enemy_words[slot].text = ""
+	enemy_words[slot].can_be_shot = false
 	player_words[slot].text = ""
 	player_words[slot].can_be_shot = false
 	shots_remaining -= 1
@@ -233,8 +238,8 @@ func player_shoot(slot: int) -> void:
 	_update_all_button_states()
 	sentence_updated.emit()
 
-	# 应用该字绑定的所有效果
-	for effect: EffectData in word.shot_effects:
+	# 应用敌人该字绑定的所有效果
+	for effect: EffectData in enemy_words[slot].shot_effects:
 		apply_effect(effect)
 
 	# 切换到敌人回合

@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://tmtb7nul8m3k"]
+[gd_scene format=3 uid="uid://dyas15hssweam"]
 
 [ext_resource type="Script" uid="uid://bj1c6qdo3udhf" path="res://scripts/battle_manager.gd" id="1_q3i6v"]
 [ext_resource type="Resource" uid="uid://crx213q0v8il5" path="res://resources/xu_fuji.tres" id="2_bbehg"]
@@ -15,7 +15,7 @@ size = Vector2(64, 64)
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_p6tk1"]
 size = Vector2(64, 64)
 
-[node name="Battle" type="Node2D" unique_id=689843110]
+[node name="Battle2" type="Node2D" unique_id=689843110]
 script = ExtResource("1_q3i6v")
 enemy_config = ExtResource("2_bbehg")
 player_config = ExtResource("3_acqap")
