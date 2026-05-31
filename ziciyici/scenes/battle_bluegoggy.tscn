@@ -109,12 +109,6 @@ theme_override_fonts/font = ExtResource("8_ih0ju")
 theme_override_font_sizes/font_size = 12
 text = "剩余: 1"
 
-[node name="JumpBtn" type="Button" parent="ActionButtons/HBoxContainer" unique_id=1282695462]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("8_ih0ju")
-text = "跳
-"
-
 [node name="GameOverUI" type="CanvasLayer" parent="." unique_id=1873818336]
 visible = false
 
@@ -193,6 +187,7 @@ theme_override_fonts/font = ExtResource("8_ih0ju")
 theme_override_font_sizes/font_size = 16
 
 [node name="EnemyExtraText" type="Label" parent="." unique_id=123456789]
+visible = false
 offset_left = 400.0
 offset_top = 500.0
 offset_right = 1200.0
@@ -200,7 +195,6 @@ offset_bottom = 550.0
 theme_override_fonts/font = ExtResource("8_ih0ju")
 theme_override_font_sizes/font_size = 28
 horizontal_alignment = 1
-visible = false
 
 [node name="RestartBtn" type="Button" parent="." unique_id=987654321]
 offset_left = 20.0
@@ -215,7 +209,6 @@ text = "重新开始"
 [connection signal="sentence_updated" from="." to="SentenceUI" method="_on_battle_sentence_updated"]
 [connection signal="pressed" from="ActionButtons/HBoxContainer/AttackBtn" to="." method="_on_attack_pressed"]
 [connection signal="pressed" from="ActionButtons/HBoxContainer/ShootVBox/ShootBtn" to="." method="_on_shoot_pressed"]
-[connection signal="pressed" from="ActionButtons/HBoxContainer/JumpBtn" to="." method="_on_jump_pressed"]
 [connection signal="pressed" from="GameOverUI/RestartBtn" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="GameOverUI/NextLevelBtn" to="." method="_on_next_level_pressed"]
 [connection signal="pressed" from="RestartBtn" to="." method="_on_restart_pressed"]
