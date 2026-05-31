@@ -74,6 +74,15 @@ var is_jumping: bool = false
 ## 射击模式状态：true=已激活（可点击有色字），false=未激活（点击有色字无反应）
 var shoot_mode_active: bool = false
 
+## 敌人攻击模式：true=投掷红色圆球（初始），false=普通子弹（射"雷"后改变）
+var enemy_attack_mode_red_ball: bool = true
+
+## 标记是否已射击（用于在敌人回合特殊处理）
+var has_shot_this_turn: bool = false
+
+## 当前射击的槽位（用于敌人回合判断）
+var shot_slot: int = -1
+
 # ---------------------------------------------------------------------------
 # 回合状态
 # ---------------------------------------------------------------------------
@@ -233,17 +242,122 @@ func player_shoot(slot: int) -> void:
 	player_words[slot].text = ""
 	player_words[slot].can_be_shot = false
 	shots_remaining -= 1
+	has_shot_this_turn = true
+	shot_slot = slot
 	# 射击后退出射击模式
 	shoot_mode_active = false
 	_update_all_button_states()
 	sentence_updated.emit()
 
-	# 应用敌人该字绑定的所有效果
-	for effect: EffectData in enemy_words[slot].shot_effects:
-		apply_effect(effect)
+	# 根据槽位执行特殊效果
+	_execute_shot_effect(slot)
 
 	# 切换到敌人回合
 	change_state(State.ENEMY_TURN)
+
+
+## 执行射击效果（根据槽位）
+func _execute_shot_effect(slot: int) -> void:
+	match slot:
+		0:
+			# 射"手"：双方上方闪电动画2秒，双方各扣250血
+			_play_lightning_animation()
+			enemy_hp -= 250
+			player_hp -= 250
+			update_hp_display()
+			check_victory()
+
+		1:
+			# 射"雷"：敌人伤害变10，从玩家发射黄色球到敌人，敌人右侧显示文字
+			enemy_damage = 10
+			enemy_attack_mode_red_ball = false
+			# 从玩家发射黄色球到敌人
+			_spawn_projectile($PlayerSprite.position, $EnemySprite.position, Color.YELLOW, 0, false)
+			# 在敌人右侧显示文字
+			_show_label_near_node($EnemySprite, "对方限制行动一回合", Vector2(80, 0))
+
+		6:
+			# 射"跑"：从敌人发射无伤害红球到玩家左侧，显示文字，敌人HP归零
+			var target_pos = $PlayerSprite.position + Vector2(-10, 0)
+			_spawn_projectile($EnemySprite.position, target_pos, Color.RED, 0, false)
+			_show_label_near_node($PlayerSprite, "闪避生效，你死吧！", Vector2(-120, -40))
+			enemy_hp = 0
+			update_hp_display()
+			check_victory()
+
+
+## 播放闪电渐现渐隐闪烁动画（在敌我双方上方）
+func _play_lightning_animation() -> void:
+	var lightning = ColorRect.new()
+	lightning.color = Color(1, 1, 0.8, 0.9)  # 亮黄色
+	lightning.size = Vector2(1600, 100)
+	lightning.position = Vector2(0, 100)  # 在双方上方
+	lightning.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(lightning)
+
+	var tween = create_tween()
+	# 闪烁效果：快速交替透明度
+	tween.tween_property(lightning, "modulate:a", 0.1, 0.1)
+	tween.tween_property(lightning, "modulate:a", 0.9, 0.1)
+	tween.tween_property(lightning, "modulate:a", 0.1, 0.1)
+	tween.tween_property(lightning, "modulate:a", 0.9, 0.1)
+	tween.tween_property(lightning, "modulate:a", 0.1, 0.1)
+	tween.tween_property(lightning, "modulate:a", 0.9, 0.1)
+	tween.tween_property(lightning, "modulate:a", 0.1, 0.1)
+	tween.tween_property(lightning, "modulate:a", 0.9, 0.1)
+	tween.tween_property(lightning, "modulate:a", 0.0, 0.2).set_delay(0.2)
+	tween.finished.connect(func(): lightning.queue_free())
+
+
+## 生成一个从起点到终点的投射物
+## @param from: 起始位置
+## @param to: 目标位置
+## @param color: 颜色
+## @param damage: 伤害（0=无伤害）
+## @param hurt_target: 是否伤害目标
+func _spawn_projectile(from: Vector2, to: Vector2, color: Color, damage: int, hurt_target: bool) -> void:
+	var projectile = ColorRect.new()
+	projectile.color = color
+	projectile.size = Vector2(16, 16)
+	projectile.position = from - Vector2(8, 8)
+	projectile.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(projectile)
+
+	var tween = create_tween()
+	tween.set_trans(Tween.TRANS_LINEAR)
+	tween.tween_property(projectile, "position", to - Vector2(8, 8), 0.5)
+	tween.finished.connect(func():
+		projectile.queue_free()
+		if damage > 0 and hurt_target:
+			# 如果投射物到达敌人位置
+			if to == $EnemySprite.position:
+				enemy_hp -= damage
+				update_hp_display()
+				check_victory()
+			elif to == $PlayerSprite.position or abs(to.x - $PlayerSprite.position.x) < 20:
+				player_hp -= damage
+				update_hp_display()
+				check_victory()
+	)
+
+
+## 在节点附近显示一个 Label
+## @param node: 参考节点
+## @param text: 显示文字
+## @param offset: 相对节点的偏移
+func _show_label_near_node(node: Node2D, text: String, offset: Vector2) -> void:
+	var label = Label.new()
+	label.text = text
+	label.position = node.position + offset
+	label.theme_override_font_sizes["font_size"] = 24
+	label.modulate = Color(1, 1, 1, 1)
+	add_child(label)
+
+	# 2秒后淡出消失
+	var tween = create_tween()
+	tween.tween_interval(2.0)
+	tween.tween_property(label, "modulate:a", 0.0, 0.5)
+	tween.finished.connect(func(): label.queue_free())
 
 
 ## 应用单个效果到对应目标
@@ -255,6 +369,14 @@ func apply_effect(effect: EffectData) -> void:
 				enemy_damage = int(effect.value)
 			elif effect.target == EffectData.Target.PLAYER and effect.attribute == "jump_height":
 				player_jump_height = effect.value
+			elif effect.target == EffectData.Target.ENEMY and effect.attribute == "hp":
+				enemy_hp -= int(effect.value)
+				update_hp_display()
+				check_victory()
+			elif effect.target == EffectData.Target.PLAYER and effect.attribute == "hp":
+				player_hp -= int(effect.value)
+				update_hp_display()
+				check_victory()
 
 		EffectData.EffectType.CHANGE_SHOOT_DIRECTION:
 			if effect.target == EffectData.Target.ENEMY:
@@ -338,6 +460,10 @@ func _on_enemy_turn() -> void:
 	bullet.direction = current_shoot_direction
 	bullet.can_hurt_shooter = bullet_can_hurt_self
 	bullet.is_ricochet = bullet_ricochet
+
+	# 如果是红色圆球模式，设置子弹颜色为红色
+	if enemy_attack_mode_red_ball:
+		bullet.modulate = Color.RED
 
 	# 添加到场景
 	add_child(bullet)

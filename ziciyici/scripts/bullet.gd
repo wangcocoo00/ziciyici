@@ -45,6 +45,8 @@ func _physics_process(delta: float) -> void:
 			battle_ref.player_hp -= damage
 			battle_ref.update_hp_display()
 			battle_ref.check_victory()
+			# 玩家向后挪50像素
+			player_sprite.position.x -= 50
 			queue_free_and_emit()
 			return
 
