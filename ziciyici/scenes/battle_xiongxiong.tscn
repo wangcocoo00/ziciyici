@@ -4,15 +4,13 @@
 [ext_resource type="Resource" uid="uid://cin5k6lwkpv3o" path="res://resources/enemy_config_lv1.tres" id="2_dfhvj"]
 [ext_resource type="Resource" uid="uid://cu4dn6xtmb80p" path="res://resources/player_config_lv1.tres" id="3_bl1r5"]
 [ext_resource type="Resource" uid="uid://duhkqf7do7285" path="res://resources/taunts.tres" id="4_pp7ab"]
+[ext_resource type="Texture2D" uid="uid://c5nodteo6rof7" path="res://resources/img_v3_02127_bfa615cb-8268-451d-88b4-9a3834d3be6g.png" id="5_yw1d3"]
+[ext_resource type="Texture2D" uid="uid://dnie6wy2ckdqe" path="res://resources/企鹅ui.png" id="6_ciu3y"]
 [ext_resource type="Script" uid="uid://xjntphmll8l7" path="res://scripts/sentence_ui.gd" id="6_n4b6j"]
 [ext_resource type="Script" uid="uid://ca11714ms7hyc" path="res://scripts/fox_popup.gd" id="7_hihw6"]
+[ext_resource type="Texture2D" uid="uid://ctdobk8jiuex3" path="res://resources/熊熊大王ui.png" id="7_pp7ab"]
+[ext_resource type="Texture2D" uid="uid://cdfvb11jvt2wi" path="res://resources/开弓设计.png" id="8_656bh"]
 [ext_resource type="FontFile" uid="uid://biffnd0pv2bcc" path="res://resources/NotoSansSC-Regular.ttf" id="8_ih0ju"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_l1kui"]
-size = Vector2(64, 64)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_p6tk1"]
-size = Vector2(64, 64)
 
 [node name="Battle" type="Node2D" unique_id=1820023348]
 script = ExtResource("1_1syc1")
@@ -22,21 +20,56 @@ fox_taunt_library = ExtResource("4_pp7ab")
 next_level_scene = "res://scenes/battle_xufuji.tscn"
 
 [node name="PlayerSprite" type="Sprite2D" parent="." unique_id=2030853381]
-modulate = Color(0, 0, 1, 1)
-position = Vector2(260, 380)
-scale = Vector2(2, 2)
-texture = SubResource("PlaceholderTexture2D_l1kui")
+modulate = Color(0.85466915, 0.7581256, 0.60568833, 0.9843137)
+position = Vector2(134, 339)
+scale = Vector2(0.16834071, 0.28743497)
+texture = ExtResource("5_yw1d3")
+
+[node name="playernameLabel" type="Label" parent="PlayerSprite" unique_id=2036879662]
+offset_left = -546.5107
+offset_top = -309.63528
+offset_right = 103.48932
+offset_bottom = -125.635284
+theme_override_colors/font_color = Color(0.43603075, 0.77427876, 0.9977755, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_font_sizes/font_size = 130
+text = "玩家：企鹅"
+
+[node name="playerimage" type="TextureRect" parent="PlayerSprite" unique_id=748920823]
+offset_left = 546.51074
+offset_top = -361.821
+offset_right = 1425.6802
+offset_bottom = 279.48367
+texture = ExtResource("6_ciu3y")
+expand_mode = 1
 
 [node name="EnemySprite" type="Sprite2D" parent="." unique_id=566615846]
-position = Vector2(260, 180)
-scale = Vector2(2, 2)
-texture = SubResource("PlaceholderTexture2D_p6tk1")
+position = Vector2(1278, 350.00003)
+scale = Vector2(0.16666667, 0.28495547)
+texture = ExtResource("5_yw1d3")
+
+[node name="enemynameLabel" type="Label" parent="EnemySprite" unique_id=1378173303]
+offset_left = -546.96204
+offset_top = -299.7763
+offset_right = 153.03796
+offset_bottom = -158.7763
+theme_override_colors/font_color = Color(0.9932439, 0.54736644, 0.41125506, 1)
+theme_override_font_sizes/font_size = 130
+text = "敌人：熊熊大王"
+
+[node name="enemyimage" type="TextureRect" parent="EnemySprite" unique_id=1487649082]
+offset_left = -1314.0
+offset_top = -263.19907
+offset_right = -600.0
+offset_bottom = 135.42026
+texture = ExtResource("7_pp7ab")
+expand_mode = 1
 
 [node name="EnemyExtraText" type="Label" parent="." unique_id=1286442959]
-offset_left = 800.0
-offset_top = 200.0
-offset_right = 1300.0
-offset_bottom = 300.0
+offset_left = 330.0
+offset_top = 104.0
+offset_right = 830.0
+offset_bottom = 204.0
 theme_override_fonts/font = ExtResource("8_ih0ju")
 theme_override_font_sizes/font_size = 32
 autowrap_mode = 2
@@ -52,18 +85,18 @@ script = ExtResource("6_n4b6j")
 
 [node name="EnemySentenceContainer" type="HBoxContainer" parent="SentenceUI" unique_id=762468490]
 layout_mode = 0
-offset_left = 370.0
-offset_top = 170.0
-offset_right = 410.0
-offset_bottom = 210.0
+offset_left = 727.00006
+offset_top = 325.0
+offset_right = 767.00006
+offset_bottom = 365.0
 scale = Vector2(1.3, 1.3)
 
 [node name="PlayerSentenceContainer" type="HBoxContainer" parent="SentenceUI" unique_id=1988279806]
 layout_mode = 0
-offset_left = 370.0
-offset_top = 370.0
-offset_right = 410.0
-offset_bottom = 410.0
+offset_left = 376.00003
+offset_top = 326.00003
+offset_right = 416.00003
+offset_bottom = 366.00003
 scale = Vector2(1.3, 1.3)
 
 [node name="FoxPopup" type="CanvasLayer" parent="." unique_id=852023058]
@@ -103,7 +136,20 @@ theme_override_constants/separation = 5
 [node name="ShootBtn" type="Button" parent="ActionButtons/VBoxContainer" unique_id=1004607529]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("8_ih0ju")
-text = "射击"
+text = "射击
+"
+flat = true
+icon_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="ActionButtons/VBoxContainer/ShootBtn" unique_id=1340828994]
+layout_mode = 0
+offset_left = -20.5
+offset_top = -24.5
+offset_right = 72.0
+offset_bottom = 51.0
+texture = ExtResource("8_656bh")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="ShootCountLabel" type="Label" parent="ActionButtons/VBoxContainer" unique_id=1004607530]
 layout_mode = 2
