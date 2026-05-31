@@ -41,8 +41,8 @@ var has_shot_this_turn: bool = false
 var shot_slot: int = -1
 
 # 第三关专用变量
-## 第一次射击的颜色类型（"blue" 或 "yellow"），用于限制第二次射击只能同色
-var first_shot_color: String = ""
+## 第一次射击的槽位，用于限制第二次射击只能射击配对的字
+var first_shot_slot: int = -1
 ## 是否已经完成第一次射击
 var has_shot_once: bool = false
 ## 胜利按钮点击计数
@@ -188,20 +188,20 @@ func player_shoot(slot: int) -> void:
 		fox_taunt.emit(msg)
 		return
 
-	# 检查颜色一致性：第二次射击必须与第一次同色
-	var current_color = _get_word_color(slot)
+	# 检查配对一致性：第二次射击必须射击配对的字
 	if has_shot_once:
-		if current_color != first_shot_color:
-			var msg: String = "只能射击同一种颜色的字！"
+		var paired_slot = _get_paired_slot(first_shot_slot)
+		if slot != paired_slot:
+			var msg: String = "狗屁不通！你是这样说话的吗！"
 			if fox_taunt_library and not fox_taunt_library.taunts.is_empty():
 				msg = fox_taunt_library.taunts[randi() % fox_taunt_library.taunts.size()]
 			fox_taunt.emit(msg)
 			return
 	else:
-		# 第一次射击，记录颜色
-		first_shot_color = current_color
-		# 将另一种颜色的字变为白色且不可射击
-		_disable_other_color_words(current_color)
+		# 第一次射击，记录槽位
+		first_shot_slot = slot
+		# 只保留配对的字，其余全部变白不可射击
+		_disable_non_paired_words(slot)
 
 	# 执行射击
 	enemy_sentence[slot] = ""
@@ -229,24 +229,26 @@ func player_shoot(slot: int) -> void:
 	if current_state != State.GAME_OVER:
 		change_state(State.ENEMY_TURN)
 
-## 获取某个槽位字的颜色类型
-func _get_word_color(slot: int) -> String:
-	if slot < 0 or slot >= enemy_words.size():
-		return ""
-	var color = enemy_words[slot].highlight_color
-	# 蓝色：B分量 > 0.5 且 R分量 < 0.5
-	if color.b > 0.5 and color.r < 0.5:
-		return "blue"
-	# 黄色：R和G分量都 > 0.5
-	if color.r > 0.5 and color.g > 0.5:
-		return "yellow"
-	return ""
+## 获取某个槽位字的配对槽位
+## 配对规则：1↔3（跑↔快），2↔5（再↔没）
+func _get_paired_slot(slot: int) -> int:
+	match slot:
+		1:
+			return 3
+		3:
+			return 1
+		2:
+			return 5
+		5:
+			return 2
+		_:
+			return -1
 
-## 禁用另一种颜色的所有字的可射击状态
-func _disable_other_color_words(chosen_color: String) -> void:
+## 只保留配对的字可射击，其余全部变白不可射击
+func _disable_non_paired_words(chosen_slot: int) -> void:
+	var paired_slot = _get_paired_slot(chosen_slot)
 	for i in range(enemy_words.size()):
-		var word_color = _get_word_color(i)
-		if word_color != "" and word_color != chosen_color:
+		if i != paired_slot:
 			enemy_words[i].can_be_shot = false
 			enemy_words[i].highlight_color = Color.WHITE
 			# 同步玩家句子对应槽位的颜色
