@@ -72,10 +72,13 @@ script = ExtResource("7_hihw6")
 [node name="FoxSprite" type="Sprite2D" parent="FoxPopup" unique_id=891934620]
 
 [node name="DialogBubble" type="Label" parent="FoxPopup/FoxSprite" unique_id=1693996157]
-offset_left = -100.0
-offset_top = -30.0
-offset_right = 100.0
-offset_bottom = 10.0
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 411.0
+offset_top = 66.0
+offset_right = 611.0
+offset_bottom = 105.0
+grow_vertical = 2
 theme_override_fonts/font = ExtResource("8_ih0ju")
 theme_override_font_sizes/font_size = 24
 horizontal_alignment = 1
