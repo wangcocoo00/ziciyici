@@ -51,7 +51,7 @@ texture = ExtResource("6_ciu3y")
 expand_mode = 1
 
 [node name="EnemySprite" type="Sprite2D" parent="." unique_id=566615846]
-position = Vector2(1099, 418.99994)
+position = Vector2(1046, 419.99994)
 scale = Vector2(0.21130954, 0.37424853)
 texture = ExtResource("5_yw1d3")
 
@@ -62,7 +62,7 @@ offset_right = 153.03796
 offset_bottom = -158.7763
 theme_override_colors/font_color = Color(0.9932439, 0.54736644, 0.41125506, 1)
 theme_override_font_sizes/font_size = 130
-text = "敌人：熊熊大王"
+text = "敌人：熊熊小王"
 
 [node name="enemyimage" type="TextureRect" parent="EnemySprite" unique_id=1487649082]
 offset_left = -1314.0

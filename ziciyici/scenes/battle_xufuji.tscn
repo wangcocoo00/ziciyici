@@ -5,15 +5,16 @@
 [ext_resource type="Resource" uid="uid://dvgpadkf3ql8l" path="res://resources/player.tres" id="3_ciu3y"]
 [ext_resource type="Resource" uid="uid://duhkqf7do7285" path="res://resources/taunts.tres" id="4_pp7ab"]
 [ext_resource type="PackedScene" uid="uid://dc1wlhupgmgcg" path="res://scenes/Bullet.tscn" id="5_qul14"]
+[ext_resource type="Texture2D" uid="uid://cp28vevschuu" path="res://resources/背景图.png" id="6_4mfke"]
 [ext_resource type="Script" uid="uid://xjntphmll8l7" path="res://scripts/sentence_ui.gd" id="6_n4b6j"]
+[ext_resource type="Texture2D" uid="uid://c5nodteo6rof7" path="res://resources/img_v3_02127_bfa615cb-8268-451d-88b4-9a3834d3be6g.png" id="6_vu1hv"]
 [ext_resource type="Script" uid="uid://ca11714ms7hyc" path="res://scripts/fox_popup.gd" id="7_hihw6"]
 [ext_resource type="FontFile" uid="uid://biffnd0pv2bcc" path="res://resources/NotoSansSC-Regular.ttf" id="8_ih0ju"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_l1kui"]
-size = Vector2(64, 64)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_p6tk1"]
-size = Vector2(64, 64)
+[ext_resource type="Texture2D" uid="uid://dnie6wy2ckdqe" path="res://resources/企鹅ui.png" id="10_t2t55"]
+[ext_resource type="Texture2D" uid="uid://lfy2uju01g7q" path="res://resources/攻击.png" id="11_01oib"]
+[ext_resource type="Texture2D" uid="uid://8ux4r7k4b35r" path="res://resources/镜像护士小狗.png" id="11_t2t55"]
+[ext_resource type="Texture2D" uid="uid://cdfvb11jvt2wi" path="res://resources/开弓设计.png" id="12_jibkb"]
+[ext_resource type="Texture2D" uid="uid://bstustndpwn5w" path="res://resources/重新开始.png" id="13_4c2yr"]
 
 [node name="Battle3" type="Node2D" unique_id=689843110]
 script = ExtResource("1_656bh")
@@ -23,15 +24,20 @@ fox_taunt_library = ExtResource("4_pp7ab")
 bullet_scene = ExtResource("5_qul14")
 next_level_scene = "res://scenes/battle_tutu.tscn"
 
+[node name="background" type="Sprite2D" parent="." unique_id=1986734028]
+position = Vector2(1081, 40.000004)
+scale = Vector2(1.6171875, 2.0898438)
+texture = ExtResource("6_4mfke")
+
 [node name="PlayerSprite" type="Sprite2D" parent="." unique_id=2004262358]
-position = Vector2(300, 400)
-scale = Vector2(2, 2)
-texture = SubResource("PlaceholderTexture2D_l1kui")
+position = Vector2(184, 446.00003)
+scale = Vector2(0.18452382, 0.34114587)
+texture = ExtResource("6_vu1hv")
 
 [node name="EnemySprite" type="Sprite2D" parent="." unique_id=1564758301]
-position = Vector2(1300, 400)
-scale = Vector2(2, 2)
-texture = SubResource("PlaceholderTexture2D_p6tk1")
+position = Vector2(1070, 442.99997)
+scale = Vector2(0.20238103, 0.3401693)
+texture = ExtResource("6_vu1hv")
 
 [node name="SentenceUI" type="Control" parent="." unique_id=1557530583]
 layout_mode = 3
@@ -44,20 +50,20 @@ script = ExtResource("6_n4b6j")
 
 [node name="EnemySentenceContainer" type="HBoxContainer" parent="SentenceUI" unique_id=1862869488]
 layout_mode = 0
-offset_left = 1000.0
-offset_top = 250.0
-offset_right = 1000.0
-offset_bottom = 250.0
-scale = Vector2(1.3, 1.3)
+offset_left = 855.00006
+offset_top = 256.0
+offset_right = 934.638
+offset_bottom = 295.81903
+scale = Vector2(2.21, 2.21)
 theme_override_constants/separation = 4
 
 [node name="PlayerSentenceContainer" type="HBoxContainer" parent="SentenceUI" unique_id=886792692]
 layout_mode = 0
-offset_left = 100.0
-offset_top = 250.0
-offset_right = 100.0
-offset_bottom = 250.0
-scale = Vector2(1.3, 1.3)
+offset_left = 84.0
+offset_top = 261.0
+offset_right = 163.63802
+offset_bottom = 294.48416
+scale = Vector2(2.21, 2.21)
 
 [node name="FoxPopup" type="CanvasLayer" parent="." unique_id=852023058]
 script = ExtResource("7_hihw6")
@@ -95,6 +101,17 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("8_ih0ju")
 text = "攻击"
 
+[node name="attackbtnimage" type="TextureRect" parent="ActionButtons/HBoxContainer/AttackBtn" unique_id=33805117]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.062000003
+offset_left = -9.5
+offset_top = -39.0
+offset_right = 45.52
+offset_bottom = 87.5
+texture = ExtResource("11_01oib")
+expand_mode = 1
+
 [node name="ShootVBox" type="VBoxContainer" parent="ActionButtons/HBoxContainer" unique_id=749983759]
 layout_mode = 2
 theme_override_constants/separation = 5
@@ -104,8 +121,18 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("8_ih0ju")
 text = "射击"
 
+[node name="shootbtnimage" type="TextureRect" parent="ActionButtons/HBoxContainer/ShootVBox/ShootBtn" unique_id=1390715135]
+layout_mode = 0
+offset_left = -16.5
+offset_top = -23.5
+offset_right = 51.0
+offset_bottom = 57.0
+texture = ExtResource("12_jibkb")
+expand_mode = 1
+
 [node name="ShootCountLabel" type="Label" parent="ActionButtons/HBoxContainer/ShootVBox" unique_id=749983761]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.9611512, 0.19004989, 0.32134914, 1)
 theme_override_fonts/font = ExtResource("8_ih0ju")
 theme_override_font_sizes/font_size = 12
 text = "剩余: 1"
@@ -172,20 +199,39 @@ theme_override_font_sizes/font_size = 28
 text = "下一关"
 
 [node name="PlayerHPLabel" type="Label" parent="." unique_id=61279231]
-offset_left = 280.0
-offset_top = 380.0
-offset_right = 320.0
-offset_bottom = 405.0
+z_index = 10
+offset_left = 88.0
+offset_top = 517.0
+offset_right = 267.0
+offset_bottom = 586.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("8_ih0ju")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 
-[node name="EnemyHPLabel" type="Label" parent="." unique_id=685025840]
-offset_left = 1100.0
-offset_top = 380.0
-offset_right = 1140.0
-offset_bottom = 416.0
-theme_override_fonts/font = ExtResource("8_ih0ju")
-theme_override_font_sizes/font_size = 16
+[node name="playericon" type="Control" parent="." unique_id=1232442814]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="playername" type="Label" parent="playericon" unique_id=2105358835]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 352.0
+offset_right = 264.0
+offset_bottom = 401.0
+theme_override_colors/font_color = Color(0.38170114, 0.82807684, 0.99363095, 1)
+theme_override_font_sizes/font_size = 32
+text = "玩家：企鹅"
+
+[node name="playerimage" type="TextureRect" parent="playericon" unique_id=296778049]
+layout_mode = 0
+offset_left = 271.0
+offset_top = 359.0
+offset_right = 455.0
+offset_bottom = 537.0
+texture = ExtResource("10_t2t55")
+expand_mode = 1
 
 [node name="EnemyExtraText" type="Label" parent="." unique_id=123456789]
 visible = false
@@ -198,13 +244,49 @@ theme_override_font_sizes/font_size = 28
 horizontal_alignment = 1
 
 [node name="RestartBtn" type="Button" parent="." unique_id=987654321]
-offset_left = 20.0
-offset_top = 20.0
-offset_right = 100.0
-offset_bottom = 60.0
+offset_left = -35.0
+offset_top = -133.0
+offset_right = 204.0
+offset_bottom = 207.0
 theme_override_fonts/font = ExtResource("8_ih0ju")
 theme_override_font_sizes/font_size = 16
-text = "重新开始"
+icon = ExtResource("13_4c2yr")
+flat = true
+expand_icon = true
+
+[node name="EnemyHPLabel" type="Label" parent="." unique_id=685025840]
+offset_left = 994.0
+offset_top = 505.0
+offset_right = 1143.0
+offset_bottom = 574.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("8_ih0ju")
+theme_override_font_sizes/font_size = 24
+
+[node name="enemyicon" type="Control" parent="." unique_id=135623953]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="enemyname" type="Label" parent="enemyicon" unique_id=1711994812]
+layout_mode = 0
+offset_left = 960.0
+offset_top = 358.0
+offset_right = 1184.0
+offset_bottom = 407.0
+theme_override_colors/font_color = Color(0.9179055, 0.92235994, 0.92892456, 1)
+theme_override_font_sizes/font_size = 32
+text = "敌人：护士小狗"
+
+[node name="enemyimage" type="TextureRect" parent="enemyicon" unique_id=1434546324]
+layout_mode = 0
+offset_left = 833.0
+offset_top = 380.0
+offset_right = 957.0
+offset_bottom = 495.0
+texture = ExtResource("11_t2t55")
+expand_mode = 1
 
 [connection signal="fox_taunt" from="." to="FoxPopup" method="_on_battle_fox_taunt"]
 [connection signal="sentence_updated" from="." to="SentenceUI" method="_on_battle_sentence_updated"]
