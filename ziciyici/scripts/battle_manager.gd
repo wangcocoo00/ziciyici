@@ -287,7 +287,7 @@ func _execute_shot_effect(slot: int) -> void:
 			# 直接胜利，显示 EnemyExtraText 2秒后再显示 GameOverUI
 			current_state = State.GAME_OVER
 			battle_ended.emit(true)
-			_show_victory_with_delay("护士小狗钦佩于鹅鹅冒险的勇气，决心跟随鹅鹅一起冒险")
+			_show_victory_with_delay("哇塞，鹅鹅你才是运用语法的高手")
 
 
 ## 播放闪电渐现渐隐闪烁动画（在敌我双方上方）
@@ -537,7 +537,7 @@ func _show_game_over(victory: bool) -> void:
 	ui.visible = true
 	var label = ui.get_node("ResultLabel") as Label
 	if label:
-		label.text = "熊熊小王良心发现，今天决定减肥，不吃肉了"
+		label.text = "护士小狗钦佩于鹅鹅冒险的勇气，决心跟随鹅鹅一起冒险"
 	var restart_btn = ui.get_node("RestartBtn") as Button
 	if restart_btn:
 		restart_btn.visible = true
