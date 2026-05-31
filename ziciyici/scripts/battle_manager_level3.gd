@@ -128,7 +128,7 @@ func update_hp_display() -> void:
 	if player_hp_label:
 		player_hp_label.text = "鹅鹅血量：" + str(player_hp)
 	if enemy_hp_label:
-		enemy_hp_label.text = "小兔兔血量：" + str(enemy_hp)
+		enemy_hp_label.text = "兔兔队长血量：" + str(enemy_hp)
 
 func _update_all_button_states() -> void:
 	_update_shoot_button_style()

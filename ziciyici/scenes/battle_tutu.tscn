@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://h420l68jldb"]
 
-[ext_resource type="Script" uid="uid://bj1c6qdo3udhf" path="res://scripts/battle_manager_level3.gd" id="1_656bh"]
+[ext_resource type="Script" uid="uid://3ipodfwy5rll" path="res://scripts/battle_manager_level3.gd" id="1_8tbow"]
 [ext_resource type="Resource" path="res://resources/tutu_config.tres" id="2_8tbow"]
 [ext_resource type="Resource" uid="uid://dwwxu087nfsds" path="res://resources/player_level3.tres" id="3_2ihut"]
 [ext_resource type="Resource" uid="uid://duhkqf7do7285" path="res://resources/taunts.tres" id="4_pp7ab"]
@@ -16,7 +16,7 @@ size = Vector2(64, 64)
 size = Vector2(64, 64)
 
 [node name="Battle3" type="Node2D" unique_id=689843110]
-script = ExtResource("1_656bh")
+script = ExtResource("1_8tbow")
 enemy_config = ExtResource("2_8tbow")
 player_config = ExtResource("3_2ihut")
 fox_taunt_library = ExtResource("4_pp7ab")
