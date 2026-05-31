@@ -13,6 +13,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 stream = ExtResource("3_ih0ju")
+autoplay = true
 expand = true
 
 [node name="ColorRect" type="ColorRect" parent="."]

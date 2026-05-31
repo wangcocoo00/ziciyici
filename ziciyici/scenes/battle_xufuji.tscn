@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://8ux4r7k4b35r" path="res://resources/镜像护士小狗.png" id="11_t2t55"]
 [ext_resource type="Texture2D" uid="uid://cdfvb11jvt2wi" path="res://resources/开弓设计.png" id="12_jibkb"]
 [ext_resource type="Texture2D" uid="uid://bstustndpwn5w" path="res://resources/重新开始.png" id="13_4c2yr"]
-[ext_resource type="AudioStream" uid="uid://bmgm2q3q2q3q" path="res://resources/Copper Confetti.mp3" id="14_bgm"]
+[ext_resource type="AudioStream" path="res://resources/Copper Confetti.mp3" id="14_bgm"]
 
 [node name="Battle3" type="Node2D" unique_id=689843110]
 script = ExtResource("1_656bh")
