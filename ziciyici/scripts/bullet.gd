@@ -42,6 +42,11 @@ func _physics_process(delta: float) -> void:
 	var player_sprite = battle_ref.get_node_or_null("PlayerSprite") as Sprite2D
 	if player_sprite and not battle_ref.is_jumping:
 		if position.distance_to(player_sprite.position) < 30.0:
+			# 闪避状态：敌人攻击落空
+			if battle_ref.is_dodging:
+				battle_ref.is_dodging = false
+				queue_free_and_emit()
+				return
 			battle_ref.player_hp -= damage
 			battle_ref.update_hp_display()
 			battle_ref.check_victory()

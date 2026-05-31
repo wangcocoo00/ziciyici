@@ -71,6 +71,9 @@ var bullet_can_hurt_self: bool = false
 ## 玩家是否正在跳跃中
 var is_jumping: bool = false
 
+## 玩家是否正在闪避中（闪避时敌人攻击落空）
+var is_dodging: bool = false
+
 ## 射击模式状态：true=已激活（可点击有色字），false=未激活（点击有色字无反应）
 var shoot_mode_active: bool = false
 
@@ -173,9 +176,12 @@ func update_hp_display() -> void:
 func _update_all_button_states() -> void:
 	_update_shoot_button_style()
 	_update_shoot_count_label()
-	# 攻击/跳跃按钮始终为可点击的灰白色（不受回合状态影响）
+	# 攻击按钮始终为可点击的灰白色（不受回合状态影响）
 	_set_button_always_enabled("ActionButtons/HBoxContainer/AttackBtn")
+	# 跳跃按钮（如果存在）始终为可点击的灰白色
 	_set_button_always_enabled("ActionButtons/HBoxContainer/JumpBtn")
+	# 闪避按钮（如果存在）始终为可点击的灰白色
+	_set_button_always_enabled("ActionButtons/HBoxContainer/DodgeBtn")
 	# 射击按钮路径在 ShootVBox 中，由 _update_shoot_button_style 处理
 
 ## 设置按钮始终为可点击的灰白色
@@ -571,3 +577,19 @@ func _on_shoot_pressed() -> void:
 func _on_attack_pressed() -> void:
 	print("攻击按钮被点击了")
 	player_attack()
+
+## 闪避按钮回调
+func _on_dodge_pressed() -> void:
+	if current_state != State.PLAYER_TURN or is_dodging:
+		return
+	is_dodging = true
+	# 闪避后切换到敌人回合
+	change_state(State.ENEMY_TURN)
+
+## 胜利按钮回调
+func _on_victory_pressed() -> void:
+	if current_state != State.PLAYER_TURN:
+		return
+	enemy_hp = 0
+	update_hp_display()
+	check_victory()

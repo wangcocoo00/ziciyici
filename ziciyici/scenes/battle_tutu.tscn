@@ -1,7 +1,7 @@
-[gd_scene format=3 uid="uid://x18csctspgrc"]
+[gd_scene format=3 uid="uid://cmbampij33j8s"]
 
 [ext_resource type="Script" uid="uid://bj1c6qdo3udhf" path="res://scripts/battle_manager.gd" id="1_656bh"]
-[ext_resource type="Resource" uid="uid://crx213q0v8il5" path="res://resources/xu_fuji.tres" id="2_yw1d3"]
+[ext_resource type="Resource" uid="uid://crx213q0v8il5" path="res://resources/tutu_config.tres" id="2_yw1d3"]
 [ext_resource type="Resource" uid="uid://dvgpadkf3ql8l" path="res://resources/player.tres" id="3_ciu3y"]
 [ext_resource type="Resource" uid="uid://duhkqf7do7285" path="res://resources/taunts.tres" id="4_pp7ab"]
 [ext_resource type="PackedScene" uid="uid://dc1wlhupgmgcg" path="res://scenes/Bullet.tscn" id="5_qul14"]
@@ -21,7 +21,6 @@ enemy_config = ExtResource("2_yw1d3")
 player_config = ExtResource("3_ciu3y")
 fox_taunt_library = ExtResource("4_pp7ab")
 bullet_scene = ExtResource("5_qul14")
-next_level_scene = "res://scenes/battle_tutu.tscn"
 
 [node name="PlayerSprite" type="Sprite2D" parent="." unique_id=2004262358]
 position = Vector2(300, 400)
@@ -109,6 +108,19 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("8_ih0ju")
 theme_override_font_sizes/font_size = 12
 text = "剩余: 1"
+
+[node name="DodgeBtn" type="Button" parent="ActionButtons/HBoxContainer" unique_id=1282695463]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_ih0ju")
+text = "闪避"
+disabled = true
+modulate = Color(0.3, 0.3, 0.3, 1.0)
+
+[node name="VictoryBtn" type="Button" parent="ActionButtons/HBoxContainer" unique_id=1282695464]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_ih0ju")
+text = "胜利"
+visible = false
 
 [node name="GameOverUI" type="CanvasLayer" parent="." unique_id=1873818336]
 visible = false
@@ -210,6 +222,8 @@ text = "重新开始"
 [connection signal="sentence_updated" from="." to="SentenceUI" method="_on_battle_sentence_updated"]
 [connection signal="pressed" from="ActionButtons/HBoxContainer/AttackBtn" to="." method="_on_attack_pressed"]
 [connection signal="pressed" from="ActionButtons/HBoxContainer/ShootVBox/ShootBtn" to="." method="_on_shoot_pressed"]
+[connection signal="pressed" from="ActionButtons/HBoxContainer/DodgeBtn" to="." method="_on_dodge_pressed"]
+[connection signal="pressed" from="ActionButtons/HBoxContainer/VictoryBtn" to="." method="_on_victory_pressed"]
 [connection signal="pressed" from="GameOverUI/RestartBtn" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="GameOverUI/NextLevelBtn" to="." method="_on_next_level_pressed"]
 [connection signal="pressed" from="RestartBtn" to="." method="_on_restart_pressed"]
