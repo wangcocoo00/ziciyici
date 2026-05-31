@@ -35,6 +35,9 @@ class_name BattleManager
 ## 敌人句子文字数组（仅用于显示）
 var enemy_sentence: Array[String] = []
 
+## 敌人句子 WordData 数组（用于检查可射击状态）
+var enemy_words: Array[WordData] = []
+
 ## 玩家句子 WordData 数组（射击时需要 effects）
 var player_words: Array[WordData] = []
 
@@ -68,8 +71,20 @@ var bullet_can_hurt_self: bool = false
 ## 玩家是否正在跳跃中
 var is_jumping: bool = false
 
+## 玩家是否正在闪避中（闪避时敌人攻击落空）
+var is_dodging: bool = false
+
 ## 射击模式状态：true=已激活（可点击有色字），false=未激活（点击有色字无反应）
 var shoot_mode_active: bool = false
+
+## 敌人攻击模式：true=投掷红色圆球（初始），false=普通子弹（射"雷"后改变）
+var enemy_attack_mode_red_ball: bool = true
+
+## 标记是否已射击（用于在敌人回合特殊处理）
+var has_shot_this_turn: bool = false
+
+## 当前射击的槽位（用于敌人回合判断）
+var shot_slot: int = -1
 
 # ---------------------------------------------------------------------------
 # 回合状态
@@ -135,11 +150,16 @@ func load_config() -> void:
 	current_shoot_direction = enemy_config.base_shoot_direction
 	bullet_ricochet = enemy_config.bullet_ricochet
 	bullet_can_hurt_self = enemy_config.bullet_can_hurt_self
+	# 重置快速射击模式
+	_rapid_fire_active = false
+	_rapid_fire_timer = null
 
-	# 加载敌人句子（仅文字）
+	# 加载敌人句子
 	enemy_sentence.clear()
+	enemy_words.clear()
 	for word: WordData in enemy_config.sentence.words:
 		enemy_sentence.append(word.text)
+		enemy_words.append(word.duplicate())
 
 	# 加载玩家句子（完整 WordData，需要 duplicate 避免修改原资源）
 	player_words.clear()
@@ -153,15 +173,18 @@ func update_hp_display() -> void:
 	if player_hp_label:
 		player_hp_label.text = "鹅鹅血量：" + str(player_hp)
 	if enemy_hp_label:
-		enemy_hp_label.text = "徐福记血量：" + str(enemy_hp)
+		enemy_hp_label.text = "小兰血量：" + str(enemy_hp)
 
 ## 更新所有按钮的状态
 func _update_all_button_states() -> void:
 	_update_shoot_button_style()
 	_update_shoot_count_label()
-	# 攻击/跳跃按钮始终为可点击的灰白色（不受回合状态影响）
+	# 攻击按钮始终为可点击的灰白色（不受回合状态影响）
 	_set_button_always_enabled("ActionButtons/HBoxContainer/AttackBtn")
+	# 跳跃按钮（如果存在）始终为可点击的灰白色
 	_set_button_always_enabled("ActionButtons/HBoxContainer/JumpBtn")
+	# 闪避按钮（如果存在）始终为可点击的灰白色
+	_set_button_always_enabled("ActionButtons/HBoxContainer/DodgeBtn")
 	# 射击按钮路径在 ShootVBox 中，由 _update_shoot_button_style 处理
 
 ## 设置按钮始终为可点击的灰白色
@@ -213,32 +236,165 @@ func player_shoot(slot: int) -> void:
 	if slot < 0 or slot >= player_words.size():
 		return
 
-	var word: WordData = player_words[slot]
-
-	# 该字不可射击时触发狐狸嘲讽
-	if not word.can_be_shot:
+	# 检查敌人对应槽位的字是否可射击
+	if slot >= enemy_words.size() or not enemy_words[slot].can_be_shot:
 		var msg: String = "狗屁不通！你是这样说话的吗！"
 		if fox_taunt_library and not fox_taunt_library.taunts.is_empty():
 			msg = fox_taunt_library.taunts[randi() % fox_taunt_library.taunts.size()]
 		fox_taunt.emit(msg)
 		return
 
-	# 执行射击：清除敌人对应位置的字，标记玩家字已使用
+	# 执行射击：清除敌人对应位置的字，标记敌人字和玩家字已使用
 	enemy_sentence[slot] = ""
+	enemy_words[slot].text = ""
+	enemy_words[slot].can_be_shot = false
 	player_words[slot].text = ""
 	player_words[slot].can_be_shot = false
 	shots_remaining -= 1
+	has_shot_this_turn = true
+	shot_slot = slot
 	# 射击后退出射击模式
 	shoot_mode_active = false
 	_update_all_button_states()
 	sentence_updated.emit()
 
-	# 应用该字绑定的所有效果
-	for effect: EffectData in word.shot_effects:
-		apply_effect(effect)
+	# 根据槽位执行特殊效果
+	_execute_shot_effect(slot)
 
-	# 切换到敌人回合
-	change_state(State.ENEMY_TURN)
+	# 切换到敌人回合（如果还没结束的话）
+	if current_state != State.GAME_OVER:
+		change_state(State.ENEMY_TURN)
+
+
+## 执行射击效果（根据槽位）
+func _execute_shot_effect(slot: int) -> void:
+	match slot:
+		0:
+			# 射"手"（槽位0）：玩家句子对应槽位"闪"被消除
+			# 双方上方播放闪电渐现渐隐闪烁动画2秒
+			_play_lightning_animation()
+			# 双方各受到300点伤害
+			enemy_hp -= 300
+			player_hp -= 300
+			update_hp_display()
+			# 玩家血条归零，玩家失败
+			if player_hp <= 0:
+				current_state = State.GAME_OVER
+				battle_ended.emit(false)
+				_show_game_over(false, "输给小兰不丢人……")
+
+		1:
+			# 射"雷"（槽位1）：玩家句子对应槽位"避"被消除
+			# 敌人第一次攻击方式变化：不再投掷红色圆球，改为普通子弹，伤害变为50
+			enemy_attack_mode_red_ball = false
+			enemy_damage = 50
+			# 在EnemySprite下侧显示Label
+			_show_label_near_node($EnemySprite, "糟糕，手雷没了，伤害减少了！", Vector2(0, 60))
+			# 从PlayerSprite向EnemySprite投掷白色圆球，到达后触发后续效果
+			_spawn_projectile($PlayerSprite.position, $EnemySprite.position, Color.WHITE, 0, false, func():
+				# 白色圆球到达后，全屏显示1s白色遮罩
+				_show_white_overlay(1.0)
+				# 白色遮罩结束后（1s + 0.3s淡出），显示Label并启动快速射击
+				var timer = get_tree().create_timer(1.3)
+				timer.timeout.connect(func():
+					# EnemySprite右侧显示Label
+					_show_label_near_node($EnemySprite, "限制对方行动一回合", Vector2(80, 0))
+					# 标记：玩家攻击将射出无伤害白色圆球，敌人快速射击
+					_start_enemy_rapid_fire()
+				)
+			)
+
+		6:
+			# 射"跑"（槽位6）：玩家句子对应槽位"心"被消除
+			# 从EnemySprite向PlayerSprite扔无伤害红色圆球，停在玩家左侧
+			var target_pos = $PlayerSprite.position + Vector2(-10, 0)
+			_spawn_projectile($EnemySprite.position, target_pos, Color.RED, 0, false)
+			# 在PlayerSprite旁边显示Label
+			_show_label_near_node($PlayerSprite, "闪避生效，你死吧！", Vector2(-120, -40))
+			# 立即将EnemySprite生命值置0，玩家直接胜利
+			enemy_hp = 0
+			update_hp_display()
+			current_state = State.GAME_OVER
+			battle_ended.emit(true)
+			_show_victory_with_delay("哇塞，鹅鹅你才是运用语法的高手")
+
+
+## 播放闪电渐现渐隐闪烁动画（在敌我双方上方）
+func _play_lightning_animation() -> void:
+	var lightning = ColorRect.new()
+	lightning.color = Color(1, 1, 0.8, 0.9)  # 亮黄色
+	lightning.size = Vector2(1600, 100)
+	lightning.position = Vector2(0, 100)  # 在双方上方
+	lightning.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(lightning)
+
+	var tween = create_tween()
+	# 闪烁效果：快速交替透明度
+	tween.tween_property(lightning, "modulate:a", 0.1, 0.1)
+	tween.tween_property(lightning, "modulate:a", 0.9, 0.1)
+	tween.tween_property(lightning, "modulate:a", 0.1, 0.1)
+	tween.tween_property(lightning, "modulate:a", 0.9, 0.1)
+	tween.tween_property(lightning, "modulate:a", 0.1, 0.1)
+	tween.tween_property(lightning, "modulate:a", 0.9, 0.1)
+	tween.tween_property(lightning, "modulate:a", 0.1, 0.1)
+	tween.tween_property(lightning, "modulate:a", 0.9, 0.1)
+	tween.tween_property(lightning, "modulate:a", 0.0, 0.2).set_delay(0.2)
+	tween.finished.connect(func(): lightning.queue_free())
+
+
+## 生成一个从起点到终点的投射物
+## @param from: 起始位置
+## @param to: 目标位置
+## @param color: 颜色
+## @param damage: 伤害（0=无伤害）
+## @param hurt_target: 是否伤害目标
+## @param on_arrival: 到达目标后的回调（可选）
+func _spawn_projectile(from: Vector2, to: Vector2, color: Color, damage: int, hurt_target: bool, on_arrival: Callable = Callable()) -> void:
+	var projectile = ColorRect.new()
+	projectile.color = color
+	projectile.size = Vector2(16, 16)
+	projectile.position = from - Vector2(8, 8)
+	projectile.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(projectile)
+
+	var tween = create_tween()
+	tween.set_trans(Tween.TRANS_LINEAR)
+	tween.tween_property(projectile, "position", to - Vector2(8, 8), 0.5)
+	tween.finished.connect(func():
+		projectile.queue_free()
+		if damage > 0 and hurt_target:
+			# 如果投射物到达敌人位置
+			if to == $EnemySprite.position:
+				enemy_hp -= damage
+				update_hp_display()
+				check_victory()
+			elif to == $PlayerSprite.position or abs(to.x - $PlayerSprite.position.x) < 20:
+				player_hp -= damage
+				update_hp_display()
+				check_victory()
+		# 执行到达回调
+		if on_arrival.is_valid():
+			on_arrival.call()
+	)
+
+
+## 在节点附近显示一个 Label
+## @param node: 参考节点
+## @param text: 显示文字
+## @param offset: 相对节点的偏移
+func _show_label_near_node(node: Node2D, text: String, offset: Vector2) -> void:
+	var label = Label.new()
+	label.text = text
+	label.position = node.position + offset
+	label.add_theme_font_size_override("font_size", 24)
+	label.modulate = Color(1, 1, 1, 1)
+	add_child(label)
+
+	# 2秒后淡出消失
+	var tween = create_tween()
+	tween.tween_interval(2.0)
+	tween.tween_property(label, "modulate:a", 0.0, 0.5)
+	tween.finished.connect(func(): label.queue_free())
 
 
 ## 应用单个效果到对应目标
@@ -250,6 +406,14 @@ func apply_effect(effect: EffectData) -> void:
 				enemy_damage = int(effect.value)
 			elif effect.target == EffectData.Target.PLAYER and effect.attribute == "jump_height":
 				player_jump_height = effect.value
+			elif effect.target == EffectData.Target.ENEMY and effect.attribute == "hp":
+				enemy_hp -= int(effect.value)
+				update_hp_display()
+				check_victory()
+			elif effect.target == EffectData.Target.PLAYER and effect.attribute == "hp":
+				player_hp -= int(effect.value)
+				update_hp_display()
+				check_victory()
 
 		EffectData.EffectType.CHANGE_SHOOT_DIRECTION:
 			if effect.target == EffectData.Target.ENEMY:
@@ -266,6 +430,12 @@ func apply_effect(effect: EffectData) -> void:
 ## 玩家普通攻击（直接扣敌人血）
 func player_attack() -> void:
 	if current_state != State.PLAYER_TURN:
+		return
+
+	# 如果处于快速射击模式（射"雷"后），玩家攻击改为射出无伤害白色圆球
+	if _rapid_fire_active:
+		_spawn_projectile($PlayerSprite.position, $EnemySprite.position, Color.WHITE, 0, false)
+		# 不切换回合，等待敌人快速射击
 		return
 
 	enemy_hp -= player_attack_power
@@ -334,6 +504,10 @@ func _on_enemy_turn() -> void:
 	bullet.can_hurt_shooter = bullet_can_hurt_self
 	bullet.is_ricochet = bullet_ricochet
 
+	# 如果是红色圆球模式，设置子弹颜色为红色
+	if enemy_attack_mode_red_ball:
+		bullet.modulate = Color.RED
+
 	# 添加到场景
 	add_child(bullet)
 
@@ -384,21 +558,15 @@ func change_state(new_state: State) -> void:
 # 生命周期与防御
 # ===========================================================================
 
-## 显示游戏结束界面
-func _show_game_over(victory: bool) -> void:
-	var ui = $GameOverUI
-	if not ui:
-		return
-	ui.visible = true
-	var label = ui.get_node("ResultLabel") as Label
-	if label:
-		label.text = "熊熊小王良心发现，今天决定减肥，不吃肉了"
-	var restart_btn = ui.get_node("RestartBtn") as Button
-	if restart_btn:
-		restart_btn.visible = true
-	var next_btn = ui.get_node("NextLevelBtn") as Button
-	if next_btn:
-		next_btn.visible = victory and not next_level_scene.is_empty()
+## 显示胜利文字2秒后再显示 GameOverUI
+func _show_victory_with_delay(enemy_text: String) -> void:
+	var extra = $EnemyExtraText as Label
+	if extra:
+		extra.text = enemy_text
+		extra.visible = true
+	# 2秒后显示 GameOverUI
+	var timer = get_tree().create_timer(2.0)
+	timer.timeout.connect(func(): _show_game_over(true))
 
 func _on_restart_pressed() -> void:
 	get_tree().reload_current_scene()
@@ -426,3 +594,97 @@ func _on_shoot_pressed() -> void:
 func _on_attack_pressed() -> void:
 	print("攻击按钮被点击了")
 	player_attack()
+
+## 闪避按钮回调
+func _on_dodge_pressed() -> void:
+	if current_state != State.PLAYER_TURN or is_dodging:
+		return
+	is_dodging = true
+	# 闪避后切换到敌人回合
+	change_state(State.ENEMY_TURN)
+
+## 胜利按钮回调
+func _on_victory_pressed() -> void:
+	if current_state != State.PLAYER_TURN:
+		return
+	enemy_hp = 0
+	update_hp_display()
+	check_victory()
+
+
+# ===========================================================================
+# 射击效果辅助函数（第二关专用）
+# ===========================================================================
+
+## 显示全屏白色遮罩，持续 duration 秒后消失
+func _show_white_overlay(duration: float) -> void:
+	var overlay = ColorRect.new()
+	overlay.color = Color(1, 1, 1, 1)
+	overlay.size = get_viewport().get_visible_rect().size
+	overlay.position = Vector2(0, 0)
+	overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(overlay)
+
+	var tween = create_tween()
+	tween.tween_interval(duration)
+	tween.tween_property(overlay, "modulate:a", 0.0, 0.3)
+	tween.finished.connect(func(): overlay.queue_free())
+
+
+## 启动敌人快速射击模式（射"雷"后触发）
+## 玩家攻击将射出无伤害白色圆球，敌人每1秒射出1个普通子弹
+var _rapid_fire_timer: Timer = null
+var _rapid_fire_active: bool = false
+
+func _start_enemy_rapid_fire() -> void:
+	_rapid_fire_active = true
+	# 创建定时器，每1秒发射一次
+	_rapid_fire_timer = Timer.new()
+	_rapid_fire_timer.wait_time = 1.0
+	_rapid_fire_timer.autostart = true
+	add_child(_rapid_fire_timer)
+	_rapid_fire_timer.timeout.connect(_on_rapid_fire_tick)
+
+
+func _on_rapid_fire_tick() -> void:
+	if not _rapid_fire_active or current_state == State.GAME_OVER:
+		if _rapid_fire_timer:
+			_rapid_fire_timer.stop()
+		return
+
+	# 敌人快速射出普通子弹，每发伤害50
+	var bullet: Bullet = bullet_scene.instantiate() as Bullet
+	bullet.position = $EnemySprite.position
+	bullet.damage = 50
+	bullet.direction = Vector2.LEFT
+	bullet.can_hurt_shooter = false
+	bullet.is_ricochet = false
+	add_child(bullet)
+	bullet.bullet_finished.connect(_on_rapid_fire_bullet_finished)
+
+
+func _on_rapid_fire_bullet_finished() -> void:
+	check_victory()
+
+
+## 显示游戏结束界面（支持自定义失败文本和隐藏下一关按钮）
+func _show_game_over(victory: bool, custom_fail_text: String = "") -> void:
+	var ui = $GameOverUI
+	if not ui:
+		return
+	ui.visible = true
+	var label = ui.get_node("ResultLabel") as Label
+	if label:
+		if victory:
+			label.text = "护士小狗钦佩于鹅鹅冒险的勇气，决心跟随鹅鹅一起冒险"
+		elif custom_fail_text != "":
+			label.text = custom_fail_text
+		else:
+			label.text = "GameOver"
+	var restart_btn = ui.get_node("RestartBtn") as Button
+	if restart_btn:
+		restart_btn.visible = true
+	var next_btn = ui.get_node("NextLevelBtn") as Button
+	if next_btn:
+		# 失败时隐藏下一关按钮
+		next_btn.visible = victory and not next_level_scene.is_empty()
