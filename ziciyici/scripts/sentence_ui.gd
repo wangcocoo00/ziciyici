@@ -6,7 +6,7 @@ extends Control
 @onready var player_container: HBoxContainer = $PlayerSentenceContainer
 
 # 每个字的固定宽度（像素），确保上下对齐
-const CHAR_WIDTH: float = 20.0
+const CHAR_WIDTH: float = 10.0
 
 # ==================== 信号 ====================
 

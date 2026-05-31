@@ -50,7 +50,7 @@ offset_left = 1100.0
 offset_top = 250.0
 offset_right = 1100.0
 offset_bottom = 250.0
-scale = Vector2(2, 2)
+scale = Vector2(4, 4)
 
 [node name="PlayerSentenceContainer" type="HBoxContainer" parent="SentenceUI" unique_id=886792692]
 layout_mode = 0
@@ -58,7 +58,7 @@ offset_left = 150.0
 offset_top = 250.0
 offset_right = 150.0
 offset_bottom = 250.0
-scale = Vector2(2, 2)
+scale = Vector2(4, 4)
 
 [node name="FoxPopup" type="CanvasLayer" parent="." unique_id=852023058]
 script = ExtResource("3_28cxp")

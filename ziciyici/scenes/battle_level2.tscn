@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://dvgpadkf3ql8l" path="res://resources/player.tres" id="3_l1kui"]
 [ext_resource type="Resource" uid="uid://duhkqf7do7285" path="res://resources/taunts.tres" id="4_p6tk1"]
 [ext_resource type="PackedScene" uid="uid://dc1wlhupgmgcg" path="res://scenes/Bullet.tscn" id="5_vu1hv"]
+[ext_resource type="Texture2D" uid="uid://dnie6wy2ckdqe" path="res://resources/企鹅ui.png" id="6_yyhp1"]
 [ext_resource type="FontFile" uid="uid://biffnd0pv2bcc" path="res://resources/NotoSansSC-Regular.ttf" id="8_l1kui"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_l1kui"]
@@ -23,10 +24,18 @@ fox_taunt_library = ExtResource("4_p6tk1")
 bullet_scene = ExtResource("5_vu1hv")
 
 [node name="PlayerSprite" type="Sprite2D" parent="." unique_id=2004262358]
-modulate = Color(0, 1, 0, 1)
 position = Vector2(300, 400)
 scale = Vector2(2, 2)
 texture = SubResource("PlaceholderTexture2D_l1kui")
+
+[node name="TextureRect" type="TextureRect" parent="PlayerSprite" unique_id=759181516]
+self_modulate = Color(0.9221709, 0.9799528, 0.6530389, 0.96500003)
+offset_left = -129.5
+offset_top = -60.5
+offset_right = -24.0
+offset_bottom = 56.5
+texture = ExtResource("6_yyhp1")
+expand_mode = 1
 
 [node name="EnemySprite" type="Sprite2D" parent="." unique_id=1564758301]
 modulate = Color(0, 1, 0, 1)
