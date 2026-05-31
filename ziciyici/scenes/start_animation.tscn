@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://start_animation_scene"]
 
 [ext_resource type="Script" path="res://scripts/start_animation.gd" id="1_8tbow"]
-[ext_resource type="VideoStream" path="res://resources/入场动画.mp4" id="3_ih0ju"]
+[ext_resource type="VideoStream" path="res://resources/入场动画.ogv" id="3_ih0ju"]
 
 [node name="StartAnimation" type="Node2D"]
 script = ExtResource("1_8tbow")
