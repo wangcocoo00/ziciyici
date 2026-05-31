@@ -1,12 +1,11 @@
 [gd_resource type="Resource" script_class="PlayerConfig" format=3 uid="uid://dvgpadkf3ql8l"]
 
 [ext_resource type="Script" uid="uid://dmykkocql6h34" path="res://scripts/player_config.gd" id="1_rjq7u"]
-[ext_resource type="Resource" uid="uid://coeyprthnwbs2" path="res://resources/player_sentence.tres" id="2_dk6ju"]
+[ext_resource type="Resource" uid="uid://d33idqixi2hje" path="res://resources/player_sentence_level2.tres" id="2_dk6ju"]
 
 [resource]
 script = ExtResource("1_rjq7u")
 sentence = ExtResource("2_dk6ju")
-hp = 20
-base_attack = 5
-base_jump_height = 200.0
+hp = 400
+base_attack = 100
 metadata/_custom_type_script = "uid://dmykkocql6h34"

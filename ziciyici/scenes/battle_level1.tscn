@@ -1,0 +1,191 @@
+[gd_scene format=3 uid="uid://xiregy8bu526"]
+
+[ext_resource type="Script" uid="uid://bj1c6qdo3udhf" path="res://scripts/battle_manager.gd" id="1_uytx1"]
+[ext_resource type="Resource" uid="uid://c6qaq4r5s7t8u" path="res://resources/xu_fuji_level1.tres" id="2_it7ts"]
+[ext_resource type="Script" uid="uid://xjntphmll8l7" path="res://scripts/sentence_ui.gd" id="2_rd5u4"]
+[ext_resource type="Script" uid="uid://ca11714ms7hyc" path="res://scripts/fox_popup.gd" id="3_28cxp"]
+[ext_resource type="Resource" uid="uid://ctwyv417jck8r" path="res://resources/player_level1.tres" id="3_l1kui"]
+[ext_resource type="Resource" uid="uid://duhkqf7do7285" path="res://resources/taunts.tres" id="4_p6tk1"]
+[ext_resource type="PackedScene" uid="uid://dc1wlhupgmgcg" path="res://scenes/Bullet.tscn" id="5_vu1hv"]
+[ext_resource type="FontFile" uid="uid://biffnd0pv2bcc" path="res://resources/NotoSansSC-Regular.ttf" id="8_l1kui"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_l1kui"]
+size = Vector2(64, 64)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_p6tk1"]
+size = Vector2(64, 64)
+
+[node name="Battle2" type="Node2D" unique_id=689843110]
+script = ExtResource("1_uytx1")
+enemy_config = ExtResource("2_it7ts")
+player_config = ExtResource("3_l1kui")
+fox_taunt_library = ExtResource("4_p6tk1")
+bullet_scene = ExtResource("5_vu1hv")
+next_level_scene = "res://scenes/battle_level2.tscn"
+
+[node name="PlayerSprite" type="Sprite2D" parent="." unique_id=2004262358]
+modulate = Color(0, 1, 0, 1)
+position = Vector2(300, 400)
+scale = Vector2(2, 2)
+texture = SubResource("PlaceholderTexture2D_l1kui")
+
+[node name="EnemySprite" type="Sprite2D" parent="." unique_id=1564758301]
+modulate = Color(0, 1, 0, 1)
+position = Vector2(1300, 400)
+scale = Vector2(2, 2)
+texture = SubResource("PlaceholderTexture2D_p6tk1")
+
+[node name="SentenceUI" type="Control" parent="." unique_id=1557530583]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_rd5u4")
+
+[node name="EnemySentenceContainer" type="HBoxContainer" parent="SentenceUI" unique_id=1862869488]
+layout_mode = 0
+offset_left = 1100.0
+offset_top = 250.0
+offset_right = 1100.0
+offset_bottom = 250.0
+scale = Vector2(2, 2)
+
+[node name="PlayerSentenceContainer" type="HBoxContainer" parent="SentenceUI" unique_id=886792692]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 250.0
+offset_right = 150.0
+offset_bottom = 250.0
+scale = Vector2(2, 2)
+
+[node name="FoxPopup" type="CanvasLayer" parent="." unique_id=852023058]
+script = ExtResource("3_28cxp")
+
+[node name="FoxSprite" type="Sprite2D" parent="FoxPopup" unique_id=891934620]
+
+[node name="DialogBubble" type="Label" parent="FoxPopup" unique_id=1693996157]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="ActionButtons" type="Control" parent="." unique_id=562539446]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ActionButtons" unique_id=89587544]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 520.0
+offset_right = 1600.0
+offset_bottom = 577.0
+theme_override_constants/separation = 100
+
+[node name="AttackBtn" type="Button" parent="ActionButtons/HBoxContainer" unique_id=1558428434]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_l1kui")
+theme_override_font_sizes/font_size = 32
+text = "攻击"
+
+[node name="ShootBtn" type="Button" parent="ActionButtons/HBoxContainer" unique_id=749983760]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_l1kui")
+theme_override_font_sizes/font_size = 32
+text = "射击"
+
+[node name="JumpBtn" type="Button" parent="ActionButtons/HBoxContainer" unique_id=1282695462]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_l1kui")
+theme_override_font_sizes/font_size = 32
+text = "跳跃"
+
+[node name="GameOverUI" type="CanvasLayer" parent="." unique_id=1873818336]
+visible = false
+
+[node name="Overlay" type="ColorRect" parent="GameOverUI" unique_id=1873818337]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0, 0, 0, 0.7)
+
+[node name="ResultLabel" type="Label" parent="GameOverUI" unique_id=975836803]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.3
+anchor_right = 0.5
+anchor_bottom = 0.3
+offset_left = -200.0
+offset_top = -50.0
+offset_right = 200.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("8_l1kui")
+theme_override_font_sizes/font_size = 50
+text = "GameOver"
+horizontal_alignment = 1
+
+[node name="RestartBtn" type="Button" parent="GameOverUI" unique_id=1746486183]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 50.0
+offset_right = 150.0
+offset_bottom = 130.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("8_l1kui")
+theme_override_font_sizes/font_size = 32
+text = "重新挑战"
+
+[node name="NextLevelBtn" type="Button" parent="GameOverUI" unique_id=69316343]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 160.0
+offset_right = 150.0
+offset_bottom = 240.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("8_l1kui")
+theme_override_font_sizes/font_size = 32
+text = "下一关"
+
+[node name="PlayerHPLabel" type="Label" parent="." unique_id=61279231]
+offset_left = 230.0
+offset_top = 470.0
+offset_right = 270.0
+offset_bottom = 495.0
+scale = Vector2(1.3, 1.3)
+theme_override_fonts/font = ExtResource("8_l1kui")
+theme_override_font_sizes/font_size = 16
+
+[node name="EnemyHPLabel" type="Label" parent="." unique_id=685025840]
+offset_left = 1200.0
+offset_top = 500.0
+offset_right = 1240.0
+offset_bottom = 536.0
+scale = Vector2(1.3, 1.3)
+theme_override_fonts/font = ExtResource("8_l1kui")
+theme_override_font_sizes/font_size = 16
+
+[connection signal="fox_taunt" from="." to="FoxPopup" method="_on_battle_fox_taunt"]
+[connection signal="sentence_updated" from="." to="SentenceUI" method="_on_battle_sentence_updated"]
+[connection signal="pressed" from="ActionButtons/HBoxContainer/AttackBtn" to="." method="_on_attack_pressed"]
+[connection signal="pressed" from="ActionButtons/HBoxContainer/ShootBtn" to="." method="_on_shoot_pressed"]
+[connection signal="pressed" from="ActionButtons/HBoxContainer/JumpBtn" to="." method="_on_jump_pressed"]
+[connection signal="pressed" from="GameOverUI/RestartBtn" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="GameOverUI/NextLevelBtn" to="." method="_on_next_level_pressed"]

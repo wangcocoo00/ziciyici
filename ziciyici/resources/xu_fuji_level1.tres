@@ -1,12 +1,10 @@
-[gd_resource type="Resource" script_class="EnemyConfig" format=3 uid="uid://crx213q0v8il5"]
+[gd_resource type="Resource" script_class="EnemyConfig" format=3 uid="uid://c6qaq4r5s7t8u"]
 
 [ext_resource type="Script" uid="uid://beo8atehsmfr6" path="res://scripts/enemy_config.gd" id="1_alkkl"]
 [ext_resource type="Resource" uid="uid://c3p6wynddvhd4" path="res://resources/enemy_sentence_level2.tres" id="2_ia85u"]
 
 [resource]
 script = ExtResource("1_alkkl")
-enemy_name = "护士小狗小兰"
-hp = 800
+enemy_name = "史官徐福记"
 sentence = ExtResource("2_ia85u")
-base_attack_damage = 300
 metadata/_custom_type_script = "uid://beo8atehsmfr6"

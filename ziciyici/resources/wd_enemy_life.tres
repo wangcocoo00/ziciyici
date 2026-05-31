@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="WordData" format=3 uid="uid://83x14dj7ciki"]
+
+[ext_resource type="Script" uid="uid://wpq0rh32h21a" path="res://scripts/word_data.gd" id="1_splxo"]
+[ext_resource type="Script" uid="uid://dmimlx5lxapvv" path="res://scripts/effect_data.gd" id="2_g7lfe"]
+
+[resource]
+script = ExtResource("1_splxo")
+metadata/_custom_type_script = "uid://wpq0rh32h21a"

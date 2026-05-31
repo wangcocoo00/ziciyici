@@ -36,10 +36,23 @@ func refresh_display() -> void:
 	elif "shoot_mode_active" in battle:
 		shoot_mode_active = battle.shoot_mode_active
 
+	# 获取敌人 WordData 数组（用于颜色和可射击状态）
+	var enemy_words: Array = battle.enemy_words if "enemy_words" in battle else []
+
 	# 遍历所有槽位
 	for i in range(battle.enemy_sentence.size()):
 		var enemy_text: String = battle.enemy_sentence[i]
+		var enemy_word: WordData = enemy_words[i] if i < enemy_words.size() else null
 		var player_word: WordData = battle.player_words[i] if i < battle.player_words.size() else null
+
+		# 判断该字是否可射击（以敌人字的 can_be_shot 为准）
+		var can_shoot: bool = enemy_word != null and enemy_word.can_be_shot
+		# 获取颜色（优先用敌人字的颜色，其次玩家字的颜色）
+		var word_color: Color = Color.WHITE
+		if enemy_word and enemy_word.highlight_color != Color.BLACK and enemy_word.highlight_color != Color.WHITE:
+			word_color = enemy_word.highlight_color
+		elif player_word and player_word.highlight_color != Color.BLACK and player_word.highlight_color != Color.WHITE:
+			word_color = player_word.highlight_color
 
 		# 敌人文字 Label / Button
 		var enemy_label: Control
@@ -48,9 +61,9 @@ func refresh_display() -> void:
 			var btn := Button.new()
 			btn.text = enemy_text
 			btn.custom_minimum_size = Vector2(CHAR_WIDTH, 0)
-			if player_word and player_word.can_be_shot:
+			if can_shoot:
 				# 有色字：显示高亮颜色
-				btn.modulate = player_word.highlight_color
+				btn.modulate = word_color
 			else:
 				# 无色字：白色
 				btn.modulate = Color.WHITE
@@ -61,9 +74,9 @@ func refresh_display() -> void:
 			var lbl := Label.new()
 			lbl.text = enemy_text
 			lbl.custom_minimum_size = Vector2(CHAR_WIDTH, 0)
-			if player_word and player_word.can_be_shot:
+			if can_shoot:
 				# 有色字但射击模式未激活：显示颜色但不可点击
-				lbl.modulate = player_word.highlight_color
+				lbl.modulate = word_color
 			else:
 				lbl.modulate = Color.WHITE
 			enemy_label = lbl

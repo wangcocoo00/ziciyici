@@ -16,7 +16,7 @@ class_name PlayerConfig
 @export var hp: int = 500
 
 ## 基础攻击力，玩家子弹击中敌人时造成的伤害
-@export var base_attack: int = 50
+@export var base_attack: int = 300
 
 ## 基础跳跃高度（像素单位）
 @export var base_jump_height: float = 80.0

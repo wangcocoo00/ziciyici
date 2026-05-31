@@ -14,13 +14,11 @@ var battle_ref: BattleManager = null
 signal bullet_finished()
 
 func _ready() -> void:
-	print("子弹已生成，父节点：", get_parent().name, " 父节点类型：", get_parent().get_class())
 	var viewport_rect = get_viewport().get_visible_rect()
 	screen_width = viewport_rect.size.x
 	battle_ref = get_parent() as BattleManager
 
 func _physics_process(delta: float) -> void:
-	print("子弹帧更新中，位置：", position, " 方向：", direction)
 	position += direction * speed * delta
 
 	# 边界反弹或销毁
@@ -47,6 +45,12 @@ func _physics_process(delta: float) -> void:
 			battle_ref.player_hp -= damage
 			battle_ref.update_hp_display()
 			battle_ref.check_victory()
+			# 玩家向后挪50像素，1秒后回到原位置
+			var original_x = player_sprite.position.x
+			player_sprite.position.x -= 50
+			var tween = battle_ref.create_tween()
+			tween.tween_interval(1.0)
+			tween.tween_property(player_sprite, "position:x", original_x, 0.3)
 			queue_free_and_emit()
 			return
 

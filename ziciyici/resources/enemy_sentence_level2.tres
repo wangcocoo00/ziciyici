@@ -1,0 +1,50 @@
+[gd_resource type="Resource" script_class="SentenceConfig" format=3 uid="uid://c3p6wynddvhd4"]
+
+[ext_resource type="Script" uid="uid://bcffjufmsx4rt" path="res://scripts/sentence_config.gd" id="1_fpv8s"]
+[ext_resource type="Script" uid="uid://wpq0rh32h21a" path="res://scripts/word_data.gd" id="2_51vn6"]
+[ext_resource type="Script" uid="uid://dmimlx5lxapvv" path="res://scripts/effect_data.gd" id="3_51vn6"]
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("2_51vn6")
+text = "手"
+highlight_color = Color(1, 0, 0, 1)
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("2_51vn6")
+text = "雷"
+highlight_color = Color(1, 1, 0, 1)
+
+[sub_resource type="Resource" id="Resource_3"]
+script = ExtResource("2_51vn6")
+text = "来"
+can_be_shot = false
+
+[sub_resource type="Resource" id="Resource_4"]
+script = ExtResource("2_51vn6")
+text = "了"
+can_be_shot = false
+
+[sub_resource type="Resource" id="Resource_5"]
+script = ExtResource("2_51vn6")
+text = "你"
+can_be_shot = false
+
+[sub_resource type="Resource" id="Resource_6"]
+script = ExtResource("2_51vn6")
+text = "得"
+can_be_shot = false
+
+[sub_resource type="Resource" id="Resource_7"]
+script = ExtResource("2_51vn6")
+text = "跑"
+highlight_color = Color(0, 0, 1, 1)
+
+[sub_resource type="Resource" id="Resource_8"]
+script = ExtResource("2_51vn6")
+text = "啊"
+can_be_shot = false
+
+[resource]
+script = ExtResource("1_fpv8s")
+words = Array[ExtResource("2_51vn6")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8")])
+metadata/_custom_type_script = "uid://bcffjufmsx4rt"

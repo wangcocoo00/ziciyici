@@ -222,4 +222,14 @@ text = "下一关"
 [connection signal="sentence_updated" from="." to="SentenceUI" method="_on_battle_sentence_updated"]
 [connection signal="pressed" from="ActionButtons/VBoxContainer/ShootBtn" to="." method="_on_shoot_pressed"]
 [connection signal="pressed" from="GameOverUI/RestartBtn" to="." method="_on_restart_pressed"]
+[node name="RestartBtn" type="Button" parent="." unique_id=987654322]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 100.0
+offset_bottom = 60.0
+theme_override_fonts/font = ExtResource("8_ih0ju")
+theme_override_font_sizes/font_size = 16
+text = "重新开始"
+
 [connection signal="pressed" from="GameOverUI/NextLevelBtn" to="." method="_on_next_level_pressed"]
+[connection signal="pressed" from="RestartBtn" to="." method="_on_restart_pressed"]

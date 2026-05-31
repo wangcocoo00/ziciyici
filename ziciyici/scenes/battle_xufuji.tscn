@@ -15,7 +15,7 @@ size = Vector2(64, 64)
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_p6tk1"]
 size = Vector2(64, 64)
 
-[node name="Battle2" type="Node2D" unique_id=689843110]
+[node name="Battle3" type="Node2D" unique_id=689843110]
 script = ExtResource("1_656bh")
 enemy_config = ExtResource("2_yw1d3")
 player_config = ExtResource("3_ciu3y")
@@ -192,6 +192,25 @@ offset_bottom = 416.0
 theme_override_fonts/font = ExtResource("8_ih0ju")
 theme_override_font_sizes/font_size = 16
 
+[node name="EnemyExtraText" type="Label" parent="." unique_id=123456789]
+offset_left = 400.0
+offset_top = 500.0
+offset_right = 1200.0
+offset_bottom = 550.0
+theme_override_fonts/font = ExtResource("8_ih0ju")
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 1
+visible = false
+
+[node name="RestartBtn" type="Button" parent="." unique_id=987654321]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 100.0
+offset_bottom = 60.0
+theme_override_fonts/font = ExtResource("8_ih0ju")
+theme_override_font_sizes/font_size = 16
+text = "重新开始"
+
 [connection signal="fox_taunt" from="." to="FoxPopup" method="_on_battle_fox_taunt"]
 [connection signal="sentence_updated" from="." to="SentenceUI" method="_on_battle_sentence_updated"]
 [connection signal="pressed" from="ActionButtons/HBoxContainer/AttackBtn" to="." method="_on_attack_pressed"]
@@ -199,3 +218,4 @@ theme_override_font_sizes/font_size = 16
 [connection signal="pressed" from="ActionButtons/HBoxContainer/JumpBtn" to="." method="_on_jump_pressed"]
 [connection signal="pressed" from="GameOverUI/RestartBtn" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="GameOverUI/NextLevelBtn" to="." method="_on_next_level_pressed"]
+[connection signal="pressed" from="RestartBtn" to="." method="_on_restart_pressed"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bcffjufmsx4rt" path="res://scripts/sentence_config.gd" id="1_fpv8s"]
 [ext_resource type="Script" uid="uid://wpq0rh32h21a" path="res://scripts/word_data.gd" id="2_51vn6"]
-[ext_resource type="Script" uid="uid://bb4wrhnr086ep" path="res://scripts/effect_data.gd" id="3_51vn6"]
+[ext_resource type="Script" uid="uid://dmimlx5lxapvv" path="res://scripts/effect_data.gd" id="3_51vn6"]
 
 [sub_resource type="Resource" id="Resource_n5qv2"]
 script = ExtResource("2_51vn6")
@@ -24,41 +24,53 @@ metadata/_custom_type_script = "uid://wpq0rh32h21a"
 
 [sub_resource type="Resource" id="Resource_nwfoe"]
 script = ExtResource("2_51vn6")
-text = "一"
+text = "决"
 can_be_shot = false
 metadata/_custom_type_script = "uid://wpq0rh32h21a"
 
 [sub_resource type="Resource" id="Resource_vxi1l"]
 script = ExtResource("2_51vn6")
-text = "枪"
+text = "定"
 can_be_shot = false
 metadata/_custom_type_script = "uid://wpq0rh32h21a"
 
 [sub_resource type="Resource" id="Resource_7chh1"]
 script = ExtResource("2_51vn6")
-text = "射"
+text = "你"
 can_be_shot = false
 metadata/_custom_type_script = "uid://wpq0rh32h21a"
 
 [sub_resource type="Resource" id="Resource_kdmdn"]
 script = ExtResource("2_51vn6")
-text = "死"
+text = "的"
 can_be_shot = false
 metadata/_custom_type_script = "uid://wpq0rh32h21a"
 
 [sub_resource type="Resource" id="Resource_6rxc8"]
-script = ExtResource("2_51vn6")
-text = "敌"
-can_be_shot = false
-metadata/_custom_type_script = "uid://wpq0rh32h21a"
+script = ExtResource("3_51vn6")
+attribute = "ending"
+value = 2.0
 
 [sub_resource type="Resource" id="Resource_1fuwk"]
 script = ExtResource("2_51vn6")
-text = "人"
-can_be_shot = false
+text = "生"
+highlight_color = Color(1, 0, 0, 0.92156863)
+shot_effects = Array[ExtResource("3_51vn6")]([SubResource("Resource_6rxc8")])
+metadata/_custom_type_script = "uid://wpq0rh32h21a"
+
+[sub_resource type="Resource" id="Resource_2fea5"]
+script = ExtResource("3_51vn6")
+attribute = "ending"
+value = 1.0
+
+[sub_resource type="Resource" id="Resource_fpgua"]
+script = ExtResource("2_51vn6")
+text = "死"
+highlight_color = Color(0, 1, 0.015686275, 0.9411765)
+shot_effects = Array[ExtResource("3_51vn6")]([SubResource("Resource_2fea5")])
 metadata/_custom_type_script = "uid://wpq0rh32h21a"
 
 [resource]
 script = ExtResource("1_fpv8s")
-words = Array[ExtResource("2_51vn6")]([SubResource("Resource_n5qv2"), SubResource("Resource_7a87k"), SubResource("Resource_lji3r"), SubResource("Resource_nwfoe"), SubResource("Resource_vxi1l"), SubResource("Resource_7chh1"), SubResource("Resource_kdmdn"), SubResource("Resource_6rxc8"), SubResource("Resource_1fuwk")])
+words = Array[ExtResource("2_51vn6")]([SubResource("Resource_n5qv2"), SubResource("Resource_7a87k"), SubResource("Resource_lji3r"), SubResource("Resource_nwfoe"), SubResource("Resource_vxi1l"), SubResource("Resource_7chh1"), SubResource("Resource_kdmdn"), SubResource("Resource_1fuwk"), SubResource("Resource_fpgua")])
 metadata/_custom_type_script = "uid://bcffjufmsx4rt"
