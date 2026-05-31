@@ -27,7 +27,6 @@ scale = Vector2(1.4775857, 2.544271)
 texture = ExtResource("5_n4b6j")
 
 [node name="PlayerSprite" type="Sprite2D" parent="." unique_id=2030853381]
-modulate = Color(0.85466915, 0.7581256, 0.60568833, 0.9843137)
 position = Vector2(225, 420.00003)
 scale = Vector2(0.20842631, 0.35074872)
 texture = ExtResource("5_yw1d3")
@@ -35,8 +34,8 @@ texture = ExtResource("5_yw1d3")
 [node name="playernameLabel" type="Label" parent="PlayerSprite" unique_id=2036879662]
 offset_left = -546.5107
 offset_top = -309.63528
-offset_right = 103.48932
-offset_bottom = -125.635284
+offset_right = 259.0843
+offset_bottom = -116.635284
 theme_override_colors/font_color = Color(0.43603075, 0.77427876, 0.9977755, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
 theme_override_font_sizes/font_size = 130
@@ -44,9 +43,9 @@ text = "玩家：企鹅"
 
 [node name="playerimage" type="TextureRect" parent="PlayerSprite" unique_id=748920823]
 offset_left = 546.51074
-offset_top = -361.821
+offset_top = -344.71472
 offset_right = 1425.6802
-offset_bottom = 279.48367
+offset_bottom = 296.58997
 texture = ExtResource("6_ciu3y")
 expand_mode = 1
 
@@ -66,9 +65,9 @@ text = "敌人：熊熊大王"
 
 [node name="enemyimage" type="TextureRect" parent="EnemySprite" unique_id=1487649082]
 offset_left = -1314.0
-offset_top = -263.19907
+offset_top = -249.83905
 offset_right = -600.0
-offset_bottom = 135.42026
+offset_bottom = 148.78027
 texture = ExtResource("7_pp7ab")
 expand_mode = 1
 
