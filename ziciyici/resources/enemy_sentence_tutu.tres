@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SentenceConfig" format=3 uid="uid://c3p6wynddvhd4"]
+[gd_resource type="Resource" script_class="SentenceConfig" format=3 uid="uid://bxkube871pdn5"]
 
 [ext_resource type="Script" uid="uid://bcffjufmsx4rt" path="res://scripts/sentence_config.gd" id="1_fpv8s"]
 [ext_resource type="Script" uid="uid://wpq0rh32h21a" path="res://scripts/word_data.gd" id="2_51vn6"]
@@ -12,19 +12,16 @@ can_be_shot = false
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("2_51vn6")
 text = "跑"
-can_be_shot = true
 highlight_color = Color(0, 0.5, 1, 1)
 
 [sub_resource type="Resource" id="Resource_2"]
 script = ExtResource("2_51vn6")
 text = "再"
-can_be_shot = true
 highlight_color = Color(1, 1, 0, 1)
 
 [sub_resource type="Resource" id="Resource_3"]
 script = ExtResource("2_51vn6")
 text = "快"
-can_be_shot = true
 highlight_color = Color(0, 0.5, 1, 1)
 
 [sub_resource type="Resource" id="Resource_4"]
@@ -35,7 +32,6 @@ can_be_shot = false
 [sub_resource type="Resource" id="Resource_5"]
 script = ExtResource("2_51vn6")
 text = "没"
-can_be_shot = true
 highlight_color = Color(1, 1, 0, 1)
 
 [sub_resource type="Resource" id="Resource_6"]

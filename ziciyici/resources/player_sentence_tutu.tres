@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SentenceConfig" format=3 uid="uid://d33idqixi2hje"]
+[gd_resource type="Resource" script_class="SentenceConfig" format=3 uid="uid://datilwfktluv7"]
 
 [ext_resource type="Script" uid="uid://bcffjufmsx4rt" path="res://scripts/sentence_config.gd" id="1_fpv8s"]
 [ext_resource type="Script" uid="uid://wpq0rh32h21a" path="res://scripts/word_data.gd" id="2_51vn6"]

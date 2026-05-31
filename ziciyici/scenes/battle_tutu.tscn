@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://cmbampij33j8s"]
+[gd_scene format=3 uid="uid://h420l68jldb"]
 
 [ext_resource type="Script" uid="uid://bj1c6qdo3udhf" path="res://scripts/battle_manager_level3.gd" id="1_656bh"]
-[ext_resource type="Resource" uid="uid://crx213q0v8il5" path="res://resources/tutu_config.tres" id="2_yw1d3"]
-[ext_resource type="Resource" uid="uid://dvgpadkf3ql8l" path="res://resources/player_level3.tres" id="3_ciu3y"]
+[ext_resource type="Resource" path="res://resources/tutu_config.tres" id="2_8tbow"]
+[ext_resource type="Resource" uid="uid://dwwxu087nfsds" path="res://resources/player_level3.tres" id="3_2ihut"]
 [ext_resource type="Resource" uid="uid://duhkqf7do7285" path="res://resources/taunts.tres" id="4_pp7ab"]
 [ext_resource type="PackedScene" uid="uid://dc1wlhupgmgcg" path="res://scenes/Bullet.tscn" id="5_qul14"]
 [ext_resource type="Script" uid="uid://xjntphmll8l7" path="res://scripts/sentence_ui.gd" id="6_n4b6j"]
@@ -17,8 +17,8 @@ size = Vector2(64, 64)
 
 [node name="Battle3" type="Node2D" unique_id=689843110]
 script = ExtResource("1_656bh")
-enemy_config = ExtResource("2_yw1d3")
-player_config = ExtResource("3_ciu3y")
+enemy_config = ExtResource("2_8tbow")
+player_config = ExtResource("3_2ihut")
 fox_taunt_library = ExtResource("4_pp7ab")
 bullet_scene = ExtResource("5_qul14")
 
@@ -110,17 +110,17 @@ theme_override_font_sizes/font_size = 12
 text = "剩余: 2"
 
 [node name="DodgeBtn" type="Button" parent="ActionButtons/HBoxContainer" unique_id=1282695463]
+modulate = Color(0.3, 0.3, 0.3, 1)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("8_ih0ju")
-text = "闪避"
 disabled = true
-modulate = Color(0.3, 0.3, 0.3, 1.0)
+text = "闪避"
 
 [node name="VictoryBtn" type="Button" parent="ActionButtons/HBoxContainer" unique_id=1282695464]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("8_ih0ju")
 text = "胜利"
-visible = false
 
 [node name="GameOverUI" type="CanvasLayer" parent="." unique_id=1873818336]
 visible = false
